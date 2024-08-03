@@ -1,0 +1,201 @@
+Traceback (most recent call last):
+  File "/Users/williamthompson/micromamba/envs/openai-helper/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/williamthompson/micromamba/envs/openai-helper/lib/python3.11/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/williamthompson/micromamba/envs/openai-helper/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/williamthompson/micromamba/envs/openai-helper/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/williamthompson/micromamba/envs/openai-helper/lib/python3.11/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Users/williamthompson/micromamba/envs/openai-helper/lib/python3.11/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/williamthompson/micromamba/envs/openai-helper/lib/python3.11/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+response = client.chat.completions.create(
+  model = "gpt-3.5-turbo-0613",
+  messages = [
+    {
+      "role": "user",
+      "content": "What is the flight status of UA 792 for Nov 12, 2023?"
+    }
+  ],
+  functions = [
+    {
+      "name": "get_flight_status",
+      "description": "Get the current flight status",
+      "parameters": {
+          "type": "object",
+          "properties": {
+              "airline_code": {
+                  "type": "string",
+                  "description": "Shorthand notation for airline, e.g. UA, AA"
+              },
+              "flight_number": {
+                  "type": "integer",
+                  "description": "Flight number"
+              },
+              "day": {
+                  "type": "integer",
+                  "description": "Day of the flight"
+              },
+              "month": {
+                  "type": "integer",
+                  "description": "Month of the flight"
+              },
+              "year": {
+                  "type": "integer",
+                  "description": "Year of the flight"
+              },
+            },
+          "required": ["airline_code","flight_number","day","month","year"]
+        }
+    }
+  ]
+)
+print(response)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNotFoundError[0m                             Traceback (most recent call last)
+Cell [0;32mIn[3], line 1[0m
+[0;32m----> 1[0m response [38;5;241m=[39m [43mclient[49m[38;5;241;43m.[39;49m[43mchat[49m[38;5;241;43m.[39;49m[43mcompletions[49m[38;5;241;43m.[39;49m[43mcreate[49m[43m([49m
+[1;32m      2[0m [43m  [49m[43mmodel[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mgpt-3.5-turbo-0613[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m      3[0m [43m  [49m[43mmessages[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[43m[[49m
+[1;32m      4[0m [43m    [49m[43m{[49m
+[1;32m      5[0m [43m      [49m[38;5;124;43m"[39;49m[38;5;124;43mrole[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43muser[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m      6[0m [43m      [49m[38;5;124;43m"[39;49m[38;5;124;43mcontent[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mWhat is the flight status of UA 792 for Nov 12, 2023?[39;49m[38;5;124;43m"[39;49m
+[1;32m      7[0m [43m    [49m[43m}[49m
+[1;32m      8[0m [43m  [49m[43m][49m[43m,[49m
+[1;32m      9[0m [43m  [49m[43mfunctions[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[43m[[49m
+[1;32m     10[0m [43m    [49m[43m{[49m
+[1;32m     11[0m [43m      [49m[38;5;124;43m"[39;49m[38;5;124;43mname[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mget_flight_status[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     12[0m [43m      [49m[38;5;124;43m"[39;49m[38;5;124;43mdescription[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mGet the current flight status[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     13[0m [43m      [49m[38;5;124;43m"[39;49m[38;5;124;43mparameters[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43m{[49m
+[1;32m     14[0m [43m          [49m[38;5;124;43m"[39;49m[38;5;124;43mtype[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mobject[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     15[0m [43m          [49m[38;5;124;43m"[39;49m[38;5;124;43mproperties[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43m{[49m
+[1;32m     16[0m [43m              [49m[38;5;124;43m"[39;49m[38;5;124;43mairline_code[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43m{[49m
+[1;32m     17[0m [43m                  [49m[38;5;124;43m"[39;49m[38;5;124;43mtype[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mstring[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     18[0m [43m                  [49m[38;5;124;43m"[39;49m[38;5;124;43mdescription[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mShorthand notation for airline, e.g. UA, AA[39;49m[38;5;124;43m"[39;49m
+[1;32m     19[0m [43m              [49m[43m}[49m[43m,[49m
+[1;32m     20[0m [43m              [49m[38;5;124;43m"[39;49m[38;5;124;43mflight_number[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43m{[49m
+[1;32m     21[0m [43m                  [49m[38;5;124;43m"[39;49m[38;5;124;43mtype[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43minteger[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     22[0m [43m                  [49m[38;5;124;43m"[39;49m[38;5;124;43mdescription[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mFlight number[39;49m[38;5;124;43m"[39;49m
+[1;32m     23[0m [43m              [49m[43m}[49m[43m,[49m
+[1;32m     24[0m [43m              [49m[38;5;124;43m"[39;49m[38;5;124;43mday[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43m{[49m
+[1;32m     25[0m [43m                  [49m[38;5;124;43m"[39;49m[38;5;124;43mtype[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43minteger[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     26[0m [43m                  [49m[38;5;124;43m"[39;49m[38;5;124;43mdescription[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mDay of the flight[39;49m[38;5;124;43m"[39;49m
+[1;32m     27[0m [43m              [49m[43m}[49m[43m,[49m
+[1;32m     28[0m [43m              [49m[38;5;124;43m"[39;49m[38;5;124;43mmonth[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43m{[49m
+[1;32m     29[0m [43m                  [49m[38;5;124;43m"[39;49m[38;5;124;43mtype[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43minteger[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     30[0m [43m                  [49m[38;5;124;43m"[39;49m[38;5;124;43mdescription[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mMonth of the flight[39;49m[38;5;124;43m"[39;49m
+[1;32m     31[0m [43m              [49m[43m}[49m[43m,[49m
+[1;32m     32[0m [43m              [49m[38;5;124;43m"[39;49m[38;5;124;43myear[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43m{[49m
+[1;32m     33[0m [43m                  [49m[38;5;124;43m"[39;49m[38;5;124;43mtype[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43minteger[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m     34[0m [43m                  [49m[38;5;124;43m"[39;49m[38;5;124;43mdescription[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mYear of the flight[39;49m[38;5;124;43m"[39;49m
+[1;32m     35[0m [43m              [49m[43m}[49m[43m,[49m
+[1;32m     36[0m [43m            [49m[43m}[49m[43m,[49m
+[1;32m     37[0m [43m          [49m[38;5;124;43m"[39;49m[38;5;124;43mrequired[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43m[[49m[38;5;124;43m"[39;49m[38;5;124;43mairline_code[39;49m[38;5;124;43m"[39;49m[43m,[49m[38;5;124;43m"[39;49m[38;5;124;43mflight_number[39;49m[38;5;124;43m"[39;49m[43m,[49m[38;5;124;43m"[39;49m[38;5;124;43mday[39;49m[38;5;124;43m"[39;49m[43m,[49m[38;5;124;43m"[39;49m[38;5;124;43mmonth[39;49m[38;5;124;43m"[39;49m[43m,[49m[38;5;124;43m"[39;49m[38;5;124;43myear[39;49m[38;5;124;43m"[39;49m[43m][49m
+[1;32m     38[0m [43m        [49m[43m}[49m
+[1;32m     39[0m [43m    [49m[43m}[49m
+[1;32m     40[0m [43m  [49m[43m][49m
+[1;32m     41[0m [43m)[49m
+[1;32m     42[0m [38;5;28mprint[39m(response)
+
+File [0;32m~/micromamba/envs/openai-helper/lib/python3.11/site-packages/openai/_utils/_utils.py:277[0m, in [0;36mrequired_args.<locals>.inner.<locals>.wrapper[0;34m(*args, **kwargs)[0m
+[1;32m    275[0m             msg [38;5;241m=[39m [38;5;124mf[39m[38;5;124m"[39m[38;5;124mMissing required argument: [39m[38;5;132;01m{[39;00mquote(missing[[38;5;241m0[39m])[38;5;132;01m}[39;00m[38;5;124m"[39m
+[1;32m    276[0m     [38;5;28;01mraise[39;00m [38;5;167;01mTypeError[39;00m(msg)
+[0;32m--> 277[0m [38;5;28;01mreturn[39;00m [43mfunc[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+
+File [0;32m~/micromamba/envs/openai-helper/lib/python3.11/site-packages/openai/resources/chat/completions.py:646[0m, in [0;36mCompletions.create[0;34m(self, messages, model, frequency_penalty, function_call, functions, logit_bias, logprobs, max_tokens, n, parallel_tool_calls, presence_penalty, response_format, seed, service_tier, stop, stream, stream_options, temperature, tool_choice, tools, top_logprobs, top_p, user, extra_headers, extra_query, extra_body, timeout)[0m
+[1;32m    612[0m [38;5;129m@required_args[39m([[38;5;124m"[39m[38;5;124mmessages[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mmodel[39m[38;5;124m"[39m], [[38;5;124m"[39m[38;5;124mmessages[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mmodel[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mstream[39m[38;5;124m"[39m])
+[1;32m    613[0m [38;5;28;01mdef[39;00m [38;5;21mcreate[39m(
+[1;32m    614[0m     [38;5;28mself[39m,
+[0;32m   (...)[0m
+[1;32m    644[0m     timeout: [38;5;28mfloat[39m [38;5;241m|[39m httpx[38;5;241m.[39mTimeout [38;5;241m|[39m [38;5;28;01mNone[39;00m [38;5;241m|[39m NotGiven [38;5;241m=[39m NOT_GIVEN,
+[1;32m    645[0m ) [38;5;241m-[39m[38;5;241m>[39m ChatCompletion [38;5;241m|[39m Stream[ChatCompletionChunk]:
+[0;32m--> 646[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_post[49m[43m([49m
+[1;32m    647[0m [43m        [49m[38;5;124;43m"[39;49m[38;5;124;43m/chat/completions[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m    648[0m [43m        [49m[43mbody[49m[38;5;241;43m=[39;49m[43mmaybe_transform[49m[43m([49m
+[1;32m    649[0m [43m            [49m[43m{[49m
+[1;32m    650[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mmessages[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mmessages[49m[43m,[49m
+[1;32m    651[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mmodel[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mmodel[49m[43m,[49m
+[1;32m    652[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mfrequency_penalty[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mfrequency_penalty[49m[43m,[49m
+[1;32m    653[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mfunction_call[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mfunction_call[49m[43m,[49m
+[1;32m    654[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mfunctions[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mfunctions[49m[43m,[49m
+[1;32m    655[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mlogit_bias[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mlogit_bias[49m[43m,[49m
+[1;32m    656[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mlogprobs[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mlogprobs[49m[43m,[49m
+[1;32m    657[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mmax_tokens[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mmax_tokens[49m[43m,[49m
+[1;32m    658[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mn[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mn[49m[43m,[49m
+[1;32m    659[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mparallel_tool_calls[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mparallel_tool_calls[49m[43m,[49m
+[1;32m    660[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mpresence_penalty[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mpresence_penalty[49m[43m,[49m
+[1;32m    661[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mresponse_format[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mresponse_format[49m[43m,[49m
+[1;32m    662[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mseed[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mseed[49m[43m,[49m
+[1;32m    663[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mservice_tier[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mservice_tier[49m[43m,[49m
+[1;32m    664[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mstop[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mstop[49m[43m,[49m
+[1;32m    665[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mstream[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mstream[49m[43m,[49m
+[1;32m    666[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mstream_options[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mstream_options[49m[43m,[49m
+[1;32m    667[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mtemperature[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mtemperature[49m[43m,[49m
+[1;32m    668[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mtool_choice[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mtool_choice[49m[43m,[49m
+[1;32m    669[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mtools[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mtools[49m[43m,[49m
+[1;32m    670[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mtop_logprobs[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mtop_logprobs[49m[43m,[49m
+[1;32m    671[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43mtop_p[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mtop_p[49m[43m,[49m
+[1;32m    672[0m [43m                [49m[38;5;124;43m"[39;49m[38;5;124;43muser[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43muser[49m[43m,[49m
+[1;32m    673[0m [43m            [49m[43m}[49m[43m,[49m
+[1;32m    674[0m [43m            [49m[43mcompletion_create_params[49m[38;5;241;43m.[39;49m[43mCompletionCreateParams[49m[43m,[49m
+[1;32m    675[0m [43m        [49m[43m)[49m[43m,[49m
+[1;32m    676[0m [43m        [49m[43moptions[49m[38;5;241;43m=[39;49m[43mmake_request_options[49m[43m([49m
+[1;32m    677[0m [43m            [49m[43mextra_headers[49m[38;5;241;43m=[39;49m[43mextra_headers[49m[43m,[49m[43m [49m[43mextra_query[49m[38;5;241;43m=[39;49m[43mextra_query[49m[43m,[49m[43m [49m[43mextra_body[49m[38;5;241;43m=[39;49m[43mextra_body[49m[43m,[49m[43m [49m[43mtimeout[49m[38;5;241;43m=[39;49m[43mtimeout[49m
+[1;32m    678[0m [43m        [49m[43m)[49m[43m,[49m
+[1;32m    679[0m [43m        [49m[43mcast_to[49m[38;5;241;43m=[39;49m[43mChatCompletion[49m[43m,[49m
+[1;32m    680[0m [43m        [49m[43mstream[49m[38;5;241;43m=[39;49m[43mstream[49m[43m [49m[38;5;129;43;01mor[39;49;00m[43m [49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[1;32m    681[0m [43m        [49m[43mstream_cls[49m[38;5;241;43m=[39;49m[43mStream[49m[43m[[49m[43mChatCompletionChunk[49m[43m][49m[43m,[49m
+[1;32m    682[0m [43m    [49m[43m)[49m
+
+File [0;32m~/micromamba/envs/openai-helper/lib/python3.11/site-packages/openai/_base_client.py:1266[0m, in [0;36mSyncAPIClient.post[0;34m(self, path, cast_to, body, options, files, stream, stream_cls)[0m
+[1;32m   1252[0m [38;5;28;01mdef[39;00m [38;5;21mpost[39m(
+[1;32m   1253[0m     [38;5;28mself[39m,
+[1;32m   1254[0m     path: [38;5;28mstr[39m,
+[0;32m   (...)[0m
+[1;32m   1261[0m     stream_cls: [38;5;28mtype[39m[_StreamT] [38;5;241m|[39m [38;5;28;01mNone[39;00m [38;5;241m=[39m [38;5;28;01mNone[39;00m,
+[1;32m   1262[0m ) [38;5;241m-[39m[38;5;241m>[39m ResponseT [38;5;241m|[39m _StreamT:
+[1;32m   1263[0m     opts [38;5;241m=[39m FinalRequestOptions[38;5;241m.[39mconstruct(
+[1;32m   1264[0m         method[38;5;241m=[39m[38;5;124m"[39m[38;5;124mpost[39m[38;5;124m"[39m, url[38;5;241m=[39mpath, json_data[38;5;241m=[39mbody, files[38;5;241m=[39mto_httpx_files(files), [38;5;241m*[39m[38;5;241m*[39moptions
+[1;32m   1265[0m     )
+[0;32m-> 1266[0m     [38;5;28;01mreturn[39;00m cast(ResponseT, [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mrequest[49m[43m([49m[43mcast_to[49m[43m,[49m[43m [49m[43mopts[49m[43m,[49m[43m [49m[43mstream[49m[38;5;241;43m=[39;49m[43mstream[49m[43m,[49m[43m [49m[43mstream_cls[49m[38;5;241;43m=[39;49m[43mstream_cls[49m[43m)[49m)
+
+File [0;32m~/micromamba/envs/openai-helper/lib/python3.11/site-packages/openai/_base_client.py:942[0m, in [0;36mSyncAPIClient.request[0;34m(self, cast_to, options, remaining_retries, stream, stream_cls)[0m
+[1;32m    933[0m [38;5;28;01mdef[39;00m [38;5;21mrequest[39m(
+[1;32m    934[0m     [38;5;28mself[39m,
+[1;32m    935[0m     cast_to: Type[ResponseT],
+[0;32m   (...)[0m
+[1;32m    940[0m     stream_cls: [38;5;28mtype[39m[_StreamT] [38;5;241m|[39m [38;5;28;01mNone[39;00m [38;5;241m=[39m [38;5;28;01mNone[39;00m,
+[1;32m    941[0m ) [38;5;241m-[39m[38;5;241m>[39m ResponseT [38;5;241m|[39m _StreamT:
+[0;32m--> 942[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_request[49m[43m([49m
+[1;32m    943[0m [43m        [49m[43mcast_to[49m[38;5;241;43m=[39;49m[43mcast_to[49m[43m,[49m
+[1;32m    944[0m [43m        [49m[43moptions[49m[38;5;241;43m=[39;49m[43moptions[49m[43m,[49m
+[1;32m    945[0m [43m        [49m[43mstream[49m[38;5;241;43m=[39;49m[43mstream[49m[43m,[49m
+[1;32m    946[0m [43m        [49m[43mstream_cls[49m[38;5;241;43m=[39;49m[43mstream_cls[49m[43m,[49m
+[1;32m    947[0m [43m        [49m[43mremaining_retries[49m[38;5;241;43m=[39;49m[43mremaining_retries[49m[43m,[49m
+[1;32m    948[0m [43m    [49m[43m)[49m
+
+File [0;32m~/micromamba/envs/openai-helper/lib/python3.11/site-packages/openai/_base_client.py:1046[0m, in [0;36mSyncAPIClient._request[0;34m(self, cast_to, options, remaining_retries, stream, stream_cls)[0m
+[1;32m   1043[0m         err[38;5;241m.[39mresponse[38;5;241m.[39mread()
+[1;32m   1045[0m     log[38;5;241m.[39mdebug([38;5;124m"[39m[38;5;124mRe-raising status error[39m[38;5;124m"[39m)
+[0;32m-> 1046[0m     [38;5;28;01mraise[39;00m [38;5;28mself[39m[38;5;241m.[39m_make_status_error_from_response(err[38;5;241m.[39mresponse) [38;5;28;01mfrom[39;00m [38;5;28;01mNone[39;00m
+[1;32m   1048[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_process_response(
+[1;32m   1049[0m     cast_to[38;5;241m=[39mcast_to,
+[1;32m   1050[0m     options[38;5;241m=[39moptions,
+[0;32m   (...)[0m
+[1;32m   1053[0m     stream_cls[38;5;241m=[39mstream_cls,
+[1;32m   1054[0m )
+
+[0;31mNotFoundError[0m: Error code: 404 - {'error': {'message': 'The model `gpt-3.5-turbo-0613` has been deprecated, learn more here: https://platform.openai.com/docs/deprecations', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_found'}}
+
