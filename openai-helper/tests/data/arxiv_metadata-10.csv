@@ -1,0 +1,911 @@
+"id","submitter","authors","title","comments","journal-ref","doi","report-no","categories","license","abstract","update_date","src_pdf","text"
+"2310.00014","Yong Ren","Yong Ren, Tao Wang, Jiangyan Yi, Le Xu, Jianhua Tao, Chuyuan Zhang,
+  Junzuo Zhou","Fewer-token Neural Speech Codec with Time-invariant Codes","Submitted to ICASSP 2024","","","","cs.SD eess.AS","http://arxiv.org/licenses/nonexclusive-distrib/1.0/","  Language model based text-to-speech (TTS) models, like VALL-E, have gained
+attention for their outstanding in-context learning capability in zero-shot
+scenarios. Neural speech codec is a critical component of these models, which
+can convert speech into discrete token representations. However, excessive
+token sequences from the codec may negatively affect prediction accuracy and
+restrict the progression of Language model based TTS models. To address this
+issue, this paper proposes a novel neural speech codec with time-invariant
+codes named TiCodec. By encoding and quantizing time-invariant information into
+a separate code, TiCodec can reduce the amount of frame-level information that
+needs encoding, effectively decreasing the number of tokens as codes of speech.
+Furthermore, this paper introduces a time-invariant encoding consistency loss
+to enhance the consistency of time-invariant code within an utterance and force
+it to capture more global information, which can benefit the zero-shot TTS
+task. Experimental results demonstrate that TiCodec can not only enhance the
+quality of reconstruction speech with fewer tokens but also increase the
+similarity and naturalness, as well as reduce the word error rate of the
+synthesized speech by the TTS model.
+","2023-10-03","2310.00014v1.pdf","FEWER-TOKEN NEURAL SPEECH CODEC WITH TIME-INVARIANT CODES
+Yong Ren1,2, Tao Wang1, Jiangyan Yi1, Le Xu1,2, Jianhua Tao3, Chuyuan Zhang1,2, Junzuo Zhou1,2
+1Institute of Automation, Chinese Academy of Sciences, China
+2University of Chinese Academy of Sciences, China
+3Department of Automation, Tsinghua University, China
+ABSTRACT
+Language model based text-to-speech (TTS) models, like VALL-E,
+have gained attention for their outstanding in-context learning capa-
+bility in zero-shot scenarios. Neural speech codec is a critical com-
+ponent of these models, which can convert speech into discrete token
+representations. However, excessive token sequences from the codec
+may negatively affect prediction accuracy and restrict the progres-
+sion of Language model based TTS models. To address this issue,
+this paper proposes a novel neural speech codec with time-invariant
+codes named TiCodec. By encoding and quantizing time-invariant
+information into a separate code, TiCodec can reduce the amount of
+frame-level information that needs encoding, effectively decreasing
+the number of tokens as codes of speech. Furthermore, this paper
+introduces a time-invariant encoding consistency loss to enhance the
+consistency of time-invariant code within an utterance and force it
+to capture more global information, which can benefit the zero-shot
+TTS task. Experimental results demonstrate that TiCodec can not
+only enhance the quality of reconstruction speech with fewer tokens
+but also increase the similarity and naturalness, as well as reduce the
+word error rate of the synthesized speech by the TTS model.
+Index Terms— speech codec, fewer tokens, time-invariant, lan-
+guage model, text-to-speech
+1. INTRODUCTION
+arXiv:2310.00014v1  [cs.SD]  15 Sep 2023
+VQVAE [13] as conditioning for the WaveNet decoder. After that,
+SoundStream [14], as a fully convolutional end-to-end universal au-
+dio codec model, was proposed, extending the VQVAE vector quan-
+tizer to a residual vector quantizer. Following that, Encodec [4] in-
+troduced a spectrogram-only adversarial loss, a novel gradient bal-
+ancer, and a small Transformer model to further improve the per-
+formance of codec. HifiCodec [15] proposes a codec model that
+uses group-residual vector quantization to improve the reconstruc-
+tion performance of audio. It can achieve good speech reconstruc-
+tion performance with only four discrete token sequences, outper-
+forming SoundStream and Encodec. However, the performance of
+codec decreases significantly when using only one or two discrete
+token sequences to represent speech, making it unable to reconstruct
+high-quality speech.
+To achieve good speech reconstruction performance with only
+two or even one sequence of discrete frame-level tokens, we pro-
+pose a neural speech codec model with time-invariant codes named
+TiCodec. Some information in a speech that does not change over
+time is extracted by a time-invariant representation extraction mod-
+ule and encoded into a fixed-length code, referred to as the time-
+invariant code. This operation can reduce the amount of information
+that needs to be encoded in frame-level codes, forcing it to be max-
+imally informative about time-related aspects. After obtaining the
+frame-level and time-invariant features, they are separately quan-
+tized as frame-level and time-invariant tokens. When TiCodec is
+used for downstream TTS tasks, the time-invariant tokens can be
+extracted from the prompt of target speakers, which can better main-
+tain the timbre information of target speakers. At the same time,
+fewer frame-level tokens can be used to predict by the TTS model,
+while maintaining a low word error rate (WER) and high quality of
+synthesized speech. To make the time-invariant token representa-
+tions extracted from the target speech in TTS contain more global
+time-invariant information, we introduce the time-invariant encod-
+ing consistency loss, hoping to improve the robustness of inference
+in TTS and further reduce WER.
+The contributions of this paper are as follows:
+• This paper proposed a neural speech codec model named
+TiCodec, which can separate the time-varying and time-
+invariant information in speech and quantize them separately.
+• A time-invariant encoding consistency loss was introduced to
+improve the consistency of the time-invariant codes.
+Recently, large language models have demonstrated remarkable per-
+formance on zero-shot text-to-speech (TTS) tasks such as VALL-
+E [1], SPEAR-TTS [2], and SoundStorm [3]. VALL-E uses dis-
+crete tokens derived from Encodec [4] as a representation of speech,
+and then trains an autoregressive (AR) language model and a non-
+autoregressive (NAR) language model to generate tokens from the
+first quantizer and the other seven quantizers separately. It can syn-
+thesize high-quality personalized speech by using a short recording
+of an unknown speaker as an acoustic prompt. However, the high-
+quality reconstruction of speech requires multiple token sequences,
+which affects the inference speed and robustness, and restricts the
+model structure and training methods of language model based TTS
+models. Therefore, how to represent speech better with fewer dis-
+crete tokens has become a core issue.
+Neural speech codec is an important method to acquire discrete
+token representations of speech. To improve the compression rate
+and reduce the number of tokens, more and more research is focus-
+ing on neural speech codec [5, 6, 7]. Kleijn et al. [8] proposed a
+low-rate speech coding architecture based on the WaveNet [9] de-
+coder.
+Lyra [10] encodes quantized mel-spectrogram features of
+speech, and then decodes them with WaveGRU [11]. Subsequently,
+end-to-end neural speech codecs have been introduced.
+Grbacea
+et al. [12] used the discretized latent representations proposed in
+Experimental results on speech reconstruction and zero-shot
+TTS task with LibriTTS datasets [16] show that TiCodec achieved
+better speech reconstruction performance with fewer tokens and
+improved robustness, quality, and similarity of synthesized speech
+in the zero-shot TTS task.
+"
+"2310.00031","Markus Marks","Neehar Kondapaneni, Markus Marks, Manuel Knott, Rog\'erio Guimar\~aes,
+  Pietro Perona","Text-image Alignment for Diffusion-based Perception","Project page: https://www.vision.caltech.edu/tadp/","","","","cs.CV","http://arxiv.org/licenses/nonexclusive-distrib/1.0/","  Diffusion models are generative models with impressive text-to-image
+synthesis capabilities and have spurred a new wave of creative methods for
+classical machine learning tasks. However, the best way to harness the
+perceptual knowledge of these generative models for visual tasks is still an
+open question. Specifically, it is unclear how to use the prompting interface
+when applying diffusion backbones to vision tasks. We find that automatically
+generated captions can improve text-image alignment and significantly enhance a
+model's cross-attention maps, leading to better perceptual performance. Our
+approach improves upon the current SOTA in diffusion-based semantic
+segmentation on ADE20K and the current overall SOTA in depth estimation on
+NYUv2. Furthermore, our method generalizes to the cross-domain setting; we use
+model personalization and caption modifications to align our model to the
+target domain and find improvements over unaligned baselines. Our object
+detection model, trained on Pascal VOC, achieves SOTA results on Watercolor2K.
+Our segmentation method, trained on Cityscapes, achieves SOTA results on Dark
+Zurich-val and Nighttime Driving. Project page:
+https://www.vision.caltech.edu/tadp/
+","2023-10-06","2310.00031v1.pdf","Text-image Alignment for Diffusion-based Perception
+Neehar Kondapaneni1* Markus Marks1∗
+Manuel Knott2∗
+Rog´erio Guimar˜aes1
+Pietro Perona1
+1California Institute of Technology
+2ETH Z¨urich, Swiss Data Science Center, Empa
+Abstract
+Single-domain
+Depth Estimation
+Diffusion-Pretrained 
+Vision Model
+Segmentation
+“a dog and a bird”
+Captioner
++
+”in a watercolor style”
+Cross-domain
+Object Detection
+Caption Modifier
+Figure 1. Text-Aligned Diffusion Perception (TADP). In TADP,
+image captions align the text prompts and images passed to
+diffusion-based vision models. In cross-domain tasks, target do-
+main information is incorporated into the prompt to boost perfor-
+mance.
+Diffusion models are generative models with impressive
+text-to-image synthesis capabilities and have spurred a new
+wave of creative methods for classical machine learning
+tasks.
+However, the best way to harness the perceptual
+knowledge of these generative models for visual tasks is
+still an open question. Specifically, it is unclear how to
+use the prompting interface when applying diffusion back-
+bones to vision tasks. We find that automatically gener-
+ated captions can improve text-image alignment and sig-
+nificantly enhance a model’s cross-attention maps, leading
+to better perceptual performance. Our approach improves
+upon the current SOTA in diffusion-based semantic segmen-
+tation on ADE20K and the current overall SOTA in depth
+estimation on NYUv2. Furthermore, our method general-
+izes to the cross-domain setting; we use model personal-
+ization and caption modifications to align our model to the
+target domain and find improvements over unaligned base-
+lines. Our object detection model, trained on Pascal VOC,
+achieves SOTA results on Watercolor2K. Our segmentation
+method, trained on Cityscapes, achieves SOTA results on
+Dark Zurich-val and Nighttime Driving.
+1. Introduction
+arXiv:2310.00031v1  [cs.CV]  29 Sep 2023
+Diffusion models have set the state-of-the-art for image
+generation [30, 33, 36, 48]. Recently, a few works have
+shown diffusion pre-trained backbones have a strong prior
+for scene understanding that allows them to perform well in
+advanced discriminative vision tasks, such as semantic seg-
+mentation and monocular depth estimation [16, 49]. Unlike
+contrastive vision language models (like CLIP) [21, 25, 29],
+generative models have a causal relationship with text, in
+which text guides image generation.
+In latent diffusion
+models, text prompts control the denoising U-Net [34],
+moving the image latent in a semantically meaningful di-
+*Equal contribution.
+rection [5].
+We explore this relationship and find that text-image
+alignment significantly improves the performance of
+diffusion-based perception. We then investigate text-target
+domain alignment in cross-domain vision tasks, finding that
+aligning the text with the target domain while training on the
+source domain can improve a model’s target domain perfor-
+mance (Fig. 1).
+We first study prompting for diffusion-based perceptual
+models and find that increasing text-image alignment im-
+proves semantic segmentation and depth estimation perfor-
+mance. We hypothesize that unaligned text prompts can in-
+troduce semantic shifts to the feature maps of the diffusion
+model [5] and that these shifts can make it more difficult
+for the task-specific head to solve the target task. Specifi-
+1
+"
+"2310.00032","Qinghua Xu","Qinghua Xu, Tao Yue, Shaukat Ali and Maite Arratibel","Pretrain, Prompt, and Transfer: Evolving Digital Twins for Time-to-Event
+  Analysis in Cyber-physical Systems","","","","","cs.SE","http://creativecommons.org/licenses/by/4.0/","  Cyber-Physical Systems (CPSs), e.g., elevator systems and autonomous driving
+systems, are progressively permeating our everyday lives. To ensure their
+safety, various analyses need to be conducted, such as anomaly detection and
+time-to-event analysis (the focus of this paper). Recently, it has been widely
+accepted that digital Twins (DTs) can serve as an efficient method to aid in
+the development, maintenance, and safe and secure operation of CPSs. However,
+CPSs frequently evolve, e.g., with new or updated functionalities, which demand
+their corresponding DTs be co-evolved, i.e., in synchronization with the CPSs.
+To that end, we propose a novel method, named PPT, utilizing an
+uncertainty-aware transfer learning for DT evolution. Specifically, we first
+pretrain PPT with a pretraining dataset to acquire generic knowledge about the
+CPSs, followed by adapting it to a specific CPS with the help of prompt tuning.
+Results highlight that PPT is effective in time-to-event analysis in both
+elevator and ADSs case studies, on average, outperforming a baseline method by
+7.31 and 12.58 in terms of Huber loss, respectively. The experiment results
+also affirm the effectiveness of transfer learning, prompt tuning and
+uncertainty quantification in terms of reducing Huber loss by at least 21.32,
+3.14 and 4.08, respectively, in both case studies.
+","2023-10-06","2310.00032v2.pdf","PRETRAIN, PROMPT, AND TRANSFER: EVOLVING DIGITAL
+TWINS FOR TIME-TO-EVENT ANALYSIS IN CYBER-PHYSICAL
+SYSTEMS
+A PREPRINT
+Qinghua Xu
+Department of Engineering Complex Software Systems
+Simula Research Laboratory
+Oslo, Norway
+qinghua@simula.no
+Tao Yue
+Department of Engineering Complex Software Systems
+Simula Research Laboratory
+Oslo, Norway
+taoyue@gmail.com
+Maite Arratibel
+Orona Group
+Hernani, Basque Country, Spain
+marratibel@orona-group.com
+Shaukat Ali
+Department of Engineering Complex Software Systems
+Simula Research Laboratory
+Oslo, Norway
+shaukat@simula.no
+October 6, 2023
+ABSTRACT
+arXiv:2310.00032v2  [cs.SE]  3 Oct 2023
+Cyber-Physical Systems (CPSs), e.g., elevator systems and autonomous driving systems, are progres-
+sively permeating our everyday lives. To ensure their safety, various analyses need to be conducted,
+such as anomaly detection and time-to-event analysis (the focus of this paper). Recently, it has
+been widely accepted that digital Twins (DTs) can serve as an efficient method to aid in the devel-
+opment, maintenance, and safe and secure operation of CPSs. However, CPSs frequently evolve,
+e.g., with new or updated functionalities, which demand their corresponding DTs be co-evolved, i.e.,
+in synchronization with the CPSs. To that end, we propose a novel method, named PPT, utilizing
+an uncertainty-aware transfer learning for DT evolution. Specifically, we first pretrain PPT with a
+pretraining dataset to acquire generic knowledge about the CPSs, followed by adapting it to a specific
+CPS with the help of prompt tuning. Results highlight that PPT is effective in time-to-event analysis
+in both elevator and ADSs case studies, on average, outperforming a baseline method by 7.31 and
+12.58 in terms of Huber loss, respectively. The experiment results also affirm the effectiveness of
+transfer learning, prompt tuning and uncertainty quantification in terms of reducing Huber loss by at
+least 21.32, 3.14 and 4.08, respectively, in both case studies.
+1
+Introduction
+Cyber-Physical Systems (CPSs) serve as essential elements in actualizing the vision of Industry 4.0 [1]. Unlike
+conventional physical systems, a typical CPS incorporates a cyber component, linking physical systems through a
+network. This combination of cyber and physical systems enables more intelligent and adept industrial applications,
+especially in crucial infrastructures such as transportation systems. However, the increasing complexity, heterogeneity,
+and constantly evolving nature of CPSs, brought about by introducing a rich array of functionalities, opens them up to
+significant threats and challenges. This often renders existing security and safety techniques ineffective, emphasizing
+the need to devise novel techniques to ensure the dependability of various CPS tasks.
+"
+"2310.00034","Yuzhang Shang","Yuzhang Shang, Zhihang Yuan, Qiang Wu, Zhen Dong","PB-LLM: Partially Binarized Large Language Models","Frist work using network binarization for large language model
+  compression","","","","cs.LG cs.AI cs.CL","http://arxiv.org/licenses/nonexclusive-distrib/1.0/","  This paper explores network binarization, a radical form of quantization,
+compressing model weights to a single bit, specifically for Large Language
+Models (LLMs) compression. Due to previous binarization methods collapsing
+LLMs, we propose a novel approach, Partially-Binarized LLM (PB-LLM), which can
+achieve extreme low-bit quantization while maintaining the linguistic reasoning
+capacity of quantized LLMs. Specifically, our exploration first uncovers the
+ineffectiveness of naive applications of existing binarization algorithms and
+highlights the imperative role of salient weights in achieving low-bit
+quantization. Thus, PB-LLM filters a small ratio of salient weights during
+binarization, allocating them to higher-bit storage, i.e.,
+partially-binarization. PB-LLM is extended to recover the capacities of
+quantized LMMs, by analyzing from the perspective of post-training quantization
+(PTQ) and quantization-aware training (QAT). Under PTQ, combining the concepts
+from GPTQ, we reconstruct the binarized weight matrix guided by the Hessian
+matrix and successfully recover the reasoning capacity of PB-LLM in low-bit.
+Under QAT, we freeze the salient weights during training, explore the
+derivation of optimal scaling factors crucial for minimizing the quantization
+error, and propose a scaling mechanism based on this derived scaling strategy
+for residual binarized weights. Those explorations and the developed
+methodologies significantly contribute to rejuvenating the performance of
+low-bit quantized LLMs and present substantial advancements in the field of
+network binarization for LLMs.The code is available at
+https://github.com/hahnyuan/BinaryLLM.
+","2023-10-03","2310.00034v1.pdf","PB-LLM: PARTIALLY BINARIZED LARGE LANGUAGE
+MODELS
+Yuzhang Shang∗
+Illinois Institute of Technology
+Zhihang Yuan∗
+Huomo AI
+Qiang Wu
+Huomo AI
+Zhen Dong
+UC Berkeley
+ABSTRACT
+This paper explores network binarization, a radical form of quantization, compress-
+ing model weights to a single bit, specifically for Large Language Models (LLMs)
+compression. Due to previous binarization methods collapsing LLMs, we propose
+a novel approach, Partially-Binarized LLM (PB-LLM), which can achieve extreme
+low-bit quantization while maintaining the linguistic reasoning capacity of quan-
+tized LLMs. Specifically, our exploration first uncovers the ineffectiveness of na¨ıve
+applications of existing binarization algorithms and highlights the imperative role
+of salient weights in achieving low-bit quantization. Thus, PB-LLM filters a small
+ratio of salient weights during binarization, allocating them to higher-bit storage,
+i.e., partially-binarization. PB-LLM is extended to recover the capacities of quan-
+tized LMMs, by analyzing from the perspective of post-training quantization (PTQ)
+and quantization-aware training (QAT). Under PTQ, combining the concepts from
+GPTQ, we reconstruct the binarized weight matrix guided by the Hessian matrix
+and successfully recover the reasoning capacity of PB-LLM in low-bit. Under QAT,
+we freeze the salient weights during training, explore the derivation of optimal
+scaling factors crucial for minimizing the quantization error, and propose a scaling
+mechanism based on this derived scaling strategy for residual binarized weights.
+Those explorations and the developed methodologies significantly contribute to
+rejuvenating the performance of low-bit quantized LLMs and present substantial
+advancements in the field of network binarization for LLMs. The code is available
+at PB-LLM.
+1
+INTRODUCTION
+arXiv:2310.00034v1  [cs.LG]  29 Sep 2023
+Recently, large language models (LLMs) have gained significant traction in artificial intelligence. It
+can be attributed to the success of models such as ChatGPT [Brown et al., 2020, Ouyang et al., 2022].
+Following its lead, other LLMs such as OPT [Zhang et al., 2022], BLOOM [Scao et al., 2022], and
+LLaMA [Touvron et al., 2023] have emerged, proving that an increase in model size typically results
+in enhanced capabilities. As a result, models with tens to hundreds of billions of parameters have
+become the norm. However, their vast size poses considerable deployment challenges on memory-
+constrained devices. A model such as the LLAMA-65B (with 65 billion parameters) requires at least
+130GB of memory for inference - a number that often exceeds the capacity of a single GPU or server.
+Many methods have been proposed to reduce the memory consumption of LLMs [Zhu et al., 2023].
+Those methods can be categorized into weight quantization [Dettmers et al., 2022], network prun-
+ing [Frantar and Alistarh, 2023], and low-rank factorization [Zhang et al., 2023]. Among these
+compression paradigms, weight quantization is particularly prominent and widely adopted for LLMs.
+Since it preserves the original model architecture and leverages well-trained LLMs’ full-precision
+checkpoints, the compression process is greatly simplified [Zhu et al., 2023]. However, state-of-the-art
+LLM quantization methods show a marked decline in quality beyond 4 bits [Liu et al., 2023a].
+More aggressive compression methods are required to push the LLM quantization into the lower bit
+range. The network binarization technique stands out, reducing the bit-width of weights to just one
+bit [Helwegen et al., 2019, Rusci et al., 2020, Qin et al., 2020a; 2023]. The binarized models take
+little storage and memory, and accelerate the inference by efficient bitwise operations. Compared
+∗Equal contribution.
+1
+"
+"2310.00035","Xi Wang","Xi Wang, Laurence Aitchison, Maja Rudolph","LoRA ensembles for large language model fine-tuning","Update the title in the PDF file","","","","cs.LG cs.AI","http://creativecommons.org/licenses/by/4.0/","  Finetuned LLMs often exhibit poor uncertainty quantification, manifesting as
+overconfidence, poor calibration, and unreliable prediction results on test
+data or out-of-distribution samples. One approach commonly used in vision for
+alleviating this issue is a deep ensemble, which constructs an ensemble by
+training the same model multiple times using different random initializations.
+However, there is a huge challenge to ensembling LLMs: the most effective LLMs
+are very, very large. Keeping a single LLM in memory is already challenging
+enough: keeping an ensemble of e.g. 5 LLMs in memory is impossible in many
+settings. To address these issues, we propose an ensemble approach using
+Low-Rank Adapters (LoRA), a parameter-efficient fine-tuning technique.
+Critically, these low-rank adapters represent a very small number of
+parameters, orders of magnitude less than the underlying pre-trained model.
+Thus, it is possible to construct large ensembles of LoRA adapters with almost
+the same computational overhead as using the original model. We find that LoRA
+ensembles, applied on its own or on top of pre-existing regularization
+techniques, gives consistent improvements in predictive accuracy and
+uncertainty quantification.
+","2023-10-06","2310.00035v1.pdf","Preprint. Under review
+ENSEMBLE OF LOW-RANK ADAPTERS FOR LARGE
+LANGUAGE MODEL FINE-TUNING
+Xi Wang∗
+UMass Amherst
+Laurence Aitchison
+University of Bristol
+Maja Rudolph
+Bosch Center for AI
+ABSTRACT
+Fine-tuned LLMs often exhibit poor uncertainty quantification, manifesting as
+overconfidence, poor calibration, and unreliable prediction results on test data or
+out-of-distribution samples. One approach commonly used in vision for alleviating
+this issue is a deep ensemble, which constructs an ensemble by training the same
+model multiple times using different random initializations. However, there is
+a huge challenge to ensembling LLMs: the most effective LLMs are very, very
+large. Keeping a single LLM in memory is already challenging enough: keeping
+an ensemble of e.g. 5 LLMs in memory is impossible in many settings. To address
+this issue, we propose an ensemble approach using Low-Rank Adapters (LoRA),
+a parameter-efficient fine-tuning technique. Critically, these low-rank adapters
+require a very small number of parameters, orders of magnitude less than the
+underlying pre-trained model. Thus, it is possible to construct large ensembles of
+LoRA adapters with almost the same computational overhead as using the original
+model. We find that LoRA ensembles, applied on its own or on top of pre-existing
+regularization techniques, gives consistent improvements in predictive accuracy
+and uncertainty quantification.
+1
+INTRODUCTION
+LLMs have demonstrated state-of-art performance in many natural language processing tasks (Rad-
+ford et al., 2019; Touvron et al., 2023; Brown et al., 2020; Chung et al., 2022; Kojima et al., 2022;
+OpenAI, 2023). With additional fine-tuning a pre-trained LLM can be adapted to downstream applica-
+tions or data. However, fine-tuned LLMs can overfit to training data and often exhibit overconfidence
+(as visualized in Fig.1a). Specifically, these models may yield overly certain predictions, especially
+on incorrectly predicted samples or those from different domains. Ideally, a model should exhibit
+low confidence when its predictions are likely to be incorrect; otherwise, the outcomes could be
+dangerously misleading in safety-critical contexts such as medical diagnosis(Singhal et al., 2023),
+finance (Yang et al., 2023), or decision-making processes (Li et al., 2022).
+arXiv:2310.00035v1  [cs.LG]  29 Sep 2023
+A widely adopted approach for mitigating overconfidence in deep learning is to make predictions
+using an ensemble of neural networks rather than a single model. There are many approaches for
+constructing an ensemble of networks, such as training multiple networks with different random
+initializations (Lakshminarayanan et al., 2017), different hyperparameters (Wenzel et al., 2020b).
+However, there are two barriers to applying these approaches for fine-tuning LLMs. First, ensembles
+require storing multiple copies of the model weights and loading them into GPU at test time. This is
+not practical for modern LLMs. A single LLaMA-13b (Touvron et al., 2023) stored at 16-bit precision,
+is 25 GB on disk, and loading it to the GPU takes around 6 seconds. In addition, random initialization
+has been noted to play a crucial role in deep ensembles (Lakshminarayanan et al., 2017; Fort et al.,
+2019). However, starting the fine-tuning of the individual LLMs with the same initialization – the
+pre-trained weights – eliminates an important source of randomness and may cause a lack of diversity
+across the ensemble, thereby potentially reducing its benefits.
+Work by Gleave & Irving (2022) and Sun et al. (2022) has attempted building ensembles of fine-tuned
+LLMs but due to the limitations above, their method is restricted to smaller models such as GPT-2
+(Radford et al., 2019) with only 1.5 billion parameters. In this paper, we build on recent advances in
+efficient LLM fine-tuning with low-rank adapters (LoRA) (Hu et al., 2021) and propose an ensemble
+∗Work done during an internship at the Bosch Center for AI. Contact: xwang3@cs.umass.edu
+1
+"
+"2310.00036","Shengyi Huang","Shengyi Huang, Jiayi Weng, Rujikorn Charakorn, Min Lin, Zhongwen Xu,
+  Santiago Onta\~n\'on","Cleanba: A Reproducible and Efficient Distributed Reinforcement Learning
+  Platform","","","","","cs.LG","http://arxiv.org/licenses/nonexclusive-distrib/1.0/","  Distributed Deep Reinforcement Learning (DRL) aims to leverage more
+computational resources to train autonomous agents with less training time.
+Despite recent progress in the field, reproducibility issues have not been
+sufficiently explored. This paper first shows that the typical actor-learner
+framework can have reproducibility issues even if hyperparameters are
+controlled. We then introduce Cleanba, a new open-source platform for
+distributed DRL that proposes a highly reproducible architecture. Cleanba
+implements highly optimized distributed variants of PPO and IMPALA. Our Atari
+experiments show that these variants can obtain equivalent or higher scores
+than strong IMPALA baselines in moolib and torchbeast and PPO baseline in
+CleanRL. However, Cleanba variants present 1) shorter training time and 2) more
+reproducible learning curves in different hardware settings. Cleanba's source
+code is available at \url{https://github.com/vwxyzjn/cleanba}
+","2023-10-03","2310.00036v1.pdf","CLEANBA: A REPRODUCIBLE AND EFFICIENT DIS-
+TRIBUTED REINFORCEMENT LEARNING PLATFORM
+Shengyi Huang‡
+Jiayi Weng∗
+Rujikorn Charakorn♯
+Min Lin△
+Zhongwen Xu♢
+Santiago Onta˜n´on‡§
+‡Drexel University
+Hugging Face
+§Google
+♯VISTEC
+△Sea AI Lab
+♢Tencent AI Lab
+costa.huang@outlook.com
+ABSTRACT
+Distributed Deep Reinforcement Learning (DRL) aims to leverage more compu-
+tational resources to train autonomous agents with less training time. Despite
+recent progress in the field, reproducibility issues have not been sufficiently ex-
+plored. This paper first shows that the typical actor-learner framework can have
+reproducibility issues even if hyperparameters are controlled. We then introduce
+Cleanba, a new open-source platform for distributed DRL that proposes a highly
+reproducible architecture. Cleanba implements highly optimized distributed vari-
+ants of PPO (Schulman et al., 2017) and IMPALA (Espeholt et al., 2018). Our
+Atari experiments show that these variants can obtain equivalent or higher scores
+than strong IMPALA baselines in moolib and torchbeast and PPO base-
+line in CleanRL. However, Cleanba variants present 1) shorter training time and
+2) more reproducible learning curves in different hardware settings. Cleanba’s
+source code is available at https://github.com/vwxyzjn/cleanba
+1
+INTRODUCTION
+Deep Reinforcement Learning (DRL) is a technique to train autonomous agents to perform tasks.
+In recent years, it has demonstrated remarkable success across various domains, including video
+games (Mnih et al., 2015), robotics control (Schulman et al., 2017), chip design (Mirhoseini et al.,
+2021), and large language model tuning (Ouyang et al., 2022). Distributed DRL (Espeholt et al.,
+2018; 2020) has also become a fast-growing field that leverages more computing resources to train
+agents. Despite recent progress, reproducibility issues in distributed DRL have not been sufficiently
+explored. This paper introduces Cleanba, a new platform for distributed DRL that addresses repro-
+ducibility issues under different hardware settings.
+arXiv:2310.00036v1  [cs.LG]  29 Sep 2023
+Reproducibility in DRL is a challenging issue. Not only are DRL algorithms brittle to hyperparam-
+eters and neural network architectures (Henderson et al., 2018), implementation details are often
+crucial for successfully applying DRL but frequently omitted from publications (Engstrom et al.,
+2020; Andrychowicz et al., 2021; Huang et al., 2022a). Reproducibility issues in distributed DRL
+are under-studied and arguably even more challenging. In particular, most high-profile distributed
+DRL works, such as Apex-DQN (Horgan et al., 2018), IMPALA (Espeholt et al., 2018), R2D2 (Kap-
+turowski et al., 2019), and Podracer Sebulba (Hessel et al., 2021) are not (fully) open-source. Fur-
+thermore, earlier work pointed out that more actor threads not only improve training speed but cause
+reproducibility issues – different hardware settings could impact the data efficiency in a non-linear
+fashion (Mnih et al., 2016).
+In this paper, we present a more principled approach to distributed DRL, in which different hardware
+settings could make training speed slower or faster but do not impact data efficiency, thus making
+scaling results more reproducible and predictable. We first analyze the typical actor-learner architec-
+ture in IMPALA (Espeholt et al., 2018) and show that its parallelism paradigm could introduce repro-
+ducibility issues due to the concurrent scheduling of different actor threads. We then propose a more
+reproducible distributed architecture by better aligning the parallelized actor and learner’s compu-
+∗Currently at OpenAI.
+1
+"
+"2310.00068","Luchuan Song","Luchuan Song, Guojun Yin, Zhenchao Jin, Xiaoyi Dong, Chenliang Xu","Emotional Listener Portrait: Neural Listener Head Generation with
+  Emotion","Accepted by ICCV2023","","","","cs.GR cs.AI cs.MM","http://arxiv.org/licenses/nonexclusive-distrib/1.0/","  Listener head generation centers on generating non-verbal behaviors (e.g.,
+smile) of a listener in reference to the information delivered by a speaker. A
+significant challenge when generating such responses is the non-deterministic
+nature of fine-grained facial expressions during a conversation, which varies
+depending on the emotions and attitudes of both the speaker and the listener.
+To tackle this problem, we propose the Emotional Listener Portrait (ELP), which
+treats each fine-grained facial motion as a composition of several discrete
+motion-codewords and explicitly models the probability distribution of the
+motions under different emotion in conversation. Benefiting from the
+``explicit'' and ``discrete'' design, our ELP model can not only automatically
+generate natural and diverse responses toward a given speaker via sampling from
+the learned distribution but also generate controllable responses with a
+predetermined attitude. Under several quantitative metrics, our ELP exhibits
+significant improvements compared to previous methods.
+","2023-10-10","2310.00068v1.pdf","Emotional Listener Portrait: Realistic Listener Motion Simulation in Conversation
+Luchuan Song1
+Guojun Yin2
+Zhenchao Jin3
+Xiaoyi Dong4
+Chenliang Xu1
+1University of Rochester
+2University of Science and Technology of China
+3University of Hong Kong
+4Shanghai AI Laboratory
+{lsong11@ur., chenliang.xu@}rochester.edu, gjyin@mail.ustc.edu.cn,
+blwx96@connect.hku.hk, dongxiaoyi@pjlab.org.cn
+Input: Speaker Video & Audio
+Latent Space with Emotion
+Output: Listener Video with Emotion Responsive and Blinking
+Blink Coeffs.
+Neutral
+Space
+Neutral
+Positive
+Space
+Positive
+Negative
+Space
+Negative
+Figure 1: Illustration of our method on listener motion synthesis with the ternary emotional value as an example. Given
+different emotional speakers (e.g. neutral, positive, and negative), our approach generates corresponding listeners under the
+different emotional latent spaces.
+Abstract
+arXiv:2310.00068v1  [cs.GR]  29 Sep 2023
+Listener head generation centers on generating non-
+verbal behaviors (e.g., smile) of a listener in reference to the
+information delivered by a speaker. A significant challenge
+when generating such responses is the non-deterministic na-
+ture of fine-grained facial expressions during a conversation,
+which varies depending on the emotions and attitudes of
+both the speaker and the listener. To tackle this problem, we
+propose the Emotional Listener Portrait (ELP), which treats
+each fine-grained facial motion as a composition of several
+discrete motion-codewords and explicitly models the proba-
+bility distribution of the motions under different emotion in
+conversation. Benefiting from the “explicit” and “discrete”
+design, our ELP model can not only automatically generate
+natural and diverse responses toward a given speaker via
+sampling from the learned distribution but also generate
+controllable responses with a predetermined attitude. Under
+several quantitative metrics, our ELP exhibits significant
+improvements compared to previous methods.
+1. Introduction
+Listener Head Generation (LHG) technology aims to syn-
+thesize the motion of the listener in response to the speaker.
+In contrast to speaker head generation (SHG) [10, 44, 21,
+13, 35, 47, 9, 53, 45], which focuses on generating lip-
+speech synchronized portrait videos, LHG analyzes the talk-
+ing semantics of the speaker automatically, without explicit
+guidance, to synthesize corresponding interactive motions
+of the listener. As shown in Figure 1, the listener reacts
+positively when the speaker shares happy, and vice versa.
+LHG can be employed in many applications, e.g. human-
+computer interaction [57, 25, 60], virtual reality [22, 24],
+metaverse [8, 7, 46] and media forensics [42, 37, 43, 17] etc.
+The distinct nature of LHG, which necessitates a compre-
+hensive modeling of the speaker’s motion [32], presents a
+significant hurdle in yielding realistic listener head. In the
+absence of audio-to-mouth matching evaluation, audiences
+are more inclined to discern subtle changes in facial expres-
+sions and head movements. However, the existing meth-
+ods Responsive Listening Head Generation (RLHG) [61]
+and Learning2Listen [31] have ignored these key compo-
+nents. Specifically, RLHG [61] has replicated the regres-
+sion experience from SHG [10], which weakens the non-
+deterministic properties and smoothes the listener motion.
+Meanwhile, although the motion categories in codebook pro-
+posed by Learning2Listen [31] alleviate this problem, the
+one-dimensional codebook from VQ-VAE [29] limits the
+"
+"2310.00074","Hangfeng He","Hangfeng He, Hongming Zhang, Dan Roth","SocREval: Large Language Models with the Socratic Method for
+  Reference-Free Reasoning Evaluation","","","","","cs.CL cs.AI","http://creativecommons.org/licenses/by/4.0/","  To comprehensively assess the capacity of current models for complex
+reasoning, it is crucial to assess their step-by-step reasoning in a scalable
+manner. Established reference-based evaluation metrics rely on human-annotated
+reasoning chains to assess the model-derived chains. However, such
+``gold-standard'' human-written reasoning chains may not be unique and their
+acquisition is often labor-intensive. Existing reference-free reasoning metrics
+eliminate the need for human-crafted reasoning chains as references, but they
+typically require fine-tuning on datasets with human-derived reasoning chains,
+which complicates the process and raises concerns regarding generalizability
+across diverse datasets. To address these challenges, we harness GPT-4 to
+automatically evaluate reasoning chain quality, obviating the need for
+human-crafted references. Leveraging the Socratic method, we devise tailored
+prompts to enhance reference-free reasoning evaluation, which we term SocREval
+(Socratic method for Reasoning Evaluation). Empirical results from four human
+annotated datasets reveal that SocREval significantly improves GPT-4's
+performance, surpassing existing reference-free and reference-based reasoning
+evaluation metrics. Beyond its demonstrated efficacy, our proposed framework,
+large language models (LLMs) with the Socratic method, proves to be both
+cost-efficient and robust to prompt writing and example selection, as
+substantiated by our in-depth analysis.
+","2023-10-03","2310.00074v1.pdf","SOCREVAL: Large Language Models with the Socratic Method for
+Reference-Free Reasoning Evaluation
+Hangfeng He†
+Hongming Zhang‡
+Dan Roth§
+†University of Rochester
+‡Tencent AI Lab, Seattle
+§University of Pennsylvania
+hanfeng.he@rochester.edu, hongmzhang@global.tencent.com
+danroth@seas.upenn.edu
+Abstract
+To comprehensively assess the capacity of current models for complex reasoning, it is crucial to assess their
+step-by-step reasoning in a scalable manner. Established reference-based evaluation metrics rely on human-annotated
+reasoning chains to assess the model-derived chains. However, such “gold-standard” human-written reasoning chains
+may not be unique and their acquisition is often labor-intensive. Existing reference-free reasoning metrics eliminate
+the need for human-crafted reasoning chains as references, but they typically require fine-tuning on datasets with
+human-derived reasoning chains, which complicates the process and raises concerns regarding generalizability across
+diverse datasets. To address these challenges, we harness GPT-4 to automatically evaluate reasoning chain quality,
+obviating the need for human-crafted references. Leveraging the Socratic method, we devise tailored prompts to en-
+hance reference-free reasoning evaluation, which we term SOCREVAL (Socratic method for Reasoning Evaluation).
+Empirical results from four human annotated datasets reveal that SOCREVAL significantly improves GPT-4’s perfor-
+mance, surpassing existing reference-free and reference-based reasoning evaluation metrics. Beyond its demonstrated
+efficacy, our proposed framework, large language models (LLMs) with the Socratic method, proves to be both cost-
+efficient and robust to prompt writing and example selection, as substantiated by our in-depth analysis.1
+1
+Introduction
+arXiv:2310.00074v1  [cs.CL]  29 Sep 2023
+Recent advances in large language models (LLMs) have led to state-of-the-art results in a plethora of natural language
+processing (NLP) tasks, demonstrating the effectiveness of in-context learning without the need for task-specific train-
+ing or fine-tuning (OpenAI, 2023; Anil et al., 2023; Touvron et al., 2023). Despite these impressive achievements,
+the inherent reasoning capabilities of LLMs remain notably below human expectations (Arkoudas, 2023). Although
+the core of reasoning fundamentally involves offering justifications, most contemporary evaluations primarily assess a
+model’s reasoning capability based on its end-task performance (Huang & Chang, 2022). Such evaluations, focusing
+solely on the accuracy of the final answer, neglect the complexities of the underlying reasoning chains. This oversight
+inhibits a comprehensive understanding of a model’s reasoning ability and poses challenges to further advancements
+in this domain.
+To assess the quality of reasoning chains produced by models, a direct and intuitive approach centers on con-
+trasting these generated chains with human-constructed ones, termed as reference-based reasoning evaluation (Clinciu
+et al., 2021; Welleck et al., 2022; Saparov & He, 2022). However, these reference-based metrics highly rely on
+human-constructed reasoning chains, which are both labor-intensive and costly. Furthermore, “gold-standard” rea-
+soning chains may not be unique (Dalvi et al., 2021), implying that the effectiveness of reference-based evaluations
+can be significantly influenced by the choice and breadth of human-crafted references. In light of these challenges,
+recent research has begun to explore the evaluation of reasoning chains without necessitating human-annotated ref-
+erences—termed reference-free reasoning evaluation (Golovneva et al., 2022; Prasad et al., 2023). Regrettably, these
+reference-free metrics necessitate the fine-tuning of models on datasets with human-annotated reasoning chains, which
+is not only complicated but also restricts their applicability across diverse datasets.
+1Our code is publicly available at https://github.com/HornHehhf/SocREval.
+1
+"
+"2310.00085","Haechan Mark Bong","Haechan Mark Bong, Rongge Zhang, Ricardo de Azambuja, Giovanni
+  Beltrame","PEACE: Prompt Engineering Automation for CLIPSeg Enhancement in Aerial
+  Robotics","Submitted to ICRA 2024. arXiv admin note: substantial text overlap
+  with arXiv:2308.11471","","","","cs.RO","http://creativecommons.org/licenses/by-sa/4.0/","  From industrial to space robotics, safe landing is an essential component for
+flight operations. With the growing interest in artificial intelligence, we
+direct our attention to learning based safe landing approaches. This paper
+extends our previous work, DOVESEI, which focused on a reactive UAV system by
+harnessing the capabilities of open vocabulary image segmentation. Prompt-based
+safe landing zone segmentation using an open vocabulary based model is no more
+just an idea, but proven to be feasible by the work of DOVESEI. However, a
+heuristic selection of words for prompt is not a reliable solution since it
+cannot take the changing environment into consideration and detrimental
+consequences can occur if the observed environment is not well represented by
+the given prompt. Therefore, we introduce PEACE (Prompt Engineering Automation
+for CLIPSeg Enhancement), powering DOVESEI to automate the prompt generation
+and engineering to adapt to data distribution shifts. Our system is capable of
+performing safe landing operations with collision avoidance at altitudes as low
+as 20 meters using only monocular cameras and image segmentation. We take
+advantage of DOVESEI's dynamic focus to circumvent abrupt fluctuations in the
+terrain segmentation between frames in a video stream. PEACE shows promising
+improvements in prompt generation and engineering for aerial images compared to
+the standard prompt used for CLIP and CLIPSeg. Combining DOVESEI and PEACE, our
+system was able improve successful safe landing zone selections by 58.62%
+compared to using only DOVESEI. All the source code is open source and
+available online.
+","2023-10-03","2310.00085v1.pdf","PEACE: Prompt Engineering Automation for CLIPSeg Enhancement
+in Aerial Robotics
+Haechan Mark Bong∗, Rongge Zhang∗, Ricardo de Azambuja∗, Giovanni Beltrame∗
+Abstract—From industrial to space robotics, safe landing is
+an essential component for flight operations. With the growing
+interest in artificial intelligence, we direct our attention to
+learning based safe landing approaches. This paper extends our
+previous work, DOVESEI, which focused on a reactive UAV
+system by harnessing the capabilities of open vocabulary image
+segmentation. Prompt-based safe landing zone segmentation
+using an open vocabulary based model is no more just an
+idea, but proven to be feasible by the work of DOVESEI.
+However, a heuristic selection of words for prompt is not a
+reliable solution since it cannot take the changing environment
+into consideration and detrimental consequences can occur if
+the observed environment is not well represented by the given
+prompt. Therefore, we introduce PEACE (Prompt Engineering
+Automation for CLIPSeg Enhancement), powering DOVESEI to
+automate the prompt generation and engineering to adapt to
+data distribution shifts. Our system is capable of performing
+safe landing operations with collision avoidance at altitudes as
+low as 20 meters using only monocular cameras and image
+segmentation. We take advantage of DOVESEI’s dynamic focus
+to circumvent abrupt fluctuations in the terrain segmentation
+between frames in a video stream. PEACE shows promising
+improvements in prompt generation and engineering for aerial
+images compared to the standard prompt used for CLIP and
+CLIPSeg. Combining DOVESEI and PEACE, our system was
+able improve successful safe landing zone selections by 58.62%
+compared to using only DOVESEI. All the source code is open
+source and available online. 1
+arXiv:2310.00085v1  [cs.RO]  29 Sep 2023
+I. INTRODUCTION
+Logistics stands as a pivotal element across diverse sectors,
+ranging from e-commerce operations to complex military
+undertakings. Application of Uncrewed [1], [2] Aerial Vehicles
+(UAVs) is becoming part of research and industrial interest.
+Within this context, autonomous robots have emerged as an
+extensively sought-after solution. Notably, in modern urban
+environments, aerial robots are being explored as a compelling
+avenue to enhance last-mile delivery efficiency and reduce
+carbon footprint. However, challenges concerning safety have
+significantly hindered the widespread adoption of flying robots
+in more densely populated areas. When not adequately de-
+signed and operated, they can represent a possible threat
+to structures, vehicles and the public in general, especially
+if problems arise with their geolocation and other sensory
+information such that it could impede safe landing. Therefore,
+our aim is to achieve secure emergency landings without the
+need for external communication, relying solely on onboard
+computational capabilities and perceptual abilities of compact,
+lightweight cameras.
+The goal of UAV safe self-landing is to identify and descend
+onto a designated Safe Landing Zone (SLZ), such as stable
+ground, relatively flat grassland, or open fields / areas / parks,
+while avoiding pedestrians, vehicles, and certain structures.
+In the event of a localization (e.g., GPS) or remote control
+communication failure, the operator should be able to regain
+control after landing. Existing common automatic landing
+systems employ either traditional localization and percep-
+tion methods using Simultaneous Localization and Mapping
+(SLAM), constrained by sensor performance and computa-
+tional resources, or utilize conventional deep learning-based
+image segmentation models, encountering domain adaptation
+challenges.
+This work extends our previous work (DOVESEI [3]2), a
+system capable of running even with only a monocular RGB
+camera, that can “dynamically focus“, by masking the received
+raw segmentation according to the system’s current state.
+Thanks to the advancements in large language models (LLMs),
+DOVESEI can leverage open vocabulary models to allow it to
+be easily “tuned“ only using language without extensive data
+collection. LLMs for aerial robotics is a relatively underdevel-
+oped area of research and the objective of DOVESEI was to
+introduce the possibility of using an open vocabulary model
+as a basis for segmentation and dynamically focus (mask) it
+to improve the final system performance. However, DOVE-
+SEI is based on the open vocabulary segmentation model,
+CLIPSeg [4], which requires appropriate prompt inputs, and
+the selection performance of SLZ is closely related to the input
+prompts. CLIP [5] demonstrated that prompt engineering using
+“A photo of {}.“ (where {} represents the terms defining the
+class) already yields better results. Therefore, we used their
+standard prompt engineering as a baseline and refer to CLIP’s
+original prompt engineering as default and DOVESEI-DEF
+for a DOVESEI setup using that. The initial motivation of
+our work is due to the worse performance of aerial prompt
+from DOVESEI compared to the DOVESEI-DEF. DOVE-
+SEI’s original prompt engineering was created using CLIP
+Interrogator [6] to heuristically produce better prompts for
+the model. However, for the specific task of safe landing,
+this approach is not rigorous enough. Given the constantly
+changing aerial images, therefore data distribution shift, un-
+reasonable prompts generated by CLIP Interrogator may lead
+to SLZ selection failures. To address this, we propose PEACE
+(Prompt Engineering Automation for CLIPSeg Enhancement),
+aimed at enhancing the model’s adaptability and stability for
+the application in ever-evolving real-world scenarios. PEACE
+2Only available as an extended abstract.
+∗MISTLab, ´Ecole Polytechnique Montr´eal, Montr´eal, Canada
+Contact: giovanni.beltrame@polymtl.ca
+This work was supported by the National Research Council Canada (NRC).
+1https://github.com/MISTLab/PEACE
+"
+"2310.00092","Yang Su","Yang Su","Voice2Action: Language Models as Agent for Efficient Real-Time
+  Interaction in Virtual Reality","","","","","cs.CL cs.AI cs.HC","http://creativecommons.org/licenses/by/4.0/","  Large Language Models (LLMs) are trained and aligned to follow natural
+language instructions with only a handful of examples, and they are prompted as
+task-driven autonomous agents to adapt to various sources of execution
+environments. However, deploying agent LLMs in virtual reality (VR) has been
+challenging due to the lack of efficiency in online interactions and the
+complex manipulation categories in 3D environments. In this work, we propose
+Voice2Action, a framework that hierarchically analyzes customized voice signals
+and textual commands through action and entity extraction and divides the
+execution tasks into canonical interaction subsets in real-time with error
+prevention from environment feedback. Experiment results in an urban
+engineering VR environment with synthetic instruction data show that
+Voice2Action can perform more efficiently and accurately than approaches
+without optimizations.
+","2023-10-03","2310.00092v1.pdf","Voice2Action: Language Models as Agent for
+Efficient Real-Time Interaction in Virtual Reality
+Yang Su
+Cornell Tech
+ys724@cornell.edu
+Abstract
+Large Language Models (LLMs) are trained
+and aligned to follow natural language instruc-
+tions with only a handful of examples, and they
+are prompted as task-driven autonomous agents
+to adapt to various sources of execution envi-
+ronments. However, deploying agent LLMs
+in virtual reality (VR) has been challenging
+due to the lack of efficiency in online interac-
+tions and the complex manipulation categories
+in 3D environments. In this work, we propose
+Voice2Action, a framework that hierarchically
+analyzes customized voice signals and textual
+commands through action and entity extraction
+and divides the execution tasks into canonical
+interaction subsets in real time with error pre-
+vention from environment feedback. Experi-
+ment results in an urban engineering VR envi-
+ronment with synthetic instruction data show
+that Voice2Action can perform more efficiently
+and accurately than approaches without opti-
+mizations.
+1
+Introduction
+arXiv:2310.00092v1  [cs.CL]  29 Sep 2023
+Large Language Models (LLMs) have demon-
+strated impressive zero-shot and few-shot learn-
+ing abilities in natural language understanding and
+generation (Brown et al., 2020). With human align-
+ments like reinforcement learning from human
+feedback (RLHF), these models become better at
+following human instructions (Ouyang et al., 2022);
+with instruction prompting and providing external
+resources (Nakano et al., 2021), they can be used
+as agents to autonomously choose tools (Schick
+et al., 2023), communicate with other agents (Shen
+et al., 2023), and show superior ability in decision-
+making and task execution.
+However, the seamless integration of these mod-
+els within VR has remained a challenging fron-
+tier, hindered by efficiency, accuracy, and the com-
+plexities associated with interactions and manipu-
+lations in 3D spaces. Firstly, as a simulated three-
+dimensional interaction environment that mimics
+the real world, the VR environment has enormous
+possibilities in the way that the user can interact
+with entities (objects in the virtual scene) and ma-
+nipulate their properties; secondly, the game en-
+gines that execute the user instructions has a pre-
+defined set of atomic operations for entity attribute
+modifications, causing it non-trivial to map or clas-
+sify the user instruction to the most proper config-
+uration in the engine; lastly, the accuracy of VR
+hardware (i.e., the voice recognition SDK, Wit.ai)
+and the efficiency in 3D graphics rendering (i.e.,
+the uv rendering pipeline) limits the number of op-
+erations we can perform while not exceeding user’s
+comfortable response time to receive the feedback
+of the executed tasks.
+In this paper, we focus on two main challenges
+for deploying agent LLMs in VR: efficiency and
+accuracy. While improving and balancing these
+metrics, we plan to define how agent LLMs oper-
+ate within the virtual environments, and then build
+an interactive tool to provide users with a more
+practical experience in developing their customized
+virtual scene. Hence, we propose the Voice2Action
+framework, created upon a rich taxonomy of text
+input commands, ranging from simple object selec-
+tion and state manipulation to more complex opera-
+tions involving animation, scripted sequences, and
+environment configuration modification. By hierar-
+chical instruction prompting and entity extraction,
+Voice2Action can accurately interpret users’ tex-
+tual instructions by incorporating environmental
+feedback.
+To provide empirical validation, we conduct ex-
+periments and ablation studies in an urban city plan-
+ning virtual environment. We build a synthetic
+dataset generated by the text-davinci-003 model
+from OpenAI API with the self-instruct (Wang
+et al., 2022) framework, where we use a pre-defined
+canonical instruction subset as the seed tasks, and
+manually filter out the unsatisfactory generated
+instruction-execution pair. The results indicate a
+1
+"

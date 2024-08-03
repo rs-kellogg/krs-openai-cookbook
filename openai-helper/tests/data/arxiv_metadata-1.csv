@@ -1,0 +1,120 @@
+"id","submitter","authors","title","comments","journal-ref","doi","report-no","categories","license","abstract","update_date","src_pdf","text"
+"2310.00014","Yong Ren","Yong Ren, Tao Wang, Jiangyan Yi, Le Xu, Jianhua Tao, Chuyuan Zhang,
+  Junzuo Zhou","Fewer-token Neural Speech Codec with Time-invariant Codes","Submitted to ICASSP 2024","","","","cs.SD eess.AS","http://arxiv.org/licenses/nonexclusive-distrib/1.0/","  Language model based text-to-speech (TTS) models, like VALL-E, have gained
+attention for their outstanding in-context learning capability in zero-shot
+scenarios. Neural speech codec is a critical component of these models, which
+can convert speech into discrete token representations. However, excessive
+token sequences from the codec may negatively affect prediction accuracy and
+restrict the progression of Language model based TTS models. To address this
+issue, this paper proposes a novel neural speech codec with time-invariant
+codes named TiCodec. By encoding and quantizing time-invariant information into
+a separate code, TiCodec can reduce the amount of frame-level information that
+needs encoding, effectively decreasing the number of tokens as codes of speech.
+Furthermore, this paper introduces a time-invariant encoding consistency loss
+to enhance the consistency of time-invariant code within an utterance and force
+it to capture more global information, which can benefit the zero-shot TTS
+task. Experimental results demonstrate that TiCodec can not only enhance the
+quality of reconstruction speech with fewer tokens but also increase the
+similarity and naturalness, as well as reduce the word error rate of the
+synthesized speech by the TTS model.
+","2023-10-03","2310.00014v1.pdf","FEWER-TOKEN NEURAL SPEECH CODEC WITH TIME-INVARIANT CODES
+Yong Ren1,2, Tao Wang1, Jiangyan Yi1, Le Xu1,2, Jianhua Tao3, Chuyuan Zhang1,2, Junzuo Zhou1,2
+1Institute of Automation, Chinese Academy of Sciences, China
+2University of Chinese Academy of Sciences, China
+3Department of Automation, Tsinghua University, China
+ABSTRACT
+Language model based text-to-speech (TTS) models, like VALL-E,
+have gained attention for their outstanding in-context learning capa-
+bility in zero-shot scenarios. Neural speech codec is a critical com-
+ponent of these models, which can convert speech into discrete token
+representations. However, excessive token sequences from the codec
+may negatively affect prediction accuracy and restrict the progres-
+sion of Language model based TTS models. To address this issue,
+this paper proposes a novel neural speech codec with time-invariant
+codes named TiCodec. By encoding and quantizing time-invariant
+information into a separate code, TiCodec can reduce the amount of
+frame-level information that needs encoding, effectively decreasing
+the number of tokens as codes of speech. Furthermore, this paper
+introduces a time-invariant encoding consistency loss to enhance the
+consistency of time-invariant code within an utterance and force it
+to capture more global information, which can benefit the zero-shot
+TTS task. Experimental results demonstrate that TiCodec can not
+only enhance the quality of reconstruction speech with fewer tokens
+but also increase the similarity and naturalness, as well as reduce the
+word error rate of the synthesized speech by the TTS model.
+Index Terms— speech codec, fewer tokens, time-invariant, lan-
+guage model, text-to-speech
+1. INTRODUCTION
+arXiv:2310.00014v1  [cs.SD]  15 Sep 2023
+VQVAE [13] as conditioning for the WaveNet decoder. After that,
+SoundStream [14], as a fully convolutional end-to-end universal au-
+dio codec model, was proposed, extending the VQVAE vector quan-
+tizer to a residual vector quantizer. Following that, Encodec [4] in-
+troduced a spectrogram-only adversarial loss, a novel gradient bal-
+ancer, and a small Transformer model to further improve the per-
+formance of codec. HifiCodec [15] proposes a codec model that
+uses group-residual vector quantization to improve the reconstruc-
+tion performance of audio. It can achieve good speech reconstruc-
+tion performance with only four discrete token sequences, outper-
+forming SoundStream and Encodec. However, the performance of
+codec decreases significantly when using only one or two discrete
+token sequences to represent speech, making it unable to reconstruct
+high-quality speech.
+To achieve good speech reconstruction performance with only
+two or even one sequence of discrete frame-level tokens, we pro-
+pose a neural speech codec model with time-invariant codes named
+TiCodec. Some information in a speech that does not change over
+time is extracted by a time-invariant representation extraction mod-
+ule and encoded into a fixed-length code, referred to as the time-
+invariant code. This operation can reduce the amount of information
+that needs to be encoded in frame-level codes, forcing it to be max-
+imally informative about time-related aspects. After obtaining the
+frame-level and time-invariant features, they are separately quan-
+tized as frame-level and time-invariant tokens. When TiCodec is
+used for downstream TTS tasks, the time-invariant tokens can be
+extracted from the prompt of target speakers, which can better main-
+tain the timbre information of target speakers. At the same time,
+fewer frame-level tokens can be used to predict by the TTS model,
+while maintaining a low word error rate (WER) and high quality of
+synthesized speech. To make the time-invariant token representa-
+tions extracted from the target speech in TTS contain more global
+time-invariant information, we introduce the time-invariant encod-
+ing consistency loss, hoping to improve the robustness of inference
+in TTS and further reduce WER.
+The contributions of this paper are as follows:
+• This paper proposed a neural speech codec model named
+TiCodec, which can separate the time-varying and time-
+invariant information in speech and quantize them separately.
+• A time-invariant encoding consistency loss was introduced to
+improve the consistency of the time-invariant codes.
+Recently, large language models have demonstrated remarkable per-
+formance on zero-shot text-to-speech (TTS) tasks such as VALL-
+E [1], SPEAR-TTS [2], and SoundStorm [3]. VALL-E uses dis-
+crete tokens derived from Encodec [4] as a representation of speech,
+and then trains an autoregressive (AR) language model and a non-
+autoregressive (NAR) language model to generate tokens from the
+first quantizer and the other seven quantizers separately. It can syn-
+thesize high-quality personalized speech by using a short recording
+of an unknown speaker as an acoustic prompt. However, the high-
+quality reconstruction of speech requires multiple token sequences,
+which affects the inference speed and robustness, and restricts the
+model structure and training methods of language model based TTS
+models. Therefore, how to represent speech better with fewer dis-
+crete tokens has become a core issue.
+Neural speech codec is an important method to acquire discrete
+token representations of speech. To improve the compression rate
+and reduce the number of tokens, more and more research is focus-
+ing on neural speech codec [5, 6, 7]. Kleijn et al. [8] proposed a
+low-rate speech coding architecture based on the WaveNet [9] de-
+coder.
+Lyra [10] encodes quantized mel-spectrogram features of
+speech, and then decodes them with WaveGRU [11]. Subsequently,
+end-to-end neural speech codecs have been introduced.
+Grbacea
+et al. [12] used the discretized latent representations proposed in
+Experimental results on speech reconstruction and zero-shot
+TTS task with LibriTTS datasets [16] show that TiCodec achieved
+better speech reconstruction performance with fewer tokens and
+improved robustness, quality, and similarity of synthesized speech
+in the zero-shot TTS task.
+"

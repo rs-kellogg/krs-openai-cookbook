@@ -1,0 +1,28 @@
+max_token_len: 4097
+model_name: "gpt-4-1106-preview"
+encoding_name: "cl100k_base"
+
+system_prompt: |
+  You are an expert research librarian. You are precise and can analyze the structure of papers very well. You return information in json format.
+
+
+user_prompt: |
+  Extract the title and authors and affiliations from the first page of a scientific paper. 
+
+  Use the following step-by-step instructions to respond to user inputs.
+
+  Extract the title and authors from the first page of a scientific paper. The paper text will snipped will be delimited by triple quotes. Geolocate each author affiliation with latitude and longitude.
+
+  The output should have the following format:
+
+  { "title": "The paper's title",
+    "authors": [
+      {
+        "name": "Yong Ren",
+        "email": null,
+        "affiliations": [ "list of indices" ]
+      }
+    ],
+  "affiliations": [ {"index": "the index", "name": "The affiliation name", "longitude": "the longitude", "latitude": "the latitude" } ]
+  ]
+  }

@@ -1,0 +1,583 @@
+id,author,affiliation,longitude,latitude
+2310.08338,Charles C. Onu,"Ubenwa Health, Montréal, Canada",-73.5673,45.5017
+2310.08338,Charles C. Onu,"Mila-Québec AI Institute, Montréal, Canada",-73.5673,45.5017
+2310.08338,Charles C. Onu,"McGill University, Montréal, Canada",-73.5827,45.5048
+2310.08338,Samantha Latremouille,"Ubenwa Health, Montréal, Canada",-73.5673,45.5017
+2310.08338,Arsenii Gorin,"Ubenwa Health, Montréal, Canada",-73.5673,45.5017
+2310.08338,Junhao Wang,"Ubenwa Health, Montréal, Canada",-73.5673,45.5017
+2310.08338,Uchenna Ekwochi,"Enugu State University Teaching Hospital, Enugu, Nigeria",7.5086,6.5244
+2310.08338,Peter O. Ubuane,"Lagos State University Teaching Hospital, Lagos, Nigeria",3.3792,6.5244
+2310.08338,Omolara A. Kehinde,"Lagos State University Teaching Hospital, Lagos, Nigeria",3.3792,6.5244
+2310.08338,Omolara A. Kehinde,"Lagos State University College of Medicine, Lagos, Nigeria",3.3792,6.5244
+2310.08338,Muhammad A. Salisu,"Lagos State University Teaching Hospital, Lagos, Nigeria",3.3792,6.5244
+2310.08338,Muhammad A. Salisu,"Lagos State University College of Medicine, Lagos, Nigeria",3.3792,6.5244
+2310.08338,Datonye Briggs,"Rivers State University Teaching Hospital, Port Harcourt, Nigeria",7.0085,4.8156
+2310.08338,Yoshua Bengio,"Mila-Québec AI Institute, Montréal, Canada",-73.5673,45.5017
+2310.08338,Yoshua Bengio,"Université de Montréal, Montréal, Canada",-73.6128,45.5088
+2310.08338,Doina Precup,"Mila-Québec AI Institute, Montréal, Canada",-73.5673,45.5017
+2310.08338,Doina Precup,"McGill University, Montréal, Canada",-73.5827,45.5048
+2310.08338,Doina Precup,"DeepMind, Montréal, Canada",-73.5673,45.5017
+2310.14581,Shuhei Yokoo,LINE Corporation,139.703549,35.689634
+2310.14581,Peifei Zhu,LINE Corporation,139.703549,35.689634
+2310.14581,Yuchi Ishikawa,LINE Corporation,139.703549,35.689634
+2310.14581,Mikihiro Tanaka,LINE Corporation,139.703549,35.689634
+2310.14581,Masayoshi Kondo,LINE Corporation,139.703549,35.689634
+2310.14581,Hirokatsu Kataoka,LINE Corporation,139.703549,35.689634
+2310.02527,Tao Feng,Tsinghua University,116.326,40.0036
+2310.02527,Zifeng Wang,University of Illinois Urbana Champaign,-88.2272,40.102
+2310.02527,Jimeng Sun,University of Illinois Urbana Champaign,-88.2272,40.102
+2310.08102,Muhammad Razif Rizqullah,"School of Electrical Engineering and Informatics, Bandung Institute of Technology. Bandung, Indonesia",107.6107,-6.8915
+2310.08102,Ayu Purwarianti,"School of Electrical Engineering and Informatics, Bandung Institute of Technology. Bandung, Indonesia",107.6107,-6.8915
+2310.08102,Alham Fikri Aji,"Mohamed bin Zayed University of Artificial Intelligence, Abu Dhabi, UAE",54.3278,24.4642
+2310.07899,Sumedh A Sontakke,"Thomas Lord Department of Computer Science, University of Southern California",-118.285117,34.022352
+2310.07899,Jesse Zhang,"Thomas Lord Department of Computer Science, University of Southern California",-118.285117,34.022352
+2310.07899,Sébastien M. R. Arnold,Google Research,-122.084057,37.421999
+2310.07899,Karl Pertsch,"University of California, Berkeley",-122.258540,37.871853
+2310.07899,Karl Pertsch,Stanford University,-122.169365,37.427475
+2310.07899,Erdem Bıyık,"Thomas Lord Department of Computer Science, University of Southern California",-118.285117,34.022352
+2310.07899,Erdem Bıyık,"University of California, Berkeley",-122.258540,37.871853
+2310.07899,Dorsa Sadigh,Stanford University,-122.169365,37.427475
+2310.07899,Chelsea Finn,Stanford University,-122.169365,37.427475
+2310.07899,Laurent Itti,"Thomas Lord Department of Computer Science, University of Southern California",-118.285117,34.022352
+2310.03003,Siddharth Samsi,MIT,-71.09416,42.360091
+2310.03003,Dan Zhao,NYU,-73.9964609,40.7295134
+2310.03003,Joseph McDonald,MIT,-71.09416,42.360091
+2310.03003,Baolin Li,Northeastern University,-71.0891717,42.3398067
+2310.03003,Adam Michaleas,MIT,-71.09416,42.360091
+2310.03003,Michael Jones,MIT,-71.09416,42.360091
+2310.03003,William Bergeron,MIT,-71.09416,42.360091
+2310.03003,Jeremy Kepner,MIT,-71.09416,42.360091
+2310.03003,Devesh Tiwari,Northeastern University,-71.0891717,42.3398067
+2310.03003,Vijay Gadepally,MIT,-71.09416,42.360091
+2310.04678,Jianyou Wang,"Laboratory for Emerging Intelligence, University of California, San Diego, La Jolla, CA 92093",-117.234013,32.880060
+2310.04678,Kaicheng Wang,"Laboratory for Emerging Intelligence, University of California, San Diego, La Jolla, CA 92093",-117.234013,32.880060
+2310.04678,Xiaoyue Wang,"Laboratory for Emerging Intelligence, University of California, San Diego, La Jolla, CA 92093",-117.234013,32.880060
+2310.04678,Prudhviraj Naidu,"Laboratory for Emerging Intelligence, University of California, San Diego, La Jolla, CA 92093",-117.234013,32.880060
+2310.04678,Leon Bergen,"Laboratory for Emerging Intelligence, University of California, San Diego, La Jolla, CA 92093",-117.234013,32.880060
+2310.04678,Ramamohan Paturi,"Laboratory for Emerging Intelligence, University of California, San Diego, La Jolla, CA 92093",-117.234013,32.880060
+2310.14338,Megha Sundriyal,Indraprastha Institute of Information Technology Delhi,77.2653,28.5459
+2310.14338,Tanmoy Chakraborty,Indian Institute of Technology Delhi,77.1928,28.5450
+2310.14338,Preslav Nakov,Mohammed Bin Zayed University of Artificial Intelligence,54.6146,24.2992
+2310.13506,Sagnik Ray Choudhury,University of Michigan,-83.738224,42.278044
+2310.13506,Pepa Atanasova,University of Copenhagen,12.572307,55.678620
+2310.13506,Isabelle Augenstein,University of Copenhagen,12.572307,55.678620
+2310.01299,Wei Sun,"KU Leuven, Leuven, Belgium",4.70093,50.879202
+2310.01299,Mingxiao Li,"KU Leuven, Leuven, Belgium",4.70093,50.879202
+2310.01299,Damien Sileo,"Inria Centre, Lille",3.05858,50.63373
+2310.01299,Jesse Davis,"KU Leuven, Leuven, Belgium",4.70093,50.879202
+2310.01299,Marie-Francine Moens,"KU Leuven, Leuven, Belgium",4.70093,50.879202
+2310.07521,Cunxiang Wang,"Westlake University, Hangzhou, China",120.086823,30.24185
+2310.07521,Xiaoze Liu,"Purdue University, IN, USA",-86.92901,40.423705
+2310.07521,Yuanhao Yue,"Fudan University, Shanghai, China",121.50307,31.296263
+2310.07521,Xiangru Tang,"Yale University, CT, USA",-72.922343,41.316324
+2310.07521,Tianhang Zhang,"Shanghai Jiao Tong University, Shanghai, China",121.437866,31.202001
+2310.07521,Cheng Jiayang,"Hong Kong University of Science and Technology, Hong Kong SAR, China",114.263518,22.3364
+2310.07521,Yunzhi Yao,"Zhejiang University, Hangzhou, China",120.093407,30.308978
+2310.07521,Wenyang Gao,"Westlake University, Hangzhou, China",120.086823,30.24185
+2310.07521,Xuming Hu,"Tsinghua University, Beijing, China",116.326512,40.002652
+2310.07521,Zehan Qi,"Tsinghua University, Beijing, China",116.326512,40.002652
+2310.07521,Yidong Wang,"Westlake University, Hangzhou, China",120.086823,30.24185
+2310.07521,Linyi Yang,"Westlake University, Hangzhou, China",120.086823,30.24185
+2310.07521,Jindong Wang,"Microsoft Research, Beijing, China",116.333374,39.984364
+2310.07521,Xing Xie,"Microsoft Research, Beijing, China",116.333374,39.984364
+2310.07521,Zheng Zhang,"NYU Shanghai University, Shanghai, China",121.499176,31.240364
+2310.07521,Yue Zhang,"Westlake University, Hangzhou, China",120.086823,30.24185
+2310.10920,Anurag Acharya,Pacific Northwest National Laboratory,-119.284462,46.344139
+2310.10920,Sai Munikoti,Pacific Northwest National Laboratory,-119.284462,46.344139
+2310.10920,Aaron Hellinger,Pacific Northwest National Laboratory,-119.284462,46.344139
+2310.10920,Sara Smith,Pacific Northwest National Laboratory,-119.284462,46.344139
+2310.10920,Sridevi Wagle,Pacific Northwest National Laboratory,-119.284462,46.344139
+2310.10920,Sameera Horawalavithana,Pacific Northwest National Laboratory,-119.284462,46.344139
+2310.01830,Zuhao Yang,"Nanyang Technological University, Singapore",103.6831,1.3483
+2310.01830,Fangneng Zhan,"Max Planck Institute for Informatics, Germany",7.0404,49.2559
+2310.01830,Kunhao Liu,"Nanyang Technological University, Singapore",103.6831,1.3483
+2310.01830,Muyu Xu,"Nanyang Technological University, Singapore",103.6831,1.3483
+2310.01830,Shijian Lu,"Nanyang Technological University, Singapore",103.6831,1.3483
+2310.07609,Liangming Pan,MBZUAI,54.3213,24.4367
+2310.07609,Liangming Pan,"University of California, Santa Barbara",-119.8456,34.4140
+2310.07609,Xinyuan Lu,National University of Singapore,103.7764,1.2966
+2310.07609,Min-Yen Kan,National University of Singapore,103.7764,1.2966
+2310.07609,Preslav Nakov,MBZUAI,54.3213,24.4367
+2310.11721,Caoyun Fan,"MoE Key Lab of Artificial Intelligence, AI Institute, Shanghai Jiao Tong University",121.4375,31.0254
+2310.11721,Jidong Tian,"MoE Key Lab of Artificial Intelligence, AI Institute, Shanghai Jiao Tong University",121.4375,31.0254
+2310.11721,Yitian Li,"MoE Key Lab of Artificial Intelligence, AI Institute, Shanghai Jiao Tong University",121.4375,31.0254
+2310.11721,Wenqing Chen,"School of Software Engineering, Sun Yat-sen University",113.2939,23.0965
+2310.11721,Hao He,"MoE Key Lab of Artificial Intelligence, AI Institute, Shanghai Jiao Tong University",121.4375,31.0254
+2310.11721,Yaohui Jin,"MoE Key Lab of Artificial Intelligence, AI Institute, Shanghai Jiao Tong University",121.4375,31.0254
+2310.13513,Zhuoyi Zhang,SenseTime Research,unknown,unknown
+2310.13513,Yunchen Zhang,SenseTime Research,unknown,unknown
+2310.13513,Yunchen Zhang,University of Electronic Science and Technology of China,104.081533,30.538259
+2310.13513,Gonglei Shi,SenseTime Research,unknown,unknown
+2310.13513,Yu Shen,SenseTime Research,unknown,unknown
+2310.13513,Xiuying Wei,SenseTime Research,unknown,unknown
+2310.13513,Xiuying Wei,Beihang University,116.346014,39.986133
+2310.13513,Ruihao Gong,SenseTime Research,unknown,unknown
+2310.13513,Xiaoxu Xia,SenseTime Research,unknown,unknown
+2310.13513,Qi Zhang,SenseTime Research,unknown,unknown
+2310.13513,Lewei Lu,SenseTime Research,unknown,unknown
+2310.13513,Xianglong Liu,Beihang University,116.346014,39.986133
+2310.02050,Hao Zhang,"University of Information Engineering, ZhengZhou 450000, China",113.5325,34.6264
+2310.02050,Nianwen Si,"University of Information Engineering, ZhengZhou 450000, China",113.5325,34.6264
+2310.02050,Nianwen Si,"Department of Electronic Engineering, Tsinghua University, Beijing 100084, China",116.3264,40.0034
+2310.02050,Yaqi Chen,"University of Information Engineering, ZhengZhou 450000, China",113.5325,34.6264
+2310.02050,Wenlin Zhang,"University of Information Engineering, ZhengZhou 450000, China",113.5325,34.6264
+2310.02050,Xukui Yang,"University of Information Engineering, ZhengZhou 450000, China",113.5325,34.6264
+2310.02050,Dan Qu,"University of Information Engineering, ZhengZhou 450000, China",113.5325,34.6264
+2310.02050,Xiaolin Jiao,"Zhengzhou University, ZhengZhou 450000, China",113.5363,34.8089
+2310.13705,Laura B. Hensel,University of Glasgow,-4.2893,55.8721
+2310.13705,Nutchanon Yongsatianchot,Northeastern University,-71.0892,42.3398
+2310.13705,Parisa Torshizi,Northeastern University,-71.0892,42.3398
+2310.13705,Elena Minucci,University of Glasgow,-4.2893,55.8721
+2310.13705,Stacy Marsella,University of Glasgow,-4.2893,55.8721
+2310.13705,Stacy Marsella,Northeastern University,-71.0892,42.3398
+2310.16944,Lewis Tunstall,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Edward Beeching,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Nathan Lambert,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Nazneen Rajani,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Kashif Rasul,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Younes Belkada,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Shengyi Huang,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Leandro von Werra,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Clémentine Fourrier,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Nathan Habib,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Nathan Sarrazin,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Omar Sanseviero,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Alexander M. Rush,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.16944,Thomas Wolf,"The H4 (Helpful, Honest, Harmless, Huggy) Team, HuggingFace",2.3219,48.8566
+2310.11716,Ming Li,University of Maryland,-76.9400,38.9869
+2310.11716,Lichang Chen,University of Maryland,-76.9400,38.9869
+2310.11716,Jiuhai Chen,University of Maryland,-76.9400,38.9869
+2310.11716,Shwai He,University of Maryland,-76.9400,38.9869
+2310.11716,Heng Huang,University of Maryland,-76.9400,38.9869
+2310.11716,Jiuxiang Gu,Adobe Research,-121.9552,37.3541
+2310.11716,Tianyi Zhou,University of Maryland,-76.9400,38.9869
+2310.05993,Adrian Groza,"Department of Computer Science, Technical University of Cluj-Napoca",23.561,46.769
+2310.10169,Guanting Dong,"Beijing University of Posts and Telecommunications, Beijing, China",116.3616,39.9668
+2310.10169,Tingfeng Hui,"Beijing University of Posts and Telecommunications, Beijing, China",116.3616,39.9668
+2310.10169,Zhuoma GongQue,"Beijing University of Posts and Telecommunications, Beijing, China",116.3616,39.9668
+2310.10169,Jinxu Zhao,"Beijing University of Posts and Telecommunications, Beijing, China",116.3616,39.9668
+2310.10169,Daichi Guo,"Beijing University of Posts and Telecommunications, Beijing, China",116.3616,39.9668
+2310.10169,Gang Zhao,"Beijing University of Posts and Telecommunications, Beijing, China",116.3616,39.9668
+2310.10169,Keqing He,"Meituan, Beijing, China",116.4894,39.9062
+2310.10169,Weiran Xu,"Beijing University of Posts and Telecommunications, Beijing, China",116.3616,39.9668
+2310.14772,Anqi Mao,"Courant Institute of Mathematical Sciences, New York",-73.9975,40.7295
+2310.14772,Mehryar Mohri,"Courant Institute of Mathematical Sciences, New York",-73.9975,40.7295
+2310.14772,Mehryar Mohri,"Google Research, New York",-74.0059,40.7128
+2310.14772,Yutao Zhong,"Courant Institute of Mathematical Sciences, New York",-73.9975,40.7295
+2310.03878,Yao Dou,Georgia Institute of Technology,-84.396285,33.775618
+2310.03878,Philippe Laban,Salesforce,-122.401350,37.789940
+2310.03878,Claire Gardent,CNRS/LORIA,6.172692,48.663045
+2310.03878,Wei Xu,Georgia Institute of Technology,-84.396285,33.775618
+2310.06124,Yash Garg,"University of California Riverside, CA 92508, USA",-117.3280644,33.9737055
+2310.06124,Nebiyou Yismaw,"University of California Riverside, CA 92508, USA",-117.3280644,33.9737055
+2310.06124,Rakib Hyder,"University of California Riverside, CA 92508, USA",-117.3280644,33.9737055
+2310.06124,Ashley Prater-Bennette,"Air Force Research Laboratory, Rome, NY 13441, USA",-75.4557304,43.212847
+2310.06124,M. Salman Asif,"University of California Riverside, CA 92508, USA",-117.3280644,33.9737055
+2310.09668,Chenyang Yang,Carnegie Mellon University,-79.9429,40.4433
+2310.09668,Rishabh Rustogi,Carnegie Mellon University,-79.9429,40.4433
+2310.09668,Rachel Brower-Sinning,Carnegie Mellon Software Engineering Institute,-79.9959,40.4444
+2310.09668,Grace A. Lewis,Carnegie Mellon Software Engineering Institute,-79.9959,40.4444
+2310.09668,Christian Kästner,Carnegie Mellon University,-79.9429,40.4433
+2310.09668,Tongshuang Wu,Carnegie Mellon University,-79.9429,40.4433
+2310.12815,Yupei Liu,Penn State University,-77.860001,40.798214
+2310.12815,Yuqi Jia,Duke University,-78.938229,36.001426
+2310.12815,Runpeng Geng,Wuhan University,114.365487,30.539097
+2310.12815,Jinyuan Jia,Penn State University,-77.860001,40.798214
+2310.12815,Neil Zhenqiang Gong,Duke University,-78.938229,36.001426
+2310.06214,Eslam Mohamed Bakr,King Abdullah University of Science and Technology (KAUST),39.1044,22.3040
+2310.06214,Mohamed Ayman,King Abdullah University of Science and Technology (KAUST),39.1044,22.3040
+2310.06214,Mahmoud Ahmed,King Abdullah University of Science and Technology (KAUST),39.1044,22.3040
+2310.06214,Habib Slim,King Abdullah University of Science and Technology (KAUST),39.1044,22.3040
+2310.06214,Mohamed Elhoseiny,King Abdullah University of Science and Technology (KAUST),39.1044,22.3040
+2310.05028,Guozheng Li,Southeast University,118.796877,32.060255
+2310.05028,Peng Wang,Southeast University,118.796877,32.060255
+2310.05028,Wenjun Ke,Southeast University,118.796877,32.060255
+2310.04425,Petar Radanliev,"Department of Engineering Science, University of Oxford",-1.2544,51.7587
+2310.04425,David De Roure,"Department of Engineering Science, University of Oxford",-1.2544,51.7587
+2310.04425,Omar Santos,"Cisco Systems, RTP, North Carolina, United States",-78.8700,35.9934
+2310.12150,Hung-Ting Chen,"Department of Computer Science, The University of Texas at Austin",-97.736236,30.286106
+2310.12150,Fangyuan Xu,"Department of Computer Science, The University of Texas at Austin",-97.736236,30.286106
+2310.12150,Shane A. Arora,"Department of Computer Science, The University of Texas at Austin",-97.736236,30.286106
+2310.12150,Eunsol Choi,"Department of Computer Science, The University of Texas at Austin",-97.736236,30.286106
+2310.05015,Song Guo,Microsoft Research,-122.1245,47.6401
+2310.05015,Song Guo,Xiamen University,118.0895,24.4454
+2310.05015,Jiahang Xu,Microsoft Research,-122.1245,47.6401
+2310.05015,Li Lyna Zhang,Microsoft Research,-122.1245,47.6401
+2310.05015,Mao Yang,Microsoft Research,-122.1245,47.6401
+2310.11173,Shuo Wang,"Digital Medical Research Centre, School of Basic Medical Sciences, Fudan University, Shanghai, China",121.5031,31.2969
+2310.11173,Shuo Wang,"Shanghai Key Laboratory of MICCAI, Shanghai, China",121.5031,31.2969
+2310.11173,Shuo Wang,"Data Science Institute, Imperial College London, London, UK",-0.1749,51.4988
+2310.11173,Yan Zhu,"Shanghai Collaborative Innovation Centre of Endoscopy, Shanghai, China",121.5031,31.2969
+2310.11173,Yan Zhu,"Endoscopy Centre and Endoscopy Research Institute, Zhongshan Hospital, Fudan University, Shanghai, China",121.4525,31.2215
+2310.11173,Xiaoyuan Luo,"Digital Medical Research Centre, School of Basic Medical Sciences, Fudan University, Shanghai, China",121.5031,31.2969
+2310.11173,Xiaoyuan Luo,"Shanghai Key Laboratory of MICCAI, Shanghai, China",121.5031,31.2969
+2310.11173,Zhiwei Yang,"Digital Medical Research Centre, School of Basic Medical Sciences, Fudan University, Shanghai, China",121.5031,31.2969
+2310.11173,Zhiwei Yang,"Shanghai Key Laboratory of MICCAI, Shanghai, China",121.5031,31.2969
+2310.11173,Zhiwei Yang,"Academy for Engineering and Technology, Fudan University, Shanghai 200433, China",121.5031,31.2969
+2310.11173,Yizhe Zhang,"School of Computer Science and Engineering, Nanjing University of Science and Technology, Jiangsu, China",118.7698,32.0617
+2310.11173,Peiyao Fu,"Shanghai Collaborative Innovation Centre of Endoscopy, Shanghai, China",121.5031,31.2969
+2310.11173,Peiyao Fu,"Endoscopy Centre and Endoscopy Research Institute, Zhongshan Hospital, Fudan University, Shanghai, China",121.4525,31.2215
+2310.11173,Manning Wang,"Digital Medical Research Centre, School of Basic Medical Sciences, Fudan University, Shanghai, China",121.5031,31.2969
+2310.11173,Manning Wang,"Shanghai Key Laboratory of MICCAI, Shanghai, China",121.5031,31.2969
+2310.11173,Zhijian Song,"Digital Medical Research Centre, School of Basic Medical Sciences, Fudan University, Shanghai, China",121.5031,31.2969
+2310.11173,Zhijian Song,"Shanghai Key Laboratory of MICCAI, Shanghai, China",121.5031,31.2969
+2310.11173,Quanlin Li,"Shanghai Collaborative Innovation Centre of Endoscopy, Shanghai, China",121.5031,31.2969
+2310.11173,Quanlin Li,"Endoscopy Centre and Endoscopy Research Institute, Zhongshan Hospital, Fudan University, Shanghai, China",121.4525,31.2215
+2310.11173,Pinghong Zhou,"Shanghai Collaborative Innovation Centre of Endoscopy, Shanghai, China",121.5031,31.2969
+2310.11173,Pinghong Zhou,"Endoscopy Centre and Endoscopy Research Institute, Zhongshan Hospital, Fudan University, Shanghai, China",121.4525,31.2215
+2310.11173,Yike Guo,"Data Science Institute, Imperial College London, London, UK",-0.1749,51.4988
+2310.11173,Yike Guo,"Department of Computer Science and Engineering, Hong Kong University of Science and Technology, Hong Kong, China",114.2646,22.3364
+2310.14799,Libo Qin,"School of Computer Science and Engineering, Central South University, China",112.938814,28.179519
+2310.14799,Qiguang Chen,Research Center for Social Computing and Information Retrieval,126.633301,45.756966
+2310.14799,Qiguang Chen,"Harbin Institute of Technology, China",126.633301,45.756966
+2310.14799,Fuxuan Wei,Research Center for Social Computing and Information Retrieval,126.633301,45.756966
+2310.14799,Fuxuan Wei,"Harbin Institute of Technology, China",126.633301,45.756966
+2310.14799,Shijue Huang,"Harbin Institute of Technology, Shenzhen, China",114.055595,22.593399
+2310.14799,Wanxiang Che,Research Center for Social Computing and Information Retrieval,126.633301,45.756966
+2310.14799,Wanxiang Che,"Harbin Institute of Technology, China",126.633301,45.756966
+2310.12945,Chunyi Sun,Australian National University,149.1189,-35.2777
+2310.12945,Junlin Han,University of Oxford,-1.2544,51.7585
+2310.12945,Weijian Deng,Australian National University,149.1189,-35.2777
+2310.12945,Xinlong Wang,Beijing Academy of Artificial Intelligence,116.4074,39.9042
+2310.12945,Zishan Qin,Australian National University,149.1189,-35.2777
+2310.12945,Stephen Gould,Australian National University,149.1189,-35.2777
+2310.11501,Myra Cheng,"Stanford University, Department of Computer Science",-122.169365,37.427475
+2310.11501,Tiziano Piccardi,"Stanford University, Department of Computer Science",-122.169365,37.427475
+2310.11501,Diyi Yang,"Stanford University, Department of Computer Science",-122.169365,37.427475
+2310.08659,Yixiao Li,Georgia Tech,-84.3963,33.7756
+2310.08659,Yifan Yu,Georgia Tech,-84.3963,33.7756
+2310.08659,Chen Liang,Georgia Tech,-84.3963,33.7756
+2310.08659,Pengcheng He,Microsoft Azure,-122.1245,47.6401
+2310.08659,Nikos Karampatziakis,Microsoft Azure,-122.1245,47.6401
+2310.08659,Weizhu Chen,Microsoft Azure,-122.1245,47.6401
+2310.08659,Tuo Zhao,Georgia Tech,-84.3963,33.7756
+2310.07478,Minji Yoon,Carnegie Mellon University,-79.942553,40.443322
+2310.07478,Jing Yu Koh,Carnegie Mellon University,-79.942553,40.443322
+2310.07478,Bryan Hooi,National University of Singapore,103.776396,1.296643
+2310.07478,Ruslan Salakhutdinov,Carnegie Mellon University,-79.942553,40.443322
+2310.06248,Prashanth Gurunath Shivakumar,"Amazon Alexa AI, USA",-122.335167,47.621213
+2310.06248,Jari Kolehmainen,"Amazon Alexa AI, USA",-122.335167,47.621213
+2310.06248,Yile Gu,"Amazon Alexa AI, USA",-122.335167,47.621213
+2310.06248,Ankur Gandhe,"Amazon Alexa AI, USA",-122.335167,47.621213
+2310.06248,Ariya Rastrow,"Amazon Alexa AI, USA",-122.335167,47.621213
+2310.06248,Ivan Bulyko,"Amazon Alexa AI, USA",-122.335167,47.621213
+2310.02569,Zejun Li,Fudan University,121.5031,31.2935
+2310.02569,Ye Wang,Fudan University,121.5031,31.2935
+2310.02569,Mengfei Du,Fudan University,121.5031,31.2935
+2310.02569,Qingwen Liu,Fudan University,121.5031,31.2935
+2310.02569,Binhao Wu,Fudan University,121.5031,31.2935
+2310.02569,Jiwen Zhang,Fudan University,121.5031,31.2935
+2310.02569,Chengxing Zhou,Northeastern University,-71.0892,42.3398
+2310.02569,Zhihao Fan,Alibaba Group,120.2194,30.2592
+2310.02569,Jie Fu,Hong Kong University of Science and Technology,114.2635,22.3364
+2310.02569,Jingjing Chen,Fudan University,121.5031,31.2935
+2310.02569,Xuanjing Huang,Fudan University,121.5031,31.2935
+2310.02569,Zhongyu Wei,Fudan University,121.5031,31.2935
+2310.15777,Yizhe Yang,"School of Computer Science Beijing Institute of Technology, Beijing Engineering Research Center of High Volume Language Information Processing and Cloud Computing Applications, Beijing Institute of Technology Southeast Academy of Information Technology",116.3205,39.9669
+2310.15777,Huashan Sun,"School of Computer Science Beijing Institute of Technology, Beijing Engineering Research Center of High Volume Language Information Processing and Cloud Computing Applications, Beijing Institute of Technology Southeast Academy of Information Technology",116.3205,39.9669
+2310.15777,Jiawei Li,"School of Computer Science Beijing Institute of Technology, Beijing Engineering Research Center of High Volume Language Information Processing and Cloud Computing Applications, Beijing Institute of Technology Southeast Academy of Information Technology",116.3205,39.9669
+2310.15777,RunHeng Liu,"School of Computer Science Beijing Institute of Technology, Beijing Engineering Research Center of High Volume Language Information Processing and Cloud Computing Applications, Beijing Institute of Technology Southeast Academy of Information Technology",116.3205,39.9669
+2310.15777,Yinghao Li,"School of Computer Science Beijing Institute of Technology, Beijing Engineering Research Center of High Volume Language Information Processing and Cloud Computing Applications, Beijing Institute of Technology Southeast Academy of Information Technology",116.3205,39.9669
+2310.15777,Yuhang Liu,"School of Computer Science Beijing Institute of Technology, Beijing Engineering Research Center of High Volume Language Information Processing and Cloud Computing Applications, Beijing Institute of Technology Southeast Academy of Information Technology",116.3205,39.9669
+2310.15777,Heyan Huang,"School of Computer Science Beijing Institute of Technology, Beijing Engineering Research Center of High Volume Language Information Processing and Cloud Computing Applications, Beijing Institute of Technology Southeast Academy of Information Technology",116.3205,39.9669
+2310.15777,Yang Gao,"School of Computer Science Beijing Institute of Technology, Beijing Engineering Research Center of High Volume Language Information Processing and Cloud Computing Applications, Beijing Institute of Technology Southeast Academy of Information Technology",116.3205,39.9669
+2310.04304,Ahmed R. Sadik,Honda Research Institute Europe,8.76034,50.10318
+2310.04304,Sebastian Brulin,Honda Research Institute Europe,8.76034,50.10318
+2310.04304,Markus Olhofer,Honda Research Institute Europe,8.76034,50.10318
+2310.16411,Alon Goldstein,Xoltar Inc,,
+2310.16411,Miriam Havin,"Department of Cognitive and Brain Sciences, Hebrew University, Jerusalem",35.1966,31.7833
+2310.16411,Roi Reichart,"Faculty of Data and Decision Sciences, Technion",35.0219,32.7766
+2310.16411,Ariel Goldstein,Xoltar Inc,,
+2310.16411,Ariel Goldstein,"Department of Cognitive and Brain Sciences, Hebrew University, Jerusalem",35.1966,31.7833
+2310.16411,Ariel Goldstein,"The Hebrew University Business School, Jerusalem, Israel",35.1966,31.7833
+2310.16411,Ariel Goldstein,Google Research,,
+2310.16261,Ting-Rui Chiang,University of Southern California,-118.285117,34.022352
+2310.16261,Dani Yogatama,University of Southern California,-118.285117,34.022352
+2310.00313,Akanksha Saran,Microsoft Research,-74.0060,40.7128
+2310.00313,Hosein Hasanbeig,Microsoft Research,-74.0060,40.7128
+2310.00313,Leo Betthauser,Microsoft,-122.1215,47.6740
+2310.00313,Safoora Yousefi,Microsoft,-122.1215,47.6740
+2310.00313,Raphaël Millière,Macquarie University,151.1125,-33.7749
+2310.00313,Ida Momennejad,Microsoft Research,-74.0060,40.7128
+2310.02609,Wei Chen,"Hong Kong University of Science and Technology, Hong Kong, China",114.267616,22.337218
+2310.02609,Huaijin Wang,"Hong Kong University of Science and Technology, Hong Kong, China",114.267616,22.337218
+2310.02609,Weixi Gu,"China Academy of Industrial Internet, Beijing, China",116.407396,39.904200
+2310.02609,Shuai Wang,"Hong Kong University of Science and Technology, Hong Kong, China",114.267616,22.337218
+2310.16731,Roshanak Mirzaee,Michigan State University,-84.4838654,42.701848
+2310.16731,Parisa Kordjamshidi,Michigan State University,-84.4838654,42.701848
+2310.01708,G. Zubkova,Sber AI Lab,37.6172999,55.755826
+2310.01708,A. Nesterov,Sber AI Lab,37.6172999,55.755826
+2310.01708,D. Umerenkov,Sber AI Lab,37.6172999,55.755826
+2310.07710,Yihan Wu,University of Maryland,-76.9400,38.9869
+2310.07710,Zhengmian Hu,University of Maryland,-76.9400,38.9869
+2310.07710,Hongyang Zhang,University of Waterloo,-80.5417,43.4723
+2310.07710,Heng Huang,University of Maryland,-76.9400,38.9869
+2310.17217,Chenze Shao,"Key Laboratory of Intelligent Information Processing, Institute of Computing Technology, Chinese Academy of Sciences",116.328161,39.97626
+2310.17217,Chenze Shao,University of Chinese Academy of Sciences,116.298056,40.050743
+2310.17217,Zhengrui Ma,"Key Laboratory of Intelligent Information Processing, Institute of Computing Technology, Chinese Academy of Sciences",116.328161,39.97626
+2310.17217,Zhengrui Ma,University of Chinese Academy of Sciences,116.298056,40.050743
+2310.17217,Min Zhang,"School of Future Science and Engineering, Soochow University",120.735362,31.317987
+2310.17217,Yang Feng,"Key Laboratory of Intelligent Information Processing, Institute of Computing Technology, Chinese Academy of Sciences",116.328161,39.97626
+2310.17217,Yang Feng,University of Chinese Academy of Sciences,116.298056,40.050743
+2310.10583,Sagi Shaier,University of Colorado Boulder,-105.2705,40.0076
+2310.10583,Lawrence E. Hunter,University of Colorado Denver,-104.9903,39.7392
+2310.10583,Katharina von der Wense,University of Colorado Boulder,-105.2705,40.0076
+2310.10583,Katharina von der Wense,Johannes Gutenberg University Mainz,8.247253,49.992862
+2310.17121,Go Kamoda,Tohoku University,140.8486,38.2682
+2310.17121,Benjamin Heinzerling,RIKEN,139.6316,35.7101
+2310.17121,Benjamin Heinzerling,Tohoku University,140.8486,38.2682
+2310.17121,Keisuke Sakaguchi,Tohoku University,140.8486,38.2682
+2310.17121,Keisuke Sakaguchi,RIKEN,139.6316,35.7101
+2310.17121,Kentaro Inui,MBZUAI,54.4389,24.4253
+2310.17121,Kentaro Inui,Tohoku University,140.8486,38.2682
+2310.17121,Kentaro Inui,RIKEN,139.6316,35.7101
+2310.12103,Li Ding,University of Massachusetts Amherst,-72.526711,42.391157
+2310.12103,Jenny Zhang,University of British Columbia,-123.250164,49.260872
+2310.12103,Jenny Zhang,Vector Institute,-79.398193,43.659598
+2310.12103,Lee Spector,Amherst College,-72.516004,42.370910
+2310.12103,Lee Spector,University of Massachusetts Amherst,-72.526711,42.391157
+2310.12103,Jeff Clune,University of British Columbia,-123.250164,49.260872
+2310.12103,Jeff Clune,Vector Institute,-79.398193,43.659598
+2310.12103,Joel Lehman,Stochastic Labs,null,null
+2310.11454,Dawid J. Kopiczko,"QUVA Lab, University of Amsterdam",4.9541,52.3594
+2310.11454,Tijmen Blankevoort,Qualcomm AI Research,-121.9624,37.3762
+2310.11454,Yuki M. Asano,"QUVA Lab, University of Amsterdam",4.9541,52.3594
+2310.13262,Xue Zhang,"Beijing Key Lab of Traffic Data Analysis and Mining, Beijing Jiaotong University, Beijing, China",116.3492,39.95933
+2310.13262,Songming Zhang,"Beijing Key Lab of Traffic Data Analysis and Mining, Beijing Jiaotong University, Beijing, China",116.3492,39.95933
+2310.13262,Yunlong Liang,"Beijing Key Lab of Traffic Data Analysis and Mining, Beijing Jiaotong University, Beijing, China",116.3492,39.95933
+2310.13262,Yufeng Chen,"Beijing Key Lab of Traffic Data Analysis and Mining, Beijing Jiaotong University, Beijing, China",116.3492,39.95933
+2310.13262,Jian Liu,"Beijing Key Lab of Traffic Data Analysis and Mining, Beijing Jiaotong University, Beijing, China",116.3492,39.95933
+2310.13262,Wenjuan Han,"Beijing Key Lab of Traffic Data Analysis and Mining, Beijing Jiaotong University, Beijing, China",116.3492,39.95933
+2310.13262,Jinan Xu,"Beijing Key Lab of Traffic Data Analysis and Mining, Beijing Jiaotong University, Beijing, China",116.3492,39.95933
+2310.08541,Zhengyuan Yang,Microsoft Azure AI,-122.1245,47.6401
+2310.08541,Jianfeng Wang,Microsoft Azure AI,-122.1245,47.6401
+2310.08541,Linjie Li,Microsoft Azure AI,-122.1245,47.6401
+2310.08541,Kevin Lin,Microsoft Azure AI,-122.1245,47.6401
+2310.08541,Chung-Ching Lin,Microsoft Azure AI,-122.1245,47.6401
+2310.08541,Zicheng Liu,Microsoft Azure AI,-122.1245,47.6401
+2310.08541,Lijuan Wang,Microsoft Azure AI,-122.1245,47.6401
+2310.06046,Dipayan Saha,"Department of Electrical and Computer Engineering, University of Florida, Gainesville, FL, USA",-82.324829,29.643632
+2310.06046,Shams Tarek,"Department of Electrical and Computer Engineering, University of Florida, Gainesville, FL, USA",-82.324829,29.643632
+2310.06046,Katayoon Yahyaei,"Department of Electrical and Computer Engineering, University of Florida, Gainesville, FL, USA",-82.324829,29.643632
+2310.06046,Sujan Kumar Saha,"Department of Electrical and Computer Engineering, University of Florida, Gainesville, FL, USA",-82.324829,29.643632
+2310.06046,Jingbo Zhou,"Department of Electrical and Computer Engineering, University of Florida, Gainesville, FL, USA",-82.324829,29.643632
+2310.06046,Mark Tehranipoor,"Department of Electrical and Computer Engineering, University of Florida, Gainesville, FL, USA",-82.324829,29.643632
+2310.06046,Farimah Farahmandi,"Department of Electrical and Computer Engineering, University of Florida, Gainesville, FL, USA",-82.324829,29.643632
+2310.01427,Alex Peysakhovich,Sutter Hill Ventures,Please provide the longitude for Sutter Hill Ventures,Please provide the latitude for Sutter Hill Ventures
+2310.01427,Adam Lerer,Google DeepMind,Please provide the longitude for Google DeepMind,Please provide the latitude for Google DeepMind
+2310.11191,Lorenzo Flores,Yale University,-72.922343,41.316324
+2310.11191,Heyuan Huang,Yale University,-72.922343,41.316324
+2310.11191,Kejian Shi,Yale University,-72.922343,41.316324
+2310.11191,Sophie Chheang,Yale School of Medicine,-72.960894,41.304270
+2310.11191,Arman Cohan,Yale University,-72.922343,41.316324
+2310.11191,Arman Cohan,Allen Institute for AI,-122.335167,47.626208
+2310.00785,Kyle Lo,Allen Institute for AI,-122.3331,47.6062
+2310.00785,Yapei Chang,University of Massachusetts Amherst,-72.5267,42.3912
+2310.00785,Tanya Goyal,Princeton University,-74.6514,40.3430
+2310.00785,Mohit Iyyer,University of Massachusetts Amherst,-72.5267,42.3912
+2310.05442,Robert Litschko,"MaiNLP, Center for Information and Language Processing, LMU Munich, Germany",11.5802,48.1508
+2310.05442,Robert Litschko,"Munich Center for Machine Learning (MCML), Munich, Germany",11.5676,48.1505
+2310.05442,Max Müller-Eberstein,"Department of Computer Science, IT University of Copenhagen, Denmark",12.5912,55.6599
+2310.05442,Rob van der Goot,"Department of Computer Science, IT University of Copenhagen, Denmark",12.5912,55.6599
+2310.05442,Leon Weber,"MaiNLP, Center for Information and Language Processing, LMU Munich, Germany",11.5802,48.1508
+2310.05442,Leon Weber,"Munich Center for Machine Learning (MCML), Munich, Germany",11.5676,48.1505
+2310.05442,Barbara Plank,"MaiNLP, Center for Information and Language Processing, LMU Munich, Germany",11.5802,48.1508
+2310.05442,Barbara Plank,"Department of Computer Science, IT University of Copenhagen, Denmark",12.5912,55.6599
+2310.05442,Barbara Plank,"Munich Center for Machine Learning (MCML), Munich, Germany",11.5676,48.1505
+2310.07177,Xiaoxuan Liu,UC Berkeley,-122.25854,37.87159
+2310.07177,Lanxiang Hu,UCSD,-117.234013,32.880060
+2310.07177,Peter Bailis,Sisu Data,,
+2310.07177,Ion Stoica,UC Berkeley,-122.25854,37.87159
+2310.07177,Zhijie Deng,SJTU,121.437866,31.02522
+2310.07177,Alvin Cheung,UC Berkeley,-122.25854,37.87159
+2310.07177,Hao Zhang,UCSD,-117.234013,32.880060
+2310.04743,Song Jiang,"University of California, Los Angeles",-118.4452,34.0689
+2310.04743,Zahra Shakeri,Meta AI,-122.1484,37.4590
+2310.04743,Aaron Chan,Meta AI,-122.1484,37.4590
+2310.04743,Maziar Sanjabi,Meta AI,-122.1484,37.4590
+2310.04743,Hamed Firooz,"LinkedIn, Inc.",-121.9026,37.4237
+2310.04743,Yinglong Xia,Meta AI,-122.1484,37.4590
+2310.04743,Bugra Akyildiz,Meta AI,-122.1484,37.4590
+2310.04743,Yizhou Sun,"University of California, Los Angeles",-118.4452,34.0689
+2310.04743,Jinchao Li,Meta AI,-122.1484,37.4590
+2310.04743,Qifan Wang,Meta AI,-122.1484,37.4590
+2310.04743,Asli Celikyilmaz,Meta AI,-122.1484,37.4590
+2310.09761,Yulei Qin,Tencent YouTu Lab,113.7518,23.0207
+2310.09761,Xingyu Chen,ByteDance,116.3833,39.9167
+2310.09761,Yunhang Shen,Tencent YouTu Lab,113.7518,23.0207
+2310.09761,Chaoyou Fu,Tencent YouTu Lab,113.7518,23.0207
+2310.09761,Yun Gu,Shanghai Jiao Tong University,121.4375,31.0250
+2310.09761,Ke Li,Tencent YouTu Lab,113.7518,23.0207
+2310.09761,Xing Sun,Tencent YouTu Lab,113.7518,23.0207
+2310.09761,Rongrong Ji,Xiamen University,118.0895,24.4454
+2310.05136,Ronghao Dang,Tongji University,121.5025,31.2824
+2310.05136,Jiangyan Feng,SenseTime,113.9431,22.5405
+2310.05136,Haodong Zhang,SenseTime,113.9431,22.5405
+2310.05136,Chongjian Ge,The University of Hong Kong,114.1376,22.4192
+2310.05136,Lin Song,Tencent AI Lab,113.9265,22.5174
+2310.05136,Lijun Gong,SenseTime,113.9431,22.5405
+2310.05136,Chengju Liu,Tongji University,121.5025,31.2824
+2310.05136,Qijun Chen,Tongji University,121.5025,31.2824
+2310.05136,Feng Zhu,SenseTime,113.9431,22.5405
+2310.05136,Rui Zhao,SenseTime,113.9431,22.5405
+2310.05136,Yibing Song,"AI3 Institute, Fudan University",121.5031,31.2969
+2310.05418,Yu Ying Chiu,University of Washington,-122.3080,47.6553
+2310.05418,Yu Cheung Chiu,The University of Hong Kong,114.1371,22.2855
+2310.05418,Zhilin Wang,University of Washington,-122.3080,47.6553
+2310.05418,Zhilin Wang,NVIDIA,-122.1499,37.3943
+2310.08796,Hanlin Zhu,UC Berkeley,-122.25854,37.87159
+2310.08796,Hanlin Zhu,Meta AI,-122.14804,37.45907
+2310.08796,Andrew Cohen,Meta AI,-122.14804,37.45907
+2310.08796,Danqing Wang,Meta AI,-122.14804,37.45907
+2310.08796,Danqing Wang,UC Santa Barbara,-119.84889,34.41333
+2310.08796,Kevin Yang,Meta AI,-122.14804,37.45907
+2310.08796,Xiaomeng Yang,Meta AI,-122.14804,37.45907
+2310.08796,Jiantao Jiao,UC Berkeley,-122.25854,37.87159
+2310.08796,Yuandong Tian,Meta AI,-122.14804,37.45907
+2310.00272,Baphumelele Masikisiki,University of Pretoria,28.229271,-25.754549
+2310.00272,Vukosi Marivate,University of Pretoria,28.229271,-25.754549
+2310.00272,Yvette Hlophe,University of Pretoria,28.229271,-25.754549
+2310.05216,Xintong Wang,"Department of Informatics, Universität Hamburg",9.9823,53.5670
+2310.05216,Xiaoyu Li,"Department of Informatics, Technische Universität Berlin",13.3265,52.5125
+2310.05216,Xingshan Li,"Institute of Psychology, Chinese Academy of Sciences",116.3333,39.9667
+2310.05216,Chris Biemann,"Department of Informatics, Universität Hamburg",9.9823,53.5670
+2310.07707,Devvrit,Google Research,-122.084,37.422
+2310.07707,Devvrit,University of Texas at Austin,-97.739,30.284
+2310.07707,Sneha Kudugunta,Google Research,-122.084,37.422
+2310.07707,Aditya Kusupati,Google Research,-122.084,37.422
+2310.07707,Aditya Kusupati,University of Washington,-122.308,47.655
+2310.07707,Tim Dettmers,University of Washington,-122.308,47.655
+2310.07707,Kaifeng Chen,Google Research,-122.084,37.422
+2310.07707,Inderjit Dhillon,Google Research,-122.084,37.422
+2310.07707,Inderjit Dhillon,University of Texas at Austin,-97.739,30.284
+2310.07707,Yulia Tsvetkov,University of Washington,-122.308,47.655
+2310.07707,Hannaneh Hajishirzi,University of Washington,-122.308,47.655
+2310.07707,Sham Kakade,Harvard University,-71.116,42.377
+2310.07707,Ali Farhadi,University of Washington,-122.308,47.655
+2310.07707,Prateek Jain,Google Research,-122.084,37.422
+2310.12547,Junghyun Kim,"AI Institute, Seoul National University",126.951613,37.459882
+2310.12547,Junghyun Kim,"Interdisciplinary Program in AI, Seoul National University",126.951613,37.459882
+2310.12547,Gi-Cheon Kang,"AI Institute, Seoul National University",126.951613,37.459882
+2310.12547,Gi-Cheon Kang,"Interdisciplinary Program in AI, Seoul National University",126.951613,37.459882
+2310.12547,Jaein Kim,"AI Institute, Seoul National University",126.951613,37.459882
+2310.12547,Jaein Kim,"Interdisciplinary Program in Neuroscience, Seoul National University",126.951613,37.459882
+2310.12547,Seoyun Yang,"Division of Engineering Science, University of Toronto",-79.396850,43.662891
+2310.12547,Minjoon Jung,"AI Institute, Seoul National University",126.951613,37.459882
+2310.12547,Minjoon Jung,"Interdisciplinary Program in AI, Seoul National University",126.951613,37.459882
+2310.12547,Byoung-Tak Zhang,"AI Institute, Seoul National University",126.951613,37.459882
+2310.12547,Byoung-Tak Zhang,"Interdisciplinary Program in AI, Seoul National University",126.951613,37.459882
+2310.12547,Byoung-Tak Zhang,"Interdisciplinary Program in Neuroscience, Seoul National University",126.951613,37.459882
+2310.03684,Alexander Robey,University of Pennsylvania,-75.193214,39.952218
+2310.03684,Eric Wong,University of Pennsylvania,-75.193214,39.952218
+2310.03684,Hamed Hassani,University of Pennsylvania,-75.193214,39.952218
+2310.03684,George J. Pappas,University of Pennsylvania,-75.193214,39.952218
+2310.04673,Jiaming Wang,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Zhihao Du,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Qian Chen,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Yunfei Chu,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Zhifu Gao,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Zerui Li,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Kai Hu,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Xiaohuan Zhou,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Jin Xu,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Ziyang Ma,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Wen Wang,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Siqi Zheng,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Chang Zhou,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Zhijie Yan,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.04673,Shiliang Zhang,"Damo Academy, Alibaba Group, China",120.219375,30.259244
+2310.08949,Xiangyu Zhao,"Department of Computing, The Hong Kong Polytechnic University",114.1796,22.3050
+2310.08949,Bo Liu,"Department of Computing, The Hong Kong Polytechnic University",114.1796,22.3050
+2310.08949,Qijiong Liu,"Department of Computing, The Hong Kong Polytechnic University",114.1796,22.3050
+2310.08949,Guangyuan Shi,"Department of Computing, The Hong Kong Polytechnic University",114.1796,22.3050
+2310.08949,Xiao-Ming Wu,"Department of Computing, The Hong Kong Polytechnic University",114.1796,22.3050
+2310.14564,Jian Guan,Tsinghua University,116.3264,40.0034
+2310.14564,Jesse Dodge,Allen Institute for AI,-122.3355,47.6205
+2310.14564,David Wadden,Allen Institute for AI,-122.3355,47.6205
+2310.14564,Minlie Huang,Tsinghua University,116.3264,40.0034
+2310.14564,Hao Peng,University of Illinois Urbana-Champaign,-88.2272,40.1020
+2310.07911,Huiyin Xue,"Department of Computer Science, University of Sheffield, United Kingdom",-1.470085,53.381129
+2310.07911,Nikolaos Aletras,"Department of Computer Science, University of Sheffield, United Kingdom",-1.470085,53.381129
+2310.04560,Bahare Fatemi,Google Research,-122.084,37.422
+2310.04560,Jonathan Halcrow,Google Research,-122.084,37.422
+2310.04560,Bryan Perozzi,Google Research,-122.084,37.422
+2310.16028,Hattie Zhou,Apple,-122.032182,37.322998
+2310.16028,Hattie Zhou,"Mila, Université de Montréal",-73.6128,45.5048
+2310.16028,Arwen Bradley,Apple,-122.032182,37.322998
+2310.16028,Etai Littwin,Apple,-122.032182,37.322998
+2310.16028,Noam Razin,Apple,-122.032182,37.322998
+2310.16028,Noam Razin,Tel Aviv University,34.803112,32.113342
+2310.16028,Omid Saremi,Apple,-122.032182,37.322998
+2310.16028,Josh Susskind,Apple,-122.032182,37.322998
+2310.16028,Samy Bengio,Apple,-122.032182,37.322998
+2310.16028,Preetum Nakkiran,Apple,-122.032182,37.322998
+2310.15910,Qinan Yu,"Brown University, Department of Computer Science",-71.4025,41.8268
+2310.15910,Jack Merullo,"Brown University, Department of Computer Science",-71.4025,41.8268
+2310.15910,Ellie Pavlick,"Brown University, Department of Computer Science",-71.4025,41.8268
+2310.02409,Guanghui Qin,Johns Hopkins University,-76.6200464,39.3299015
+2310.02409,Corby Rosset,Microsoft,-122.1245761,47.6400681
+2310.02409,Ethan C. Chau,Microsoft,-122.1245761,47.6400681
+2310.02409,Nikhil Rao,Microsoft,-122.1245761,47.6400681
+2310.02409,Benjamin Van Durme,Johns Hopkins University,-76.6200464,39.3299015
+2310.02409,Benjamin Van Durme,Microsoft,-122.1245761,47.6400681
+2310.03874,Jason Holmes,"Department of Radiation Oncology, Mayo Clinic, Phoenix, Arizona",-112.074037,33.448377
+2310.03874,Lian Zhang,"Department of Radiation Oncology, Mayo Clinic, Phoenix, Arizona",-112.074037,33.448377
+2310.03874,Yuzhen Ding,"Department of Radiation Oncology, Mayo Clinic, Phoenix, Arizona",-112.074037,33.448377
+2310.03874,Hongying Feng,"Department of Radiation Oncology, Mayo Clinic, Phoenix, Arizona",-112.074037,33.448377
+2310.03874,Zhengliang Liu,"School of Computing, University of Georgia, Athens, Georgia",-83.377322,33.951935
+2310.03874,Tianming Liu,"School of Computing, University of Georgia, Athens, Georgia",-83.377322,33.951935
+2310.03874,William W. Wong,"Department of Radiation Oncology, Mayo Clinic, Phoenix, Arizona",-112.074037,33.448377
+2310.03874,Sujay A. Vora,"Department of Radiation Oncology, Mayo Clinic, Phoenix, Arizona",-112.074037,33.448377
+2310.03874,Jonathan B. Ashman,"Department of Radiation Oncology, Mayo Clinic, Phoenix, Arizona",-112.074037,33.448377
+2310.03874,Wei Liu,"Department of Radiation Oncology, Mayo Clinic, Phoenix, Arizona",-112.074037,33.448377
+2310.15205,Wei Chen,"School of Data Science, Fudan University, China",121.5031,31.2935
+2310.15205,Wei Chen,"School of Software Engineering, Huazhong University of Science and Technology, China",114.4146,30.5131
+2310.15205,Qiushi Wang,"School of Data Science, Fudan University, China",121.5031,31.2935
+2310.15205,Zefei Long,"School of Data Science, Fudan University, China",121.5031,31.2935
+2310.15205,Xianyin Zhang,"School of Data Science, Fudan University, China",121.5031,31.2935
+2310.15205,Zhongtian Lu,"School of Data Science, Fudan University, China",121.5031,31.2935
+2310.15205,Bingxuan Li,"School of Data Science, Fudan University, China",121.5031,31.2935
+2310.15205,Siyuan Wang,"School of Data Science, Fudan University, China",121.5031,31.2935
+2310.15205,Jiarong Xu,"School of Management, Fudan University, China",121.5031,31.2935
+2310.15205,Xiang Bai,"School of Software Engineering, Huazhong University of Science and Technology, China",114.4146,30.5131
+2310.15205,Xuanjing Huang,"Research Institute of Intelligent Complex Systems, Fudan University, China",121.5031,31.2935
+2310.15205,Zhongyu Wei,"School of Data Science, Fudan University, China",121.5031,31.2935
+2310.15205,Zhongyu Wei,"School of Computer Science, Fudan University, China",121.5031,31.2935
+2310.07093,Arushi Sharma,"School of Computing and Information, University of Pittsburgh",-79.9533,40.4444
+2310.07093,Abhibha Gupta,"School of Computing and Information, University of Pittsburgh",-79.9533,40.4444
+2310.07093,Maneesh Bilalpur,"School of Computing and Information, University of Pittsburgh",-79.9533,40.4444
+2310.06927,Eldar Kurtic,IST Austria,16.253,48.220
+2310.06927,Denis Kuznedelev,Skoltech & Yandex,37.370,55.698
+2310.06927,Elias Frantar,IST Austria,16.253,48.220
+2310.06927,Michael Goin,Neural Magic,-71.110,42.362
+2310.06927,Dan Alistarh,IST Austria,16.253,48.220
+2310.06927,Dan Alistarh,Neural Magic,-71.110,42.362
+2310.17015,Anna Koufakou,"Department of Computing and Software Engineering, Florida Gulf Coast University, Fort Myers, Florida, USA",-81.8723084,26.4643269
+2310.17015,Diego Grisales,"Department of Computing and Software Engineering, Florida Gulf Coast University, Fort Myers, Florida, USA",-81.8723084,26.4643269
+2310.17015,Ragy Costa de Jesus,"Department of Computing and Software Engineering, Florida Gulf Coast University, Fort Myers, Florida, USA",-81.8723084,26.4643269
+2310.17015,Oscar Fox,"Department of Computing and Software Engineering, Florida Gulf Coast University, Fort Myers, Florida, USA",-81.8723084,26.4643269
+2310.14614,Yige Xu,Joint NTU-UBC Research Centre of Excellence in Active Living for the Elderly,103.6831,1.3483
+2310.14614,Yige Xu,"School of Computer Science and Engineering, Nanyang Technological University, Singapore",103.6831,1.3483
+2310.14614,Zhiwei Zeng,Joint NTU-UBC Research Centre of Excellence in Active Living for the Elderly,103.6831,1.3483
+2310.14614,Zhiwei Zeng,"School of Computer Science and Engineering, Nanyang Technological University, Singapore",103.6831,1.3483
+2310.14614,Zhiqi Shen,"School of Computer Science and Engineering, Nanyang Technological University, Singapore",103.6831,1.3483
+2310.05910,Zhiqing Sun,"MIT-IBM Watson AI Lab, IBM Research",-71.08917,42.36009
+2310.05910,Zhiqing Sun,"Language Technologies Institute, CMU",-79.94536,40.44332
+2310.05910,Yikang Shen,"MIT-IBM Watson AI Lab, IBM Research",-71.08917,42.36009
+2310.05910,Hongxin Zhang,UMass Amherst,-72.52671,42.39116
+2310.05910,Qinhong Zhou,UMass Amherst,-72.52671,42.39116
+2310.05910,Zhenfang Chen,"MIT-IBM Watson AI Lab, IBM Research",-71.08917,42.36009
+2310.05910,David Cox,"MIT-IBM Watson AI Lab, IBM Research",-71.08917,42.36009
+2310.05910,Yiming Yang,"Language Technologies Institute, CMU",-79.94536,40.44332
+2310.05910,Chuang Gan,"MIT-IBM Watson AI Lab, IBM Research",-71.08917,42.36009
+2310.05910,Chuang Gan,UMass Amherst,-72.52671,42.39116
+2310.02207,Wes Gurnee,Massachusetts Institute of Technology,-71.092215,42.360091
+2310.02207,Max Tegmark,Massachusetts Institute of Technology,-71.092215,42.360091
+2310.01324,Xinhao Li,"State Key Laboratory for Novel Software Technology, Nanjing University, China",118.778074,32.061707
+2310.01324,Limin Wang,"State Key Laboratory for Novel Software Technology, Nanjing University, China",118.778074,32.061707
+2310.11430,António Farinhas,Instituto Superior Técnico (Lisbon ELLIS Unit),-9.139337,38.736819
+2310.11430,António Farinhas,Instituto de Telecomunicações,-9.146590,38.737026
+2310.11430,José G. C. de Souza,Unbabel,-9.142685,38.708891
+2310.11430,André F. T. Martins,Instituto Superior Técnico (Lisbon ELLIS Unit),-9.139337,38.736819
+2310.11430,André F. T. Martins,Instituto de Telecomunicações,-9.146590,38.737026
+2310.11430,André F. T. Martins,Unbabel,-9.142685,38.708891

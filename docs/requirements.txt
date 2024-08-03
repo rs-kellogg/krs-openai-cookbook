@@ -1,0 +1,23 @@
+jupyter-book
+ghp-import
+jupyterlab
+Wikipedia-API
+openai
+python-dotenv
+myst_nb
+leafmap
+ipyleaflet
+requests
+# faiss-cpu
+# opeanai-whisper
+wave
+pyaudio
+transformers
+pandas
+pyarrow
+bs4
+langchain
+chromadb
+tiktoken
+pypdf
+lark>=1.1.5

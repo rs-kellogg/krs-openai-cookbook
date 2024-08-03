@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "openai-helper"
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dynamic = ["version", "description"]
+dependencies = [
+    "typer[all]",
+    "typer-cli",
+    "pyyaml", 
+    "pandas",
+    "tqdm",
+    "openai",
+    "tiktoken",
+    "tenacity",
+    "PyMuPDF",
+    "datasets",
+    "pytest"
+]
+
+[project.urls]
+Home = "https://github.com/rs-kellogg/krs-llm-cookbook"
+
+[project.optional-dependencies]
+test = [
+  "pytest",
+]
+lint = [
+  "black",
+  "flake8"
+]
+notebook = [
+  "jupyterlab",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+namespaces = true
+where = ["openaihelper"]
+
+[project.scripts]
+openaihelper = "openaihelper.cli:app"
+
+[tool.setuptools.package-data]
+"openaihelper.data" = ["*.yml"]
+
+[tool.hatch.version]
+path = "openaihelper/__init__.py"
+
+[tool.black]
+line-length = 160
+
+[tool.isort]
+profile = "black"
