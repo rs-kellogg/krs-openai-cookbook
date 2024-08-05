@@ -2,12 +2,12 @@
 
 :::{admonition} Summary
 :class: note
-- Setting up an OpenAI account
-- Multimodal OpenAI use cases
-- Advanced topic: Function calling and RAG
+- Setting up and using your OpenAI account
+- Developing a testable, reprocucible workflow that scales
 :::
 
-:::{card} Development Workflow
+:::{admonition} Development Workflow
+:class: note
 - Identify a dataset and specify precisely what you want to do with it
 - Engineer a prompt (use OpenAI Playground)
 - Evaluate performance on a sample
@@ -23,7 +23,8 @@ name: gpt-dev-cycle
 ```
 :::
 
-:::{card} Structuring and Testing Code
+:::{admonition} Structuring and Testing Code
+:class: note
 - Structure your code into source code (functions) along with unit tests
 - Functions are composed in scripts, which should have runtime tests and generate logs
 - All code (source, scripts, tests) need to be in source control, typically `git`
@@ -37,7 +38,7 @@ name: testing
 :::
 
 :::{admonition} Moving forward
-:class: important
+:class: warning
 - This is a living document, we will be updating it with new topics regularly
 - We will also be adding code to the attached `openai-helper` package
 - Come to us for help during office hours at 5424, or send us an email us at <url><p><a href="mailto:rs@kellogg.northwestern.edu">rs@kellogg.northwestern.edu</a></p>

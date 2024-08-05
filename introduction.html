@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Workshop &#8212; Kellogg Research Support LLM Cookbook</title>
+    <title>Introduction &#8212; Kellogg Research Support LLM Cookbook</title>
   
   
   
@@ -60,6 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'introduction';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Generative Pre-Trained Transformer (GPT)" href="gpt-defined.html" />
+    <link rel="prev" title="Welcome" href="welcome.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,7 +180,8 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Large Language Models</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpt-defined.html">Generative Pre-Trained Transformer (GPT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="choosing_models.html">Choosing Models</a></li>
 </ul>
@@ -188,6 +189,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="openai-setup.html">OpenAI Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="openai-api.html">OpenAI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openai-copilot.html">Programming Assistance</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
 <ul class="nav bd-sidenav">
@@ -381,7 +383,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Workshop</h1>
+    <h1>Introduction</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -404,48 +406,40 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="workshop">
-<h1>Workshop<a class="headerlink" href="#workshop" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
 <section id="goals">
 <h2>Goals<a class="headerlink" href="#goals" title="Link to this heading">#</a></h2>
 <div class="admonition-objective admonition">
 <p class="admonition-title">Objective</p>
-<p>The goals of this workshop are to look at best practices with regard to:</p>
+<p>The goals of this session are to help set you up to use the OpenAI API. We will also look at best practices with respect to:</p>
 <ul class="simple">
-<li><p><font color='purple'><strong>Scaling</strong></font> jobs using the OpenAI API</p></li>
-<li><p><font color='purple'><strong>Validating</strong></font> results created using the OpenAI API</p></li>
-<li><p><font color='purple'><strong>Reproducing</strong></font> results created using the OpenAI API</p></li>
+<li><p><font color='purple'><strong>Scaling jbs</strong></font></p></li>
+<li><p><font color='purple'><strong>Validating output</strong></font></p></li>
+<li><p><font color='purple'><strong>Reproducing results</strong></font></p></li>
 </ul>
 </div>
 </section>
 <section id="outline">
 <h2>Outline<a class="headerlink" href="#outline" title="Link to this heading">#</a></h2>
-<div class="admonition-introduction admonition">
-<p class="admonition-title">1. Introduction</p>
+<div class="admonition-openai-setup admonition">
+<p class="admonition-title">1. OpenAI Setup</p>
 <ul class="simple">
-<li><p>Brief review of Generative Pre-trained Transformers (GPTs)</p></li>
-<li><p>High-level overview of what you can do with them</p></li>
-<li><p>OpenAI API setup</p></li>
+<li><p><font color='purple'><strong>Making key tokens</strong></font></p></li>
+<li><p><font color='purple'><strong>Watching usage and costs</strong></font></p></li>
+<li><p><font color='purple'><strong>Choosing a model</strong></font></p></li>
 </ul>
-<p><font color='purple'><strong>The focus will be on using the API, not the ChatGPT web application</strong></font></p>
 </div>
-<div class="admonition-use-cases admonition">
-<p class="admonition-title">2. Use Cases</p>
-<ul class="simple">
-<li><p>Text Classification (sentiment analysis)</p></li>
-<li><p>Speech to Text</p></li>
-<li><p>Text Analysis (extracting structured information)</p></li>
-<li><p>Programming Assistance</p></li>
-</ul>
-<p><font color='purple'><strong>While discussing these use cases, we we will bring in topics like prompt engineering, scaling, validation, and reproducibility</strong></font></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>The focus will be on using the API, not the ChatGPT web application</strong></p>
 </div>
-<div class="admonition-advanced-topics admonition">
-<p class="admonition-title">3. Advanced Topics</p>
-<ul class="simple">
-<li><p>Function calling from prompts</p></li>
-<li><p>Retrival Augmented Generation (RAG)</p></li>
-</ul>
-<p><font color='purple'><strong>This is a living document, and topics will be updated and extended in the future. Documentation and code is available from the <a class="reference external" href="https://github.com/rs-kellogg/krs-llm-cookbook">github repo</a></strong></font></p>
+<div class="admonition-application-workflow admonition">
+<p class="admonition-title">2. Application Workflow</p>
+<p>We will go through a case example of extracting author information from a collection of <a class="reference external" href="https://arxiv.org/">arxiv</a> papers. This is a job that can <code class="docutils literal notranslate"><span class="pre">scale</span></code> to many thousands of inputs, will demonstrate <code class="docutils literal notranslate"><span class="pre">validation</span></code> of output, and introduce ways to improve <code class="docutils literal notranslate"><span class="pre">reproducibility</span></code> of results.</p>
+<figure class="align-default" id="gpt-dev-cycle">
+<a class="reference internal image-reference" href="_images/gpt-dev-cycle.png"><img alt="_images/gpt-dev-cycle.png" src="_images/gpt-dev-cycle.png" style="width: 500px;" /></a>
+</figure>
 </div>
 </section>
 </section>
@@ -480,6 +474,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="welcome.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="gpt-defined.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Generative Pre-Trained Transformer (GPT)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

@@ -180,6 +180,7 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Large Language Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpt-defined.html">Generative Pre-Trained Transformer (GPT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="choosing_models.html">Choosing Models</a></li>
 </ul>
@@ -187,6 +188,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="openai-setup.html">OpenAI Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="openai-api.html">OpenAI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openai-copilot.html">Programming Assistance</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
 <ul class="nav bd-sidenav">
@@ -397,47 +399,40 @@ document.write(`
 <div class="note admonition">
 <p class="admonition-title">Summary</p>
 <ul class="simple">
-<li><p>Setting up an OpenAI account</p></li>
-<li><p>Multimodal OpenAI use cases</p></li>
-<li><p>Advanced topic: Function calling and RAG</p></li>
+<li><p>Setting up and using your OpenAI account</p></li>
+<li><p>Developing a testable, reprocucible workflow that scales</p></li>
 </ul>
 </div>
-<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Development Workflow</div>
+<div class="note admonition">
+<p class="admonition-title">Development Workflow</p>
 <ul class="simple">
-<li><p class="sd-card-text">Identify a dataset and specify precisely what you want to do with it</p></li>
-<li><p class="sd-card-text">Engineer a prompt (use OpenAI Playground)</p></li>
-<li><p class="sd-card-text">Evaluate performance on a sample</p>
+<li><p>Identify a dataset and specify precisely what you want to do with it</p></li>
+<li><p>Engineer a prompt (use OpenAI Playground)</p></li>
+<li><p>Evaluate performance on a sample</p>
 <ul>
-<li><p class="sd-card-text">If performance is unacceptable, try further prompt engineering, functions, etc.</p></li>
-<li><p class="sd-card-text">If performance is still not good enough, try fine-tuning</p></li>
+<li><p>If performance is unacceptable, try further prompt engineering, functions, etc.</p></li>
+<li><p>If performance is still not good enough, try fine-tuning</p></li>
 </ul>
 </li>
-<li><p class="sd-card-text">Deploy at scale</p></li>
+<li><p>Deploy at scale</p></li>
 </ul>
 <figure class="align-default" id="gpt-dev-cycle">
 <a class="reference internal image-reference" href="_images/gpt-dev-cycle.png"><img alt="_images/gpt-dev-cycle.png" src="_images/gpt-dev-cycle.png" style="width: 400px;" /></a>
 </figure>
 </div>
-</div>
-<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Structuring and Testing Code</div>
+<div class="note admonition">
+<p class="admonition-title">Structuring and Testing Code</p>
 <ul class="simple">
-<li><p class="sd-card-text">Structure your code into source code (functions) along with unit tests</p></li>
-<li><p class="sd-card-text">Functions are composed in scripts, which should have runtime tests and generate logs</p></li>
-<li><p class="sd-card-text">All code (source, scripts, tests) need to be in source control, typically <code class="docutils literal notranslate"><span class="pre">git</span></code></p></li>
-<li><p class="sd-card-text">Save logs and output files in a secure location. Do not modify them.</p></li>
+<li><p>Structure your code into source code (functions) along with unit tests</p></li>
+<li><p>Functions are composed in scripts, which should have runtime tests and generate logs</p></li>
+<li><p>All code (source, scripts, tests) need to be in source control, typically <code class="docutils literal notranslate"><span class="pre">git</span></code></p></li>
+<li><p>Save logs and output files in a secure location. Do not modify them.</p></li>
 </ul>
 <figure class="align-default" id="testing">
 <a class="reference internal image-reference" href="_images/testing.png"><img alt="_images/testing.png" src="_images/testing.png" style="width: 400px;" /></a>
 </figure>
 </div>
-</div>
-<div class="important admonition">
+<div class="warning admonition">
 <p class="admonition-title">Moving forward</p>
 <ul class="simple">
 <li><p>This is a living document, we will be updating it with new topics regularly</p></li>

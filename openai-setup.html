@@ -181,6 +181,7 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Large Language Models</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Workshop</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpt-defined.html">Generative Pre-Trained Transformer (GPT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="choosing_models.html">Choosing Models</a></li>
 </ul>
@@ -188,6 +189,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">OpenAI Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="openai-api.html">OpenAI API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openai-copilot.html">Programming Assistance</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
 <ul class="nav bd-sidenav">
@@ -542,7 +544,7 @@ Create an API key
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9sy6uKGBYwbqTYCpRzbLR2sTEzYF1&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific and methodical mindset, ensuring safety and communication through my knowledge of their psychology and social structures.\n\nHere are a few key aspects of the experience:\n\n1. **Respect for the Lion’s Power**: A lion is an apex predator, and being in close proximity to such a powerful animal instills a natural sense of awe and respect. Lions have the capacity to inflict serious harm, and their physical prowess is immediately apparent. The sheer size, the muscle definition, and the penetrating gaze of a lion remind you at every moment that you are dealing with a creature that is both majestic and potentially dangerous.\n\n2. **Awareness and Focus**: You must be completely absorbed in the moment when you’re with lions. Every movement, sound, and change in body language can convey vital information about the lion’s mood and intentions. The ability to read these cues comes from intense study and firsthand experience with the animals.\n\n3.&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722887804, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9sztC367HBQFK7jV2xhDZSAqvFNvF&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific and methodical mindset, ensuring safety and communication are paramount.\n\nThe atmosphere in the room with a lion is charged with the lion&#39;s presence; their sheer size and strength are awe-inspiring. Even a calm lion commands respect, as one is aware that the situation can change rapidly if the lion becomes agitated or perceives a threat. Lions have a very powerful aura around them, and their gaze can be quite penetrating. The sound of a lion&#39;s breath, purr, or roar in close proximity can resonate through one&#39;s body.\n\nIn managing my interactions with lions, I rely on my knowledge of their behavior and psychology. This involves recognizing subtle cues in body language, vocalizations, and general demeanor to gauge their mood and intentions. The ability to read these signs allows me to predict and influence their behavior to some extent, creating a safer environment for both the lion and myself.\n\nThroughout the interaction, it&#39;s&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722894642, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
 </pre></div>
 </div>
 </div>
@@ -563,15 +565,13 @@ Create an API key
 </div>
 </details>
 </div>
-<p><span class="pasted-text">Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal’s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific and methodical mindset, ensuring safety and communication through my knowledge of their psychology and social structures.
+<p><span class="pasted-text">Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal’s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific and methodical mindset, ensuring safety and communication are paramount.
 
-Here are a few key aspects of the experience:
+The atmosphere in the room with a lion is charged with the lion’s presence; their sheer size and strength are awe-inspiring. Even a calm lion commands respect, as one is aware that the situation can change rapidly if the lion becomes agitated or perceives a threat. Lions have a very powerful aura around them, and their gaze can be quite penetrating. The sound of a lion’s breath, purr, or roar in close proximity can resonate through one’s body.
 
-1. **Respect for the Lion’s Power**: A lion is an apex predator, and being in close proximity to such a powerful animal instills a natural sense of awe and respect. Lions have the capacity to inflict serious harm, and their physical prowess is immediately apparent. The sheer size, the muscle definition, and the penetrating gaze of a lion remind you at every moment that you are dealing with a creature that is both majestic and potentially dangerous.
+In managing my interactions with lions, I rely on my knowledge of their behavior and psychology. This involves recognizing subtle cues in body language, vocalizations, and general demeanor to gauge their mood and intentions. The ability to read these signs allows me to predict and influence their behavior to some extent, creating a safer environment for both the lion and myself.
 
-2. **Awareness and Focus**: You must be completely absorbed in the moment when you’re with lions. Every movement, sound, and change in body language can convey vital information about the lion’s mood and intentions. The ability to read these cues comes from intense study and firsthand experience with the animals.
-
-3.</span></p>
+Throughout the interaction, it’s</span></p>
 <div class="admonition-usage-https-platform-openai-com-usage admonition">
 <p class="admonition-title"><a class="reference external" href="https://platform.openai.com/usage">Usage</a></p>
 <figure class="align-default" id="openai-billing">
