@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'llm-defined';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="What can you do with GPT?" href="llm-use-cases.html" />
+    <link rel="next" title="OpenAI Setup" href="openai-setup.html" />
     <link rel="prev" title="Welcome" href="welcome.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -182,7 +182,6 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Large Language Models</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Generative Pre-Trained Transformer (GPT)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="llm-use-cases.html">What can you do with GPT?</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">OpenAI</span></p>
 <ul class="nav bd-sidenav">
@@ -397,8 +396,8 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="generative-pre-trained-transformer-gpt">
 <h1>Generative Pre-Trained Transformer (GPT)<a class="headerlink" href="#generative-pre-trained-transformer-gpt" title="Link to this heading">#</a></h1>
 <div class="note admonition">
-<p class="admonition-title">GPT is a type of Language Model</p>
-<p>Let’s break this down piece-by-piece in reverse order:</p>
+<p class="admonition-title">OpenAI’s GPT-series are Large Language Models</p>
+<p>Let’s break down these terms in reverse order:</p>
 <ul class="simple">
 <li><p>Language Models</p></li>
 <li><p>Large</p></li>
@@ -446,7 +445,7 @@ document.write(`
 <p><code class="docutils literal notranslate"><span class="pre">Transformers</span></code> were the key innovation that allowed language models to get large. They are a deep learning architecture that allow massive parallelization of training and inference on GPUs</p>
 </div>
 <figure class="align-default" id="trans-subset">
-<a class="reference internal image-reference" href="_images/ai-2-transformer.png"><img alt="_images/ai-2-transformer.png" src="_images/ai-2-transformer.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/The-Transformer-model-architecture.png"><img alt="_images/The-Transformer-model-architecture.png" src="_images/The-Transformer-model-architecture.png" style="width: 600px;" /></a>
 </figure>
 <figure class="align-default" id="attention">
 <a class="reference internal image-reference" href="_images/attention-is-all-you-need.png"><img alt="_images/attention-is-all-you-need.png" src="_images/attention-is-all-you-need.png" style="width: 600px;" /></a>
@@ -457,11 +456,11 @@ document.write(`
 </figure>
 <div class="tip admonition">
 <p class="admonition-title"><strong>Pre-trained</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">Pre-trained</span></code> language models have been trained via self-supervision on vast quantities of text. These are also called <a class="reference external" href="https://en.wikipedia.org/wiki/Foundation_models"><code class="docutils literal notranslate"><span class="pre">foundation</span></code></a> models. They are not typically useful until…</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pre-trained</span></code> language models have been trained via self-supervision on vast quantities of text. These are also sometimes called <a class="reference external" href="https://en.wikipedia.org/wiki/Foundation_models"><code class="docutils literal notranslate"><span class="pre">foundation</span></code></a> models. Pre-trained models can be used as is, or trained further, for exmaple with “fine-tuning” in order to improve performance on specific target domains.</p>
 </div>
 <div class="tip admonition">
 <p class="admonition-title"><strong>Generative</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">Generative</span></code> models are foundation models that have been further trained via supervised fine-tuning and reinforcement learning from human feedback (RLHF) to behave in a useful and safe manner, for example by responding to questions with answers like a chat assistant.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Generative</span></code> models that generate samples from the sample space they are trained on. Vanilla pre-trained models just do next word prediction (OpenAI calls these “GPT base”). These can be useful for some tasks, such as speech recognition and predictive text completion. The assistant-style models we are more used to using are foundation models that have been further trained via supervised fine-tuning and reinforcement learning from human feedback (RLHF) to behave in a useful and safe manner, for example by responding to questions with answers like a chat assistant.</p>
 </div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
 <div class="sd-card-body docutils">
@@ -529,11 +528,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="llm-use-cases.html"
+       href="openai-setup.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">What can you do with GPT?</p>
+        <p class="prev-next-title">OpenAI Setup</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

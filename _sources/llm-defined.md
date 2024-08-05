@@ -1,8 +1,8 @@
 # Generative Pre-Trained Transformer (GPT)
 
-:::{admonition} GPT is a type of Language Model
+:::{admonition} OpenAI's GPT-series are Large Language Models
 :class: note
-Let's break this down piece-by-piece in reverse order:
+Let's break down these terms in reverse order:
 
 - Language Models
 - Large
@@ -53,7 +53,7 @@ name: wikipedia-list
 `Transformers` were the key innovation that allowed language models to get large. They are a deep learning architecture that allow massive parallelization of training and inference on GPUs
 :::
 
-```{figure} ./images/ai-2-transformer.png
+```{figure} ./images/The-Transformer-model-architecture.png
 ---
 width: 600px
 name: trans-subset
@@ -71,12 +71,12 @@ name: attention
 
 :::{admonition} **Pre-trained**
 :class: tip
-`Pre-trained` language models have been trained via self-supervision on vast quantities of text. These are also called [`foundation`](https://en.wikipedia.org/wiki/Foundation_models) models. They are not typically useful until...
+`Pre-trained` language models have been trained via self-supervision on vast quantities of text. These are also sometimes called [`foundation`](https://en.wikipedia.org/wiki/Foundation_models) models. Pre-trained models can be used as is, or trained further, for exmaple with "fine-tuning" in order to improve performance on specific target domains.
 :::
 
 :::{admonition} **Generative**
 :class: tip
-`Generative` models are foundation models that have been further trained via supervised fine-tuning and reinforcement learning from human feedback (RLHF) to behave in a useful and safe manner, for example by responding to questions with answers like a chat assistant.
+`Generative` models that generate samples from the sample space they are trained on. Vanilla pre-trained models just do next word prediction (OpenAI calls these "GPT base"). These can be useful for some tasks, such as speech recognition and predictive text completion. The assistant-style models we are more used to using are foundation models that have been further trained via supervised fine-tuning and reinforcement learning from human feedback (RLHF) to behave in a useful and safe manner, for example by responding to questions with answers like a chat assistant.
 :::
 
 :::{card} [OpenAI](https://en.wikipedia.org/wiki/OpenAI):
