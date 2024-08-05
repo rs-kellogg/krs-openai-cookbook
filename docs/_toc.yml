@@ -7,6 +7,7 @@ parts:
 - caption: Large Language Models
   numbered: false
   chapters:
+  - file: introduction
   - file: gpt-defined
   - file: choosing_models
 - caption: OpenAI
@@ -14,6 +15,7 @@ parts:
   chapters:
   - file: openai-setup
   - file: openai-api
+  - file: openai-copilot
 - caption: Workflow
   numbered: false
   chapters:
