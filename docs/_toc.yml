@@ -7,15 +7,14 @@ parts:
 - caption: Large Language Models
   numbered: false
   chapters:
-  - file: llm-defined
+  - file: gpt-defined
   - file: choosing_models
 - caption: OpenAI
   numbered: false
   chapters:
   - file: openai-setup
-  - file: openai-cli
   - file: openai-api
-- caption: Examples
+- caption: Workflow
   numbered: false
   chapters:
   - file: openai-text-analysis
