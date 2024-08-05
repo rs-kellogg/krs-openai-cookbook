@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'openai-setup';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="OpenAI CLI" href="openai-cli.html" />
-    <link rel="prev" title="Generative Pre-Trained Transformer (GPT)" href="llm-defined.html" />
+    <link rel="next" title="OpenAI API" href="openai-api.html" />
+    <link rel="prev" title="Choosing Models" href="choosing_models.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,15 +181,15 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Large Language Models</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="llm-defined.html">Generative Pre-Trained Transformer (GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpt-defined.html">Generative Pre-Trained Transformer (GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choosing_models.html">Choosing Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">OpenAI</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">OpenAI Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="openai-cli.html">OpenAI CLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="openai-api.html">OpenAI API</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="openai-text-analysis.html">Text Analysis</a></li>
 </ul>
@@ -418,7 +418,7 @@ document.write(`
 <figure class="align-default" id="chat-vs-api">
 <a class="reference internal image-reference" href="_images/chat-vs-api.png"><img alt="_images/chat-vs-api.png" src="_images/chat-vs-api.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6 </span><span class="caption-text"><a class="reference external" href="https://platform.openai.com/apps">Two services, two billing accounts</a></span><a class="headerlink" href="#chat-vs-api" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text"><a class="reference external" href="https://platform.openai.com/apps">Two services, two billing accounts</a></span><a class="headerlink" href="#chat-vs-api" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -481,7 +481,7 @@ Steps</div>
 <figure class="align-default" id="gitignore">
 <a class="reference internal image-reference" href="_images/gitignore.png"><img alt="_images/gitignore.png" src="_images/gitignore.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text"><a class="reference external" href="https://github.com/rs-kellogg/krs-llm-cookbook/tree/main">use .gitignore file</a></span><a class="headerlink" href="#gitignore" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text"><a class="reference external" href="https://github.com/rs-kellogg/krs-llm-cookbook/tree/main">use .gitignore file</a></span><a class="headerlink" href="#gitignore" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </li>
@@ -542,7 +542,7 @@ Create an API key
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9sxLHvb1FA8fUWCRhnMosqEtoR9UT&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.\n\nHere are some sensations and considerations I experience when sharing a space with a lion:\n\n1. **Respect for Power**: The immediate recognition of the lion&#39;s strength and potential for danger is palpable. These creatures are apex predators, equipped with powerful muscles, sharp teeth, and claws capable of inflicting serious harm. One wrong move could elicit an aggressive response, so I always maintain a posture of respect and caution.\n\n2. **Understanding Behavior**: My background in zoology helps me to read subtle cues in the lion&#39;s body language, vocalizations, and behavior. This understanding is crucial in predicting their actions and ensuring that I react appropriately to maintain control and defuse any potential threats.\n\n3. **Calm and Control**: It&#39;s vital to remain calm and assertive. Lions, like many animals, can sense fear and uncertainty, which can affect their behavior&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722884851, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9sy6uKGBYwbqTYCpRzbLR2sTEzYF1&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific and methodical mindset, ensuring safety and communication through my knowledge of their psychology and social structures.\n\nHere are a few key aspects of the experience:\n\n1. **Respect for the Lion’s Power**: A lion is an apex predator, and being in close proximity to such a powerful animal instills a natural sense of awe and respect. Lions have the capacity to inflict serious harm, and their physical prowess is immediately apparent. The sheer size, the muscle definition, and the penetrating gaze of a lion remind you at every moment that you are dealing with a creature that is both majestic and potentially dangerous.\n\n2. **Awareness and Focus**: You must be completely absorbed in the moment when you’re with lions. Every movement, sound, and change in body language can convey vital information about the lion’s mood and intentions. The ability to read these cues comes from intense study and firsthand experience with the animals.\n\n3.&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722887804, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
 </pre></div>
 </div>
 </div>
@@ -563,15 +563,15 @@ Create an API key
 </div>
 </details>
 </div>
-<p><span class="pasted-text">Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal’s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.
+<p><span class="pasted-text">Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal’s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific and methodical mindset, ensuring safety and communication through my knowledge of their psychology and social structures.
 
-Here are some sensations and considerations I experience when sharing a space with a lion:
+Here are a few key aspects of the experience:
 
-1. **Respect for Power**: The immediate recognition of the lion’s strength and potential for danger is palpable. These creatures are apex predators, equipped with powerful muscles, sharp teeth, and claws capable of inflicting serious harm. One wrong move could elicit an aggressive response, so I always maintain a posture of respect and caution.
+1. **Respect for the Lion’s Power**: A lion is an apex predator, and being in close proximity to such a powerful animal instills a natural sense of awe and respect. Lions have the capacity to inflict serious harm, and their physical prowess is immediately apparent. The sheer size, the muscle definition, and the penetrating gaze of a lion remind you at every moment that you are dealing with a creature that is both majestic and potentially dangerous.
 
-2. **Understanding Behavior**: My background in zoology helps me to read subtle cues in the lion’s body language, vocalizations, and behavior. This understanding is crucial in predicting their actions and ensuring that I react appropriately to maintain control and defuse any potential threats.
+2. **Awareness and Focus**: You must be completely absorbed in the moment when you’re with lions. Every movement, sound, and change in body language can convey vital information about the lion’s mood and intentions. The ability to read these cues comes from intense study and firsthand experience with the animals.
 
-3. **Calm and Control**: It’s vital to remain calm and assertive. Lions, like many animals, can sense fear and uncertainty, which can affect their behavior</span></p>
+3.</span></p>
 <div class="admonition-usage-https-platform-openai-com-usage admonition">
 <p class="admonition-title"><a class="reference external" href="https://platform.openai.com/usage">Usage</a></p>
 <figure class="align-default" id="openai-billing">
@@ -662,20 +662,20 @@ Here are some sensations and considerations I experience when sharing a space wi
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="llm-defined.html"
+       href="choosing_models.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Generative Pre-Trained Transformer (GPT)</p>
+        <p class="prev-next-title">Choosing Models</p>
       </div>
     </a>
     <a class="right-next"
-       href="openai-cli.html"
+       href="openai-api.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">OpenAI CLI</p>
+        <p class="prev-next-title">OpenAI API</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

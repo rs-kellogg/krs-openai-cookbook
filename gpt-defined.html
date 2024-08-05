@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>OpenAI CLI &#8212; Kellogg Research Support LLM Cookbook</title>
+    <title>Generative Pre-Trained Transformer (GPT) &#8212; Kellogg Research Support LLM Cookbook</title>
   
   
   
@@ -57,9 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'openai-cli';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gpt-defined';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Choosing Models" href="choosing_models.html" />
+    <link rel="prev" title="Welcome" href="welcome.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,8 +180,8 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Large Language Models</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="gpt-defined.html">Generative Pre-Trained Transformer (GPT)</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Generative Pre-Trained Transformer (GPT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="choosing_models.html">Choosing Models</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">OpenAI</span></p>
@@ -267,7 +267,7 @@
       
       
       
-      <li><a href="https://github.com/rs-kellogg/krs-llm-cookbook/issues/new?title=Issue%20on%20page%20%2Fopenai-cli.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/rs-kellogg/krs-llm-cookbook/issues/new?title=Issue%20on%20page%20%2Fgpt-defined.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -297,7 +297,7 @@
       
       
       
-      <li><a href="_sources/openai-cli.ipynb" target="_blank"
+      <li><a href="_sources/gpt-defined.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -307,7 +307,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -379,7 +379,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>OpenAI CLI</h1>
+    <h1>Generative Pre-Trained Transformer (GPT)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -393,8 +393,99 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="openai-cli">
-<h1>OpenAI CLI<a class="headerlink" href="#openai-cli" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="generative-pre-trained-transformer-gpt">
+<h1>Generative Pre-Trained Transformer (GPT)<a class="headerlink" href="#generative-pre-trained-transformer-gpt" title="Link to this heading">#</a></h1>
+<div class="note admonition">
+<p class="admonition-title">OpenAI’s GPT-series are Large Language Models</p>
+<p>Let’s break down these terms in reverse order:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Language</span> <span class="pre">Models</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Large</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Transformer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Pre-Trained</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Generative</span></code></p></li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><strong><a class="reference external" href="https://en.wikipedia.org/wiki/Language_model">Language Model</a></strong></p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Language</span> <span class="pre">Model</span></code> (LM) is a model that assigns probabilities to sequences of words. Probabilities are estimated (the models are trained) using collections of naturally ocurring text, called a corpus. You can use a LM to select the most probable next word given a context of a preceding series of words.</p>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<a class="reference external" href="https://prvnsmpth.github.io/animated-transformer/">Animated Transfomer</a></div>
+<video width="99%" height="540" autoplay loop muted markdown="1">
+    <source src="_images/animated-transfomer.mp4" type="video/mp4" markdown="1" >
+</video>
+</div>
+</div>
+<figure class="align-default" id="lm-hist">
+<a class="reference internal image-reference" href="_images/lm-hist.png"><img alt="_images/lm-hist.png" src="_images/lm-hist.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text"><a class="reference external" href="https://learning.oreilly.com/library/view/developing-apps-with/9781098152475/ch01.html#understanding_the_transformer_architecture_and_its">Evolution of language models over time</a></span><a class="headerlink" href="#lm-hist" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="tip admonition">
+<p class="admonition-title"><strong><a class="reference external" href="https://en.wikipedia.org/wiki/Large_language_model#List">Large</a></strong></p>
+<p>We call a language model <code class="docutils literal notranslate"><span class="pre">large</span></code> when:</p>
+<ul class="simple">
+<li><p>The model has billions of parameters (approaching a trillion in frontier models)</p></li>
+<li><p>The model has been trained on billions or trillions of words/tokens</p></li>
+</ul>
+<p>Why the focus on large language models (LLMs)? Because as scale increases new <code class="docutils literal notranslate"><span class="pre">emergent</span></code> capabilities have appeared, such as complex reasoning. Smaller language models gave no indication that this would happen.</p>
+</div>
+<figure class="align-default" id="wikipedia-list">
+<a class="reference internal image-reference" href="_images/wikipedia-list.png"><img alt="_images/wikipedia-list.png" src="_images/wikipedia-list.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text"><a class="reference external" href="https://en.wikipedia.org/wiki/Large_language_model#List">LLM List</a></span><a class="headerlink" href="#wikipedia-list" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Transformer</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">Transformers</span></code> were the key innovation that allowed language models to get large. They are a deep learning architecture that allow massive parallelization of training and inference on GPUs</p>
+</div>
+<figure class="align-default" id="trans-subset">
+<a class="reference internal image-reference" href="_images/The-Transformer-model-architecture.png"><img alt="_images/The-Transformer-model-architecture.png" src="_images/The-Transformer-model-architecture.png" style="width: 600px;" /></a>
+</figure>
+<figure class="align-default" id="attention">
+<a class="reference internal image-reference" href="_images/attention-is-all-you-need.png"><img alt="_images/attention-is-all-you-need.png" src="_images/attention-is-all-you-need.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text"><a class="reference external" href="https://arxiv.org/abs/1706.03762">Attention Paper</a>
+<a class="reference external" href="https://nlp.seas.harvard.edu/2018/04/03/attention.html">Annotated Version</a></span><a class="headerlink" href="#attention" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Pre-trained</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">Pre-trained</span></code> language models have been trained via self-supervision on vast quantities of text. In our current context of LLMs, these are also sometimes called <a class="reference external" href="https://en.wikipedia.org/wiki/Foundation_models"><code class="docutils literal notranslate"><span class="pre">foundation</span></code></a> models. Pre-trained models can be used as is, or trained further, for exmaple with “fine-tuning” in order to improve performance on specific target domains.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Generative</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">Generative</span></code> models that generate samples from the sample space they are trained on. Vanilla pre-trained models just do next word prediction (OpenAI calls these “GPT base”). These can be useful for some tasks, such as speech recognition and predictive text completion. The assistant-style models we are more used to using are foundation models that have been further trained via supervised fine-tuning and reinforcement learning from human feedback (RLHF) to behave in a useful and safe manner, for example by responding to questions with answers like a chat assistant.</p>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+<a class="reference external" href="https://en.wikipedia.org/wiki/OpenAI">OpenAI</a>:</div>
+<blockquote>
+<div><p class="sd-card-text">OpenAI is an American artificial intelligence (AI) organization consisting of the non-profit OpenAI, Inc.[4] registered in Delaware and its for-profit subsidiary corporation OpenAI Global, LLC.[5] OpenAI researches artificial intelligence with the declared intention of developing “safe and beneficial” artificial general intelligence, which it defines as “highly autonomous systems that outperform humans at most economically valuable work”.[6]</p>
+</div></blockquote>
+<blockquote>
+<div><p class="sd-card-text">OpenAI was founded in 2015 by Ilya Sutskever, Greg Brockman, Trevor Blackwell, Vicki Cheung, Andrej Karpathy, Durk Kingma, Jessica Livingston, John Schulman, Pamela Vagata, and Wojciech Zaremba, with Sam Altman and Elon Musk serving as the initial board members.Microsoft provided OpenAI Global LLC with a $1 billion investment in 2019 and a $10 billion investment in 2023.</p>
+</div></blockquote>
+</div>
+</div>
+<figure class="align-default" id="model-zoo">
+<a class="reference internal image-reference" href="_images/model-zoo.png"><img alt="_images/model-zoo.png" src="_images/model-zoo.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text"><a class="reference external" href="https://arxiv.org/abs/2303.18223">Model Zoo</a></span><a class="headerlink" href="#model-zoo" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="openai-hist">
+<a class="reference internal image-reference" href="_images/openai-llm-history.png"><img alt="_images/openai-llm-history.png" src="_images/openai-llm-history.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text"><a class="reference external" href="https://learning.oreilly.com/library/view/developing-apps-with/9781098152475/ch01.html#understanding_the_transformer_architecture_and_its">GPT Generations</a></span><a class="headerlink" href="#openai-hist" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 
     <script type="text/x-thebe-config">
@@ -427,6 +518,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="welcome.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="choosing_models.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Choosing Models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
