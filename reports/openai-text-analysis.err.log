@@ -25,11 +25,42 @@ df.head()
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;31mAttributeError[0m                            Traceback (most recent call last)
 Cell [0;32mIn[1], line 1[0m
 [0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
 [1;32m      2[0m df [38;5;241m=[39m pd[38;5;241m.[39mread_parquet([38;5;124m'[39m[38;5;124mdata/arxiv_metadata.parquet[39m[38;5;124m'[39m)
 [1;32m      3[0m df[38;5;241m.[39mhead()
 
-[0;31mModuleNotFoundError[0m: No module named 'pandas'
+File [0;32m~/micromamba/envs/openai-helper/lib/python3.11/site-packages/pandas/__init__.py:26[0m
+[1;32m     22[0m [38;5;28;01mdel[39;00m _hard_dependencies, _dependency, _missing_dependencies
+[1;32m     24[0m [38;5;28;01mtry[39;00m:
+[1;32m     25[0m     [38;5;66;03m# numpy compat[39;00m
+[0;32m---> 26[0m     [38;5;28;01mfrom[39;00m [38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcompat[39;00m [38;5;28;01mimport[39;00m (
+[1;32m     27[0m         is_numpy_dev [38;5;28;01mas[39;00m _is_numpy_dev,  [38;5;66;03m# pyright: ignore[reportUnusedImport] # noqa: F401[39;00m
+[1;32m     28[0m     )
+[1;32m     29[0m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m _err:  [38;5;66;03m# pragma: no cover[39;00m
+[1;32m     30[0m     _module [38;5;241m=[39m _err[38;5;241m.[39mname
+
+File [0;32m~/micromamba/envs/openai-helper/lib/python3.11/site-packages/pandas/compat/__init__.py:27[0m
+[1;32m     25[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcompat[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcompressors[39;00m
+[1;32m     26[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcompat[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnumpy[39;00m [38;5;28;01mimport[39;00m is_numpy_dev
+[0;32m---> 27[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcompat[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyarrow[39;00m [38;5;28;01mimport[39;00m (
+[1;32m     28[0m     pa_version_under10p1,
+[1;32m     29[0m     pa_version_under11p0,
+[1;32m     30[0m     pa_version_under13p0,
+[1;32m     31[0m     pa_version_under14p0,
+[1;32m     32[0m     pa_version_under14p1,
+[1;32m     33[0m     pa_version_under16p0,
+[1;32m     34[0m )
+[1;32m     36[0m [38;5;28;01mif[39;00m TYPE_CHECKING:
+[1;32m     37[0m     [38;5;28;01mfrom[39;00m [38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_typing[39;00m [38;5;28;01mimport[39;00m F
+
+File [0;32m~/micromamba/envs/openai-helper/lib/python3.11/site-packages/pandas/compat/pyarrow.py:10[0m
+[1;32m      7[0m [38;5;28;01mtry[39;00m:
+[1;32m      8[0m     [38;5;28;01mimport[39;00m [38;5;21;01mpyarrow[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpa[39;00m
+[0;32m---> 10[0m     _palv [38;5;241m=[39m Version(Version([43mpa[49m[38;5;241;43m.[39;49m[43m__version__[49m)[38;5;241m.[39mbase_version)
+[1;32m     11[0m     pa_version_under10p1 [38;5;241m=[39m _palv [38;5;241m<[39m Version([38;5;124m"[39m[38;5;124m10.0.1[39m[38;5;124m"[39m)
+[1;32m     12[0m     pa_version_under11p0 [38;5;241m=[39m _palv [38;5;241m<[39m Version([38;5;124m"[39m[38;5;124m11.0.0[39m[38;5;124m"[39m)
+
+[0;31mAttributeError[0m: module 'pyarrow' has no attribute '__version__'
 
