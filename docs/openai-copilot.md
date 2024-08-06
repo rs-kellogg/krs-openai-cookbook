@@ -1,4 +1,4 @@
-# Programming Assistance
+# Copilot
 
 
 :::{card} [Copilot](https://github.com/features/copilot)
