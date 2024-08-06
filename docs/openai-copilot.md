@@ -1,4 +1,4 @@
-# Copilot
+# Github Copilot
 
 
 :::{card} [Copilot](https://github.com/features/copilot)

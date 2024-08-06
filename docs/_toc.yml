@@ -14,7 +14,6 @@ parts:
   numbered: false
   chapters:
   - file: openai-setup
-  - file: openai-api
   - file: openai-copilot
 - caption: Workflow
   numbered: false
