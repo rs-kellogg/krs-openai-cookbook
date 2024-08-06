@@ -440,31 +440,25 @@ document.write(`
 <a class="reference internal image-reference" href="_images/openai-api-keys.png"><img alt="_images/openai-api-keys.png" src="_images/openai-api-keys.png" style="width: 600px;" /></a>
 </figure>
 </div>
-<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Steps</div>
-<ul>
-<li><p class="sd-card-text">Create API key</p></li>
-<li><p class="sd-card-text">Save it to disk</p></li>
-<li><p class="sd-card-text"><font color='purple'><strong>Keep it safe!</strong></font></p>
+<div class="note admonition">
+<p class="admonition-title">Steps</p>
 <ul class="simple">
-<li><p class="sd-card-text">Don’t put it in your source code</p></li>
-<li><p class="sd-card-text">Don’t add it to a github repository</p></li>
-<li><p class="sd-card-text">Be careful about emailing, sharing via dropbox, one drive, etc.</p></li>
+<li><p>Create API key</p></li>
+<li><p>Save it to disk</p></li>
+<li><p><font color='purple'><strong>Keep it safe!</strong></font></p>
+<ul>
+<li><p>Don’t put it in your source code</p></li>
+<li><p>Don’t add it to a github repository</p></li>
+<li><p>Be careful about emailing, sharing via dropbox, one drive, etc.</p></li>
 </ul>
-<figure class="align-default" id="gitignore">
-<a class="reference internal image-reference" href="_images/gitignore.png"><img alt="_images/gitignore.png" src="_images/gitignore.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 6 </span><span class="caption-text"><a class="reference external" href="https://github.com/rs-kellogg/krs-llm-cookbook/tree/main">use .gitignore file</a></span><a class="headerlink" href="#gitignore" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
 </li>
 </ul>
-<video width="99%" height="600" controls muted markdown="1">
-    <source src="_images/openai-api-create-api-key.mp4" type="video/mp4" markdown="1" >
-</video>
-</div>
+<figure class="align-default" id="env">
+<a class="reference internal image-reference" href="_images/env.png"><img alt="_images/env.png" src="_images/env.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text"><a class="reference external" href="https://github.com/rs-kellogg/krs-llm-cookbook/blob/main/.gitignore">add an entry to your .gitignore file to exclude from source control</a></span><a class="headerlink" href="#env" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -474,13 +468,17 @@ Steps</div>
 <span class="c1"># load the .env file containing your API key</span>
 <span class="n">load_dotenv</span><span class="p">()</span>
 
-<span class="c1"># display (obfuscated) API key</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OPENAI_API_KEY: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">)[:</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+<span class="c1"># display (obfuscated) environment vars</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OPENAI_API_KEY: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">)[:</span><span class="mi">8</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OPENAI_ORG_ID: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_ORG_ID&#39;</span><span class="p">)[:</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OPENAI_PROJ_ID: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_PROJ_ID&#39;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OPENAI_API_KEY: sk-p...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OPENAI_API_KEY: sk-proj-...
+OPENAI_ORG_ID: org-...
+OPENAI_PROJ_ID: proj_...
 </pre></div>
 </div>
 </div>
@@ -515,7 +513,7 @@ Steps</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9t2hSLnFpyOuy8Ey2UlyE3prebS3H&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.\n\nThe presence of a lion is awe-inspiring. It is a majestic and formidable creature, exuding power and primal energy. The sheer size and muscular build of the lion are humbling, and its presence commands respect. The sounds a lion makes—whether a low growl or a powerful roar—can resonate through your body, reminding you of the animal&#39;s dominance and strength.\n\nThe atmosphere in the room may vary depending on the lion&#39;s mood and level of training. A well-trained lion that has been habituated to human presence may be calm and somewhat predictable, exhibiting less aggressive behavior if it is used to the routines involved in training or performance. However, it is critical to remember that lions, regardless of training, are wild animals with instincts that can kick in at any moment.\n\nWhen interacting with a lion, one must pay close attention to the animal&#39;s body&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722905446, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9t2uiD6uQHoxrSWOK8ofbuji5XmdS&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific and methodical mindset, ensuring safety and communication through my knowledge of their psychology and social structures.\n\nHere are a few key aspects of the experience:\n\n1. **Respect for the Lion’s Power**: A lion is an apex predator, and being in close proximity to such a powerful animal instills a natural sense of awe. Every movement, sound, and gesture from the lion is a reminder of its potential for swift and potent action. Their sheer physicality can be overwhelming—massive paws, razor-sharp claws, and a muscular build capable of taking down large prey.\n\n2. **Observation and Interaction**: As an expert in lion behavior, I would carefully observe the lion for any signs of discomfort, agitation, or aggression. Understanding subtle cues such as ear positions, tail movements, and vocalizations is critical for safe interaction. My approach would be based on positive reinforcement and respect for the lion&#39;s&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722906268, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
 </pre></div>
 </div>
 </div>
@@ -536,13 +534,13 @@ Steps</div>
 </div>
 </details>
 </div>
-<p><span class="pasted-text">Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal’s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.
+<p><span class="pasted-text">Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal’s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific and methodical mindset, ensuring safety and communication through my knowledge of their psychology and social structures.
 
-The presence of a lion is awe-inspiring. It is a majestic and formidable creature, exuding power and primal energy. The sheer size and muscular build of the lion are humbling, and its presence commands respect. The sounds a lion makes—whether a low growl or a powerful roar—can resonate through your body, reminding you of the animal’s dominance and strength.
+Here are a few key aspects of the experience:
 
-The atmosphere in the room may vary depending on the lion’s mood and level of training. A well-trained lion that has been habituated to human presence may be calm and somewhat predictable, exhibiting less aggressive behavior if it is used to the routines involved in training or performance. However, it is critical to remember that lions, regardless of training, are wild animals with instincts that can kick in at any moment.
+1. **Respect for the Lion’s Power**: A lion is an apex predator, and being in close proximity to such a powerful animal instills a natural sense of awe. Every movement, sound, and gesture from the lion is a reminder of its potential for swift and potent action. Their sheer physicality can be overwhelming—massive paws, razor-sharp claws, and a muscular build capable of taking down large prey.
 
-When interacting with a lion, one must pay close attention to the animal’s body</span></p>
+2. **Observation and Interaction**: As an expert in lion behavior, I would carefully observe the lion for any signs of discomfort, agitation, or aggression. Understanding subtle cues such as ear positions, tail movements, and vocalizations is critical for safe interaction. My approach would be based on positive reinforcement and respect for the lion’s</span></p>
 <div class="admonition-usage-https-platform-openai-com-usage admonition">
 <p class="admonition-title"><a class="reference external" href="https://platform.openai.com/usage">Usage</a></p>
 <figure class="align-default" id="openai-billing">
