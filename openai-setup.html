@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="OpenAI API" href="openai-api.html" />
-    <link rel="prev" title="Choosing Models" href="choosing_models.html" />
+    <link rel="prev" title="Choosing an LLM" href="choosing_models.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -183,17 +183,17 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gpt-defined.html">Generative Pre-Trained Transformer (GPT)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="choosing_models.html">Choosing Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choosing_models.html">Choosing an LLM</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">OpenAI</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">OpenAI Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="openai-api.html">OpenAI API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="openai-copilot.html">Programming Assistance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openai-copilot.html">Copilot</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workflow</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="openai-text-analysis.html">Text Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openai-text-analysis.html">Case Study: Information Extraction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Summary</span></p>
 <ul class="nav bd-sidenav">
@@ -397,7 +397,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#playground">Playground</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-costs">Calculating Costs</a></li>
 </ul>
             </nav>
         </div>
@@ -461,8 +460,8 @@ document.write(`
 <a class="reference internal image-reference" href="_images/openai-platform.png"><img alt="_images/openai-platform.png" src="_images/openai-platform.png" style="width: 600px;" /></a>
 </figure>
 </div>
-<div class="admonition-create-an-api-key-https-platform-openai-com-api-keys admonition">
-<p class="admonition-title">1. <a class="reference external" href="https://platform.openai.com/api-keys">Create an API key</a></p>
+<div class="note admonition">
+<p class="admonition-title">3. <a class="reference external" href="https://platform.openai.com/api-keys">Create an API key</a></p>
 <figure class="align-default" id="openai-keys">
 <a class="reference internal image-reference" href="_images/openai-api-keys.png"><img alt="_images/openai-api-keys.png" src="_images/openai-api-keys.png" style="width: 600px;" /></a>
 </figure>
@@ -473,7 +472,7 @@ document.write(`
 Steps</div>
 <ul>
 <li><p class="sd-card-text">Create API key</p></li>
-<li><p class="sd-card-text">Save to disk</p></li>
+<li><p class="sd-card-text">Save it to disk</p></li>
 <li><p class="sd-card-text"><font color='purple'><strong>Keep it safe!</strong></font></p>
 <ul class="simple">
 <li><p class="sd-card-text">Don’t put it in your source code</p></li>
@@ -493,9 +492,7 @@ Steps</div>
 </video>
 </div>
 </div>
-<!-- ```{figure} ./images/openai-api-create-api-key.mp4
-Create an API key
-``` --><div class="cell docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span> <span class="c1"># pip install python-dotenv</span>
@@ -544,7 +541,7 @@ Create an API key
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9sztC367HBQFK7jV2xhDZSAqvFNvF&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific and methodical mindset, ensuring safety and communication are paramount.\n\nThe atmosphere in the room with a lion is charged with the lion&#39;s presence; their sheer size and strength are awe-inspiring. Even a calm lion commands respect, as one is aware that the situation can change rapidly if the lion becomes agitated or perceives a threat. Lions have a very powerful aura around them, and their gaze can be quite penetrating. The sound of a lion&#39;s breath, purr, or roar in close proximity can resonate through one&#39;s body.\n\nIn managing my interactions with lions, I rely on my knowledge of their behavior and psychology. This involves recognizing subtle cues in body language, vocalizations, and general demeanor to gauge their mood and intentions. The ability to read these signs allows me to predict and influence their behavior to some extent, creating a safer environment for both the lion and myself.\n\nThroughout the interaction, it&#39;s&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722894642, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9t2frvCuWKfgOFNNC4RJ21L1f9VG5&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.\n\nHere are some sensations and considerations I experience when sharing a space with a lion:\n\n1. **Respect for Power**: The immediate recognition of the lion&#39;s strength and potential for danger is palpable. These creatures are apex predators, equipped with powerful muscles, sharp teeth, and claws capable of inflicting serious harm. One wrong move could elicit an aggressive response, so I always maintain a posture of respect and caution.\n\n2. **Understanding Behavior**: My background in zoology helps me to read subtle cues in the lion&#39;s body language, vocalizations, and behavior. This understanding is crucial in predicting their actions and ensuring that I react appropriately to maintain control and defuse any potential threats.\n\n3. **Calm and Control**: It&#39;s vital to remain calm and assertive. Lions, like many animals, can sense fear and uncertainty, which can affect their reaction&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722905347, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
 </pre></div>
 </div>
 </div>
@@ -565,13 +562,15 @@ Create an API key
 </div>
 </details>
 </div>
-<p><span class="pasted-text">Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal’s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific and methodical mindset, ensuring safety and communication are paramount.
+<p><span class="pasted-text">Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal’s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.
 
-The atmosphere in the room with a lion is charged with the lion’s presence; their sheer size and strength are awe-inspiring. Even a calm lion commands respect, as one is aware that the situation can change rapidly if the lion becomes agitated or perceives a threat. Lions have a very powerful aura around them, and their gaze can be quite penetrating. The sound of a lion’s breath, purr, or roar in close proximity can resonate through one’s body.
+Here are some sensations and considerations I experience when sharing a space with a lion:
 
-In managing my interactions with lions, I rely on my knowledge of their behavior and psychology. This involves recognizing subtle cues in body language, vocalizations, and general demeanor to gauge their mood and intentions. The ability to read these signs allows me to predict and influence their behavior to some extent, creating a safer environment for both the lion and myself.
+1. **Respect for Power**: The immediate recognition of the lion’s strength and potential for danger is palpable. These creatures are apex predators, equipped with powerful muscles, sharp teeth, and claws capable of inflicting serious harm. One wrong move could elicit an aggressive response, so I always maintain a posture of respect and caution.
 
-Throughout the interaction, it’s</span></p>
+2. **Understanding Behavior**: My background in zoology helps me to read subtle cues in the lion’s body language, vocalizations, and behavior. This understanding is crucial in predicting their actions and ensuring that I react appropriately to maintain control and defuse any potential threats.
+
+3. **Calm and Control**: It’s vital to remain calm and assertive. Lions, like many animals, can sense fear and uncertainty, which can affect their reaction</span></p>
 <div class="admonition-usage-https-platform-openai-com-usage admonition">
 <p class="admonition-title"><a class="reference external" href="https://platform.openai.com/usage">Usage</a></p>
 <figure class="align-default" id="openai-billing">
@@ -626,9 +625,6 @@ Throughout the interaction, it’s</span></p>
 </div>
 </div>
 </section>
-<section id="calculating-costs">
-<h2>Calculating Costs<a class="headerlink" href="#calculating-costs" title="Link to this heading">#</a></h2>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -667,7 +663,7 @@ Throughout the interaction, it’s</span></p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Choosing Models</p>
+        <p class="prev-next-title">Choosing an LLM</p>
       </div>
     </a>
     <a class="right-next"
@@ -699,7 +695,6 @@ Throughout the interaction, it’s</span></p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#playground">Playground</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-costs">Calculating Costs</a></li>
 </ul>
   </nav></div>
 
