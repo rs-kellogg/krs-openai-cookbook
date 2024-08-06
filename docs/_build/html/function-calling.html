@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Function calling &#8212; Kellogg Research Support LLM Cookbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'function-calling';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="welcome.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Kellogg Research Support LLM Cookbook - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Kellogg Research Support LLM Cookbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="welcome.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Large Language Models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="llm-defined.html">Generative Pre-Trained Transformer (GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm-use-cases.html">What can you do with GPT?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">OpenAI</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="openai-setup.html">OpenAI Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openai-cli.html">OpenAI CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openai-api.html">OpenAI API</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rs-kellogg/krs-llm-cookbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rs-kellogg/krs-llm-cookbook/issues/new?title=Issue%20on%20page%20%2Ffunction-calling.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/function-calling.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Function calling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics">Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flight-status-query-project">Flight Status Query Project</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="function-calling">
+<h1>Function calling<a class="headerlink" href="#function-calling" title="Link to this heading">#</a></h1>
+<p>We strongly recommend checking the official <a class="reference external" href="https://platform.openai.com/docs/guides/function-calling">Function-calling</a> page for the most up-to-date information.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Objective: more reliably get structured data back from the model</p>
+<ul class="simple">
+<li><p>Create assistants that answer questions by calling external APIs (e.g. like ChatGPT Plugins)</p>
+<ul>
+<li><p>send_email(to: string, body: string)</p></li>
+<li><p>get_current_weather(location: string, unit: ‘celsius’ | ‘fahrenheit’)</p></li>
+</ul>
+</li>
+<li><p>Convert natural language into API calls</p>
+<ul>
+<li><p>get_customers(min_revenue: int, created_before: string, limit: int) from internal API</p></li>
+</ul>
+</li>
+<li><p>Extract structured data from text</p>
+<ul>
+<li><p>extract_data(name: string, birthday: string)</p></li>
+<li><p>sql_query(query: string)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="basics">
+<h2>Basics<a class="headerlink" href="#basics" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>USER</strong>: describe the function</p></li>
+<li><p><strong>USER</strong>: call the model with user query + function parameter</p></li>
+<li><p><strong>MODEL</strong>: choose to call one or more functions and generate a JSON object with function arguments</p></li>
+<li><p><strong>USER</strong>: call your function with the provided arguments</p></li>
+<li><p><strong>USER</strong>: call the model again with the function response in query</p></li>
+</ul>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h2>
+<p>Full detailed information about function-calling can be found in the OpenAI cookbook for <a class="reference external" href="https://cookbook.openai.com/examples/how_to_call_functions_with_chat_models">“How to call functions with chat models”</a>.</p>
+</section>
+<section id="flight-status-query-project">
+<h2>Flight Status Query Project<a class="headerlink" href="#flight-status-query-project" title="Link to this heading">#</a></h2>
+<p>We demonstrate how function-call can be adopted in this example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Step 0: Wrote helper function to get flight status</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c1"># Python code for flight status is adapted from </span>
+<span class="c1"># https://www.tutorialspoint.com/get-flight-status-using-python</span>
+<span class="c1">#</span>
+<span class="c1"># Note: Tracking is available for flights scheduled 3 days before or after today.</span>
+<span class="c1">#</span>
+<span class="k">def</span> <span class="nf">get_flight_status</span><span class="p">(</span><span class="n">airline_code</span><span class="p">,</span> <span class="n">flight_number</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://www.flightstats.com/v2/flight-tracker/</span><span class="si">{</span><span class="n">airline_code</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">flight_number</span><span class="si">}</span><span class="s2">?year=</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">&amp;month=</span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s2">&amp;date=</span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">html_data</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html_data</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+    <span class="n">statuses</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;text-helper__TextHelper-sc-8bko4a-0 feVjck&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">time_statuses</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;text-helper__TextHelper-sc-8bko4a-0 kbHzdx&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">statuses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;; Departing at &quot;</span> <span class="o">+</span> <span class="n">time_statuses</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;; Arriving at &quot;</span> <span class="o">+</span> <span class="n">time_statuses</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Step 1: We asked GPT model about flight status, supplying function name and details</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;gpt-3.5-turbo-0613&quot;</span><span class="p">,</span>
+  <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the flight status of UA 792 for Nov 12, 2023?&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="n">functions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_flight_status&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Get the current flight status&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;airline_code&quot;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Shorthand notation for airline, e.g. UA, AA&quot;</span>
+              <span class="p">},</span>
+              <span class="s2">&quot;flight_number&quot;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Flight number&quot;</span>
+              <span class="p">},</span>
+              <span class="s2">&quot;day&quot;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Day of the flight&quot;</span>
+              <span class="p">},</span>
+              <span class="s2">&quot;month&quot;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Month of the flight&quot;</span>
+              <span class="p">},</span>
+              <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Year of the flight&quot;</span>
+              <span class="p">},</span>
+            <span class="p">},</span>
+          <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;airline_code&quot;</span><span class="p">,</span><span class="s2">&quot;flight_number&quot;</span><span class="p">,</span><span class="s2">&quot;day&quot;</span><span class="p">,</span><span class="s2">&quot;month&quot;</span><span class="p">,</span><span class="s2">&quot;year&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NotFoundError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>   <span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;gpt-3.5-turbo-0613&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>   <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="p">{</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>       <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>       <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the flight status of UA 792 for Nov 12, 2023?&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="p">}</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>   <span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>   <span class="n">functions</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>       <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_flight_status&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>       <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Get the current flight status&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>       <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>           <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>           <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>               <span class="s2">&quot;airline_code&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>                   <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>                   <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Shorthand notation for airline, e.g. UA, AA&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>               <span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>               <span class="s2">&quot;flight_number&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>                   <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>                   <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Flight number&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>               <span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>               <span class="s2">&quot;day&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>                   <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span>                   <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Day of the flight&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>               <span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>               <span class="s2">&quot;month&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>                   <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>                   <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Month of the flight&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>               <span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>               <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>                   <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>                   <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Year of the flight&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span>               <span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span>             <span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span>           <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;airline_code&quot;</span><span class="p">,</span><span class="s2">&quot;flight_number&quot;</span><span class="p">,</span><span class="s2">&quot;day&quot;</span><span class="p">,</span><span class="s2">&quot;month&quot;</span><span class="p">,</span><span class="s2">&quot;year&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span>         <span class="p">}</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="p">}</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span>   <span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="nn">File ~/micromamba/envs/openai-helper/lib/python3.11/site-packages/openai/_utils/_utils.py:277,</span> in <span class="ni">required_args.&lt;locals&gt;.inner.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span>             <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Missing required argument: </span><span class="si">{</span><span class="n">quote</span><span class="p">(</span><span class="n">missing</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">276</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">277</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/micromamba/envs/openai-helper/lib/python3.11/site-packages/openai/resources/chat/completions.py:646,</span> in <span class="ni">Completions.create</span><span class="nt">(self, messages, model, frequency_penalty, function_call, functions, logit_bias, logprobs, max_tokens, n, parallel_tool_calls, presence_penalty, response_format, seed, service_tier, stop, stream, stream_options, temperature, tool_choice, tools, top_logprobs, top_p, user, extra_headers, extra_query, extra_body, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">612</span> <span class="nd">@required_args</span><span class="p">([</span><span class="s2">&quot;messages&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="s2">&quot;stream&quot;</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">613</span> <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">614</span>     <span class="bp">self</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">644</span>     <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Timeout</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">NotGiven</span> <span class="o">=</span> <span class="n">NOT_GIVEN</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">645</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ChatCompletion</span> <span class="o">|</span> <span class="n">Stream</span><span class="p">[</span><span class="n">ChatCompletionChunk</span><span class="p">]:</span>
+<span class="ne">--&gt; </span><span class="mi">646</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">647</span>         <span class="s2">&quot;/chat/completions&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">648</span>         <span class="n">body</span><span class="o">=</span><span class="n">maybe_transform</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">649</span>             <span class="p">{</span>
+<span class="g g-Whitespace">    </span><span class="mi">650</span>                 <span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="n">messages</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">651</span>                 <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">652</span>                 <span class="s2">&quot;frequency_penalty&quot;</span><span class="p">:</span> <span class="n">frequency_penalty</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">653</span>                 <span class="s2">&quot;function_call&quot;</span><span class="p">:</span> <span class="n">function_call</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">654</span>                 <span class="s2">&quot;functions&quot;</span><span class="p">:</span> <span class="n">functions</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">655</span>                 <span class="s2">&quot;logit_bias&quot;</span><span class="p">:</span> <span class="n">logit_bias</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">656</span>                 <span class="s2">&quot;logprobs&quot;</span><span class="p">:</span> <span class="n">logprobs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">657</span>                 <span class="s2">&quot;max_tokens&quot;</span><span class="p">:</span> <span class="n">max_tokens</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">658</span>                 <span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="n">n</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">659</span>                 <span class="s2">&quot;parallel_tool_calls&quot;</span><span class="p">:</span> <span class="n">parallel_tool_calls</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">660</span>                 <span class="s2">&quot;presence_penalty&quot;</span><span class="p">:</span> <span class="n">presence_penalty</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">661</span>                 <span class="s2">&quot;response_format&quot;</span><span class="p">:</span> <span class="n">response_format</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">662</span>                 <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="n">seed</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">663</span>                 <span class="s2">&quot;service_tier&quot;</span><span class="p">:</span> <span class="n">service_tier</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">664</span>                 <span class="s2">&quot;stop&quot;</span><span class="p">:</span> <span class="n">stop</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">665</span>                 <span class="s2">&quot;stream&quot;</span><span class="p">:</span> <span class="n">stream</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">666</span>                 <span class="s2">&quot;stream_options&quot;</span><span class="p">:</span> <span class="n">stream_options</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">667</span>                 <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="n">temperature</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">668</span>                 <span class="s2">&quot;tool_choice&quot;</span><span class="p">:</span> <span class="n">tool_choice</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">669</span>                 <span class="s2">&quot;tools&quot;</span><span class="p">:</span> <span class="n">tools</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">670</span>                 <span class="s2">&quot;top_logprobs&quot;</span><span class="p">:</span> <span class="n">top_logprobs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">671</span>                 <span class="s2">&quot;top_p&quot;</span><span class="p">:</span> <span class="n">top_p</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">672</span>                 <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">673</span>             <span class="p">},</span>
+<span class="g g-Whitespace">    </span><span class="mi">674</span>             <span class="n">completion_create_params</span><span class="o">.</span><span class="n">CompletionCreateParams</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">675</span>         <span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">676</span>         <span class="n">options</span><span class="o">=</span><span class="n">make_request_options</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">677</span>             <span class="n">extra_headers</span><span class="o">=</span><span class="n">extra_headers</span><span class="p">,</span> <span class="n">extra_query</span><span class="o">=</span><span class="n">extra_query</span><span class="p">,</span> <span class="n">extra_body</span><span class="o">=</span><span class="n">extra_body</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span>         <span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">679</span>         <span class="n">cast_to</span><span class="o">=</span><span class="n">ChatCompletion</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">680</span>         <span class="n">stream</span><span class="o">=</span><span class="n">stream</span> <span class="ow">or</span> <span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">681</span>         <span class="n">stream_cls</span><span class="o">=</span><span class="n">Stream</span><span class="p">[</span><span class="n">ChatCompletionChunk</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">682</span>     <span class="p">)</span>
+
+<span class="nn">File ~/micromamba/envs/openai-helper/lib/python3.11/site-packages/openai/_base_client.py:1266,</span> in <span class="ni">SyncAPIClient.post</span><span class="nt">(self, path, cast_to, body, options, files, stream, stream_cls)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1252</span> <span class="k">def</span> <span class="nf">post</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1253</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1254</span>     <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1261</span>     <span class="n">stream_cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">_StreamT</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1262</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResponseT</span> <span class="o">|</span> <span class="n">_StreamT</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1263</span>     <span class="n">opts</span> <span class="o">=</span> <span class="n">FinalRequestOptions</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1264</span>         <span class="n">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">json_data</span><span class="o">=</span><span class="n">body</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">to_httpx_files</span><span class="p">(</span><span class="n">files</span><span class="p">),</span> <span class="o">**</span><span class="n">options</span>
+<span class="g g-Whitespace">   </span><span class="mi">1265</span>     <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1266</span>     <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">ResponseT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">cast_to</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">stream</span><span class="p">,</span> <span class="n">stream_cls</span><span class="o">=</span><span class="n">stream_cls</span><span class="p">))</span>
+
+<span class="nn">File ~/micromamba/envs/openai-helper/lib/python3.11/site-packages/openai/_base_client.py:942,</span> in <span class="ni">SyncAPIClient.request</span><span class="nt">(self, cast_to, options, remaining_retries, stream, stream_cls)</span>
+<span class="g g-Whitespace">    </span><span class="mi">933</span> <span class="k">def</span> <span class="nf">request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">934</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">935</span>     <span class="n">cast_to</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">ResponseT</span><span class="p">],</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">940</span>     <span class="n">stream_cls</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">_StreamT</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">941</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResponseT</span> <span class="o">|</span> <span class="n">_StreamT</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">942</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">943</span>         <span class="n">cast_to</span><span class="o">=</span><span class="n">cast_to</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">944</span>         <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">945</span>         <span class="n">stream</span><span class="o">=</span><span class="n">stream</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">946</span>         <span class="n">stream_cls</span><span class="o">=</span><span class="n">stream_cls</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">947</span>         <span class="n">remaining_retries</span><span class="o">=</span><span class="n">remaining_retries</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">948</span>     <span class="p">)</span>
+
+<span class="nn">File ~/micromamba/envs/openai-helper/lib/python3.11/site-packages/openai/_base_client.py:1046,</span> in <span class="ni">SyncAPIClient._request</span><span class="nt">(self, cast_to, options, remaining_retries, stream, stream_cls)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1043</span>         <span class="n">err</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1045</span>     <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Re-raising status error&quot;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1046</span>     <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_status_error_from_response</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">response</span><span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1048</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_response</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span>     <span class="n">cast_to</span><span class="o">=</span><span class="n">cast_to</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1050</span>     <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1053</span>     <span class="n">stream_cls</span><span class="o">=</span><span class="n">stream_cls</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1054</span> <span class="p">)</span>
+
+<span class="ne">NotFoundError</span>: Error code: 404 - {&#39;error&#39;: {&#39;message&#39;: &#39;The model `gpt-3.5-turbo-0613` has been deprecated, learn more here: https://platform.openai.com/docs/deprecations&#39;, &#39;type&#39;: &#39;invalid_request_error&#39;, &#39;param&#39;: None, &#39;code&#39;: &#39;model_not_found&#39;}}
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Step 2: GPT responded with function call arguments. We parsed the response and ran our helper function</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="n">function_name</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">function_call</span><span class="o">.</span><span class="n">name</span>
+<span class="n">arguments</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">function_call</span><span class="o">.</span><span class="n">arguments</span>
+<span class="c1"># Read arguments to dictionary</span>
+<span class="n">arguments</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+<span class="c1"># Call helper function</span>
+<span class="n">function_response_msg</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()[</span><span class="n">function_name</span><span class="p">](</span><span class="n">arguments</span><span class="p">[</span><span class="s2">&quot;airline_code&quot;</span><span class="p">],</span> <span class="n">arguments</span><span class="p">[</span><span class="s2">&quot;flight_number&quot;</span><span class="p">],</span> <span class="n">arguments</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">],</span> <span class="n">arguments</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">],</span> <span class="n">arguments</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">function_response_msg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On time; Departing at 06:00 CST; Arriving at 09:06 EST
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Step 3: We added helper function output to GPT query and called GPT model for the final response</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response_2</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;gpt-3.5-turbo-0613&quot;</span><span class="p">,</span>
+  <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the flight status of UA 792 for Nov 12, 2023?&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_flight_status&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">function_response_msg</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="n">functions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_flight_status&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Get the flight status of flight for the specified date&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;airline_code&quot;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Shorthand notation for airline, e.g. UA, AA&quot;</span>
+              <span class="p">},</span>
+              <span class="s2">&quot;flight_number&quot;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Flight number&quot;</span>
+              <span class="p">},</span>
+              <span class="s2">&quot;day&quot;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Day of the flight&quot;</span>
+              <span class="p">},</span>
+              <span class="s2">&quot;month&quot;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Month of the flight&quot;</span>
+              <span class="p">},</span>
+              <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Year of the flight&quot;</span>
+              <span class="p">},</span>
+            <span class="p">},</span>
+          <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;airline_code&quot;</span><span class="p">,</span><span class="s2">&quot;flight_number&quot;</span><span class="p">,</span><span class="s2">&quot;day&quot;</span><span class="p">,</span><span class="s2">&quot;month&quot;</span><span class="p">,</span><span class="s2">&quot;year&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-8KWdNwNEKsRQDoXLJ6cnrYEBnnRau&#39;, choices=[Choice(finish_reason=&#39;stop&#39;, index=0, message=ChatCompletionMessage(content=&#39;The flight status of UA 792 for November 12, 2023, is on time. The flight is scheduled to depart at 06:00 CST and arrive at 09:06 EST.&#39;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1699902697, model=&#39;gpt-3.5-turbo-0613&#39;, object=&#39;chat.completion&#39;, system_fingerprint=None, usage=CompletionUsage(completion_tokens=42, prompt_tokens=150, total_tokens=192))
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Now GPT can tell you the flight status!</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">response_2</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The flight status of UA 792 for November 12, 2023, is on time. The flight is scheduled to depart at 06:00 CST and arrive at 09:06 EST.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics">Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flight-status-query-project">Flight Status Query Project</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kellogg Research Support
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

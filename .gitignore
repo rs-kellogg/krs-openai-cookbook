@@ -4,9 +4,9 @@
 # misc
 Papers/
 **/*.log
+
+# sensitive info
 **/.env
-**/openai.txt
-docs/_build
 
 # jupyterbook
 _build/**

@@ -1,0 +1,757 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Text Classification &#8212; Kellogg Research Support LLM Cookbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'text-classification';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="welcome.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Kellogg Research Support LLM Cookbook - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Kellogg Research Support LLM Cookbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="welcome.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Large Language Models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="llm-defined.html">Generative Pre-Trained Transformer (GPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm-use-cases.html">What can you do with GPT?</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">OpenAI</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="openai-setup.html">OpenAI Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openai-cli.html">OpenAI CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openai-api.html">OpenAI API</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rs-kellogg/krs-llm-cookbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rs-kellogg/krs-llm-cookbook/issues/new?title=Issue%20on%20page%20%2Ftext-classification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/text-classification.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Text Classification</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning-and-classification-tasks">Supervised learning and classification tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-walkthrough-labeling-sentiment-of-tweets-regarding-a-specific-event-or-hashtag">Code walkthrough: labeling sentiment of Tweets regarding a specific event or hashtag</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-the-right-prompt">Designing the right prompt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template">Prompt template</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-look-ahead-into-the-future-of-gpt-image-classification">A look ahead into the future of GPT: image classification</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="text-classification">
+<h1>Text Classification<a class="headerlink" href="#text-classification" title="Link to this heading">#</a></h1>
+<section id="supervised-learning-and-classification-tasks">
+<h2>Supervised learning and classification tasks<a class="headerlink" href="#supervised-learning-and-classification-tasks" title="Link to this heading">#</a></h2>
+<p>Let’s start by reviewing some of the basics of machine learning. Supervised learning is the process of training a model using labelled data to predict the same values on unlabelled data. There are two types of supervised learning problems: classification and regression. The former is the process of predicting a label that can be categorized into one of two or more categories while the latter predicts a continuous variable.</p>
+<img src="_images/supervised_learning.png" width="600pix">
+<p>Text classification is a supervised learning task specifically. Natural language processing (NLP) models would require pre-labelled classification of “documents” (e.g., any collection of text: a PDF, an article, a tweet) and the potentially painstaking process of feature engineering to train a model to output the correct classifcation of unlabelled documents.</p>
+<p>LLMs can replace other machine learning tasks for classification of texts. Unlike NLP models that require pre-labeled training data or a pre-defined vocabulary of words or n-grams (i.e., feature engineering), LLMs allow for zero-shot or few-shot learning to label text-like data.</p>
+<p>Examples:</p>
+<ol class="arabic simple">
+<li><p>sentiment analysis of Yelp reviews</p></li>
+<li><p>categorize customer support requests (refund, complaint, login issues, etc.)</p></li>
+<li><p>SPAM filter</p></li>
+<li><p>Hate speech or inappropriate speech detection on social media</p></li>
+<li><p>Topic identification of articles</p></li>
+</ol>
+</section>
+<section id="code-walkthrough-labeling-sentiment-of-tweets-regarding-a-specific-event-or-hashtag">
+<h2>Code walkthrough: labeling sentiment of Tweets regarding a specific event or hashtag<a class="headerlink" href="#code-walkthrough-labeling-sentiment-of-tweets-regarding-a-specific-event-or-hashtag" title="Link to this heading">#</a></h2>
+<p>For this example, we are going to assume that the Tweets (or x-eets?) have already been mined from the API. The actual process of obtaining/purchacing an API key and interacting with the API for Twitter/X is beyond the scope of this example.</p>
+<p>Below are some tweets pulled from around the time the season finale of Game of Thrones ended on May 19, 2019 that contain the hashtags #GOT or #GameOfThrones. This eight year HBO series was the cultural zeitgeist of the last decade and despite having fantastic reviews the first seven seasons, had a very controversial ending.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tweets</span> <span class="o">=</span> <span class="p">[</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Can’t believe #GameOfThrones is coming to an end 😭. </span>
+<span class="sd">This season will never take away how much love I have for this show man</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Last #GameOfThrones episode tonight.  Nervous I’ll be disappointed. </span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">The more I ponder, the more I ADORE WITH A PASSION #LadyOlenna of House Tyrell.</span>
+<span class="sd">This BADASSERY WILL NEVER BE SEEN AGAIN ON TV. #GameOfThronesFinale #GameofThrones</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">When you’re the only person at a GOT finale watch party </span>
+<span class="sd">that hasn’t seen one damn episode.  #me #GOT #sundaysareforwine</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">It wouldnt be so bad if they didnt make us wait an extra year. </span>
+<span class="sd">But they did and they fed us 6 episodes of TBS original programming quality poop! #GoT</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Based on the uproar over the ending I&#39;m glad I never watched #GameOfThrones</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Rewatching #Gameofthrones finale. </span>
+<span class="sd">Danny’s speech was so awesome. So badass. </span>
+<span class="sd">And the unsullied with the Uruk-hai spear chant. Dope.</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Bran=Dr Strange. Both knew what had to happen to save the world, </span>
+<span class="sd">but neither could interfere or it would disturb the timeline. </span>
+<span class="sd">They also used that knowledge to encourage certain situations to </span>
+<span class="sd">acquire the desired outcome. #GOT #AvengersEngame</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">,</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">“&#39;Game of Thrones&#39; and star Peter Dinklage are big wins for portrayal of little people.</span>
+
+<span class="sd">Little people have always been stereotyped in movies and TV. &quot;Game of Thrones,&quot; </span>
+<span class="sd">and the character Tyrion, is a breakthrough”</span>
+<span class="sd">https://usatoday.com/story/life/2019/05/19/game-of-thrones-peter-dinklage-hero-little-people/3736538002/</span>
+
+<span class="sd">#GameOfThrones  #RepresentationMatters</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What if we wanted to organize these tweets into different categories? For example, we can ask if the person writing the tweet is a die-hard fan of the show or someone who has never watched it. We can also ask if the person has a positive, negative, or neutral reaction to the series finale.</p>
+<p>We’ll use the <a class="reference external" href="https://python.langchain.com/docs/get_started/introduction">langchain</a> software in Python to build our prompts. Langchain can interface with a number of different LLMs (including OpenAi, which we’ll use in this example) and ways to chain together prompts to get the desired output.</p>
+<p>You can install the langchain module and its dependent openai module using pip.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>langchain
+pip<span class="w"> </span>install<span class="w"> </span>openai
+</pre></div>
+</div>
+<p>You will also want to create an environment variable containing your OpenAI API token.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>YOUR-TOKEN-HERE
+</pre></div>
+</div>
+<p>You can also do this in Python.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;YOUR TOKEN HERE&#39;</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="c1"># load the .env file containing your API key</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<section id="designing-the-right-prompt">
+<h3>Designing the right prompt<a class="headerlink" href="#designing-the-right-prompt" title="Link to this heading">#</a></h3>
+<p>We want to send a prompt to the AI that explains the task and the desired output. We may not need to be super precise when working with Chat GPT, but if we are working with code, we need to be more thoughtful about our design as we want a consistent output that won’t trip up in automation. Here are some helpful tips to keep in mind.</p>
+<ul class="simple">
+<li><p>Specify the output format: in this example, we want to classify the text into one of three categories of sentiments – positive, negative, or neutral. We could tell GPT to output one of those texts, or more simply, an integer coded to one of those values. Also, a single integer is one token and therefore the cheapest output the API can give us (remember that both input and output token counts contribute to the overall cost of prompts)! You may also want a Python list, tuple, or maybe even a JSON, CSV, or HTML file for more complex information. Any of these are possible: just be specific! You can also specify a limit on the number of output tokens when initializing the LLM. If you are asking for output in a coding language, you might want to also specify the version (i.e., Python 2 vs 3).</p></li>
+<li><p>Provide examples: Examples are the equivalent of providing a training set to supervised learning models; however, the list of examples does not nearly need to be as vast as a traditional training set. LLMs are pre-trained zero-shot learners, which means they can do a fairly good job at generating the desired output without the user needing to do any fine-tuning. However, providing a few examples of what the output should look like, or “few-shot learning”, can make the model much more reliable. I gave a single example and was able to get consistent results; but feel free to provide more.</p></li>
+</ul>
+</section>
+<section id="prompt-template">
+<h3>Prompt template<a class="headerlink" href="#prompt-template" title="Link to this heading">#</a></h3>
+<p>Langchain provides an easy way to design a prompt template we can use to enter multiple variables into the prompt so it can be used over and over again. In this case, the only variable we have is the tweet itself. We can enter that text into the prompt using f-strings in Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="n">template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">Classify the following tweet into one of the following categories:</span>
+
+<span class="s1">1. Positive </span>
+<span class="s1">2. Negative</span>
+<span class="s1">3. Neutral</span>
+
+<span class="s1">Return the answer as a number 1, 2, or 3.</span>
+
+<span class="s1">===</span>
+<span class="s1">Example:</span>
+<span class="s1">Tweet: The ending of Game of Thrones was so bad. I can&#39;t believe they did that to us.</span>
+
+<span class="s1">Result: 2</span>
+<span class="s1">===</span>
+
+<span class="s1">Here is the Tweet:</span>
+<span class="si">{tweet}</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">,</span>
+<span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tweet&#39;</span><span class="p">],</span><span class="n">output_parser</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1">## Note: langchain does allow for users to provide their own output parser class</span>
+<span class="c1">## inherited from a base class offered in the library. Designing an output parser</span>
+<span class="c1">## is beyond the scope of this work as it is more advanced Python coding. But those </span>
+<span class="c1">## who are familiar with object oriented programming should give it a try!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="s1"> Classify the following tweet into one of the following categories:</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="s1"> </span>
+<span class="s1">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span><span class="s1"> &#39;&#39;&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tweet&#39;</span><span class="p">],</span><span class="n">output_parser</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="c1">## Note: langchain does allow for users to provide their own output parser class</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="c1">## inherited from a base class offered in the library. Designing an output parser</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="c1">## is beyond the scope of this work as it is more advanced Python coding. But those </span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="c1">## who are familiar with object oriented programming should give it a try!</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;langchain&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can launch a chat model from OpenAI using langchain as well. Let’s use gpt-3.5-turbo with temperature=0 (no creativity) and max_tokens=1 (since we only want a single character output).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo&#39;</span><span class="p">,</span><span class="n">max_tokens</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we’ll simply loop over each tweet, insert it into the prompt, and then call the API to predict the sentiment. If we were doing this for several hundred or more tweets, we might want need to worry about managing timing limits on the number of calls we are allowed to make per minute/day.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sentiments</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweets</span><span class="p">:</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tweet</span><span class="o">=</span><span class="n">tweet</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+    <span class="n">sentiments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s ask GPT to print out all of the positive (1) tweets and negative (2) tweets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;These tweets are positive:&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">,</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sentiments</span><span class="p">,</span><span class="n">tweets</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=========================================&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;These tweets are negative:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">,</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sentiments</span><span class="p">,</span><span class="n">tweets</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>     
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>These tweets are positive:
+
+Can’t believe #GameOfThrones is coming to an end 😭. 
+This season will never take away how much love I have for this show man
+
+
+The more I ponder, the more I ADORE WITH A PASSION #LadyOlenna of House Tyrell.
+This BADASSERY WILL NEVER BE SEEN AGAIN ON TV. #GameOfThronesFinale #GameofThrones
+
+
+Rewatching #Gameofthrones finale. 
+Danny’s speech was so awesome. So badass. 
+And the unsullied with the Uruk-hai spear chant. Dope.
+
+=========================================
+These tweets are negative:
+
+Last #GameOfThrones episode tonight.  Nervous I’ll be disappointed. 
+
+
+It wouldnt be so bad if they didnt make us wait an extra year. 
+But they did and they fed us 6 episodes of TBS original programming quality poop! #GoT
+
+
+Based on the uproar over the ending I&#39;m glad I never watched #GameOfThrones
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can agree fairly well that these tweets do fall well into the sentiments predicted by GPT; however, we still don’t know the root cause of the sentiment. For example, are they positive about a particular character? Is their negativity focused specifically on the finale? These are answers that we could still extract from GPT. We just have to write a more directed prompt.</p>
+</section>
+</section>
+<section id="a-look-ahead-into-the-future-of-gpt-image-classification">
+<h2>A look ahead into the future of GPT: image classification<a class="headerlink" href="#a-look-ahead-into-the-future-of-gpt-image-classification" title="Link to this heading">#</a></h2>
+<p>While browsing Tweets, I noticed that many of them had most of the sentiment contained in the context of the image rather than the text itself.</p>
+<img src="_images/tyrion.png" width=500pix><p>Luckily, GPT 4 now has the ability to use static images (i.e., no videos or animated GIFs) as an input. Since this is such a new feature, we unfortunately do not have any examples to showcase the capabilities yet. Nonetheless, the ability to provide both text and images would greatly improve the predictability of AI model on sentiment analysis.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning-and-classification-tasks">Supervised learning and classification tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-walkthrough-labeling-sentiment-of-tweets-regarding-a-specific-event-or-hashtag">Code walkthrough: labeling sentiment of Tweets regarding a specific event or hashtag</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-the-right-prompt">Designing the right prompt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template">Prompt template</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-look-ahead-into-the-future-of-gpt-image-classification">A look ahead into the future of GPT: image classification</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kellogg Research Support
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
