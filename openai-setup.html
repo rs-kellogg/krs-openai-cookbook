@@ -393,7 +393,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chatgpt">ChatGPT</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#playground">Playground</a></li>
@@ -423,36 +422,11 @@ document.write(`
 </figcaption>
 </figure>
 </div>
-<section id="chatgpt">
-<h2>ChatGPT<a class="headerlink" href="#chatgpt" title="Link to this heading">#</a></h2>
-<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-<strong>ChatGPT</strong></div>
-<p class="sd-card-text"><a class="reference external" href="https://chat.openai.com/">ChatGPT</a> offers a fixed-cost way to try out capabilities. If you buy the <code class="docutils literal notranslate"><span class="pre">Plus</span></code> plan, you can use the most up-to-date models and features, and OpenAI not use your data for training. If you use the free option, your data can be used to improve their models.</p>
-</div>
-</div>
-<div class="admonition-plan admonition">
-<p class="admonition-title">Plan</p>
-<figure class="align-default" id="chatgpt-plan">
-<a class="reference internal image-reference" href="_images/chatgpt-plan.png"><img alt="_images/chatgpt-plan.png" src="_images/chatgpt-plan.png" style="width: 600px;" /></a>
-</figure>
-</div>
-<div class="admonition-capabilities admonition">
-<p class="admonition-title">Capabilities</p>
-<figure class="align-default" id="chatgpt-settings">
-<a class="reference internal image-reference" href="_images/chatgpt-settings.png"><img alt="_images/chatgpt-settings.png" src="_images/chatgpt-settings.png" style="width: 600px;" /></a>
-</figure>
-</div>
-</section>
 <section id="api">
 <h2>API<a class="headerlink" href="#api" title="Link to this heading">#</a></h2>
-<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-<strong>OpenAI API</strong></div>
-<p class="sd-card-text">The <a class="reference external" href="https://platform.openai.com/">OpenAI API</a> offers pay as you go service that allows you to write code and automate your interaction with GPT resources. This is the way to go to scale up your jobs to hundreds or thousands of inputs.</p>
-</div>
+<div class="note admonition">
+<p class="admonition-title">OpenAI API</p>
+<p>The <a class="reference external" href="https://platform.openai.com/">OpenAI API</a> offers pay as you go service that allows you to write code and automate your interaction with GPT resources. This is the way to go to scale up your jobs to hundreds or thousands of inputs.</p>
 </div>
 <div class="admonition-platform-offerings admonition">
 <p class="admonition-title">Platform Offerings</p>
@@ -541,7 +515,7 @@ Steps</div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9t2frvCuWKfgOFNNC4RJ21L1f9VG5&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.\n\nHere are some sensations and considerations I experience when sharing a space with a lion:\n\n1. **Respect for Power**: The immediate recognition of the lion&#39;s strength and potential for danger is palpable. These creatures are apex predators, equipped with powerful muscles, sharp teeth, and claws capable of inflicting serious harm. One wrong move could elicit an aggressive response, so I always maintain a posture of respect and caution.\n\n2. **Understanding Behavior**: My background in zoology helps me to read subtle cues in the lion&#39;s body language, vocalizations, and behavior. This understanding is crucial in predicting their actions and ensuring that I react appropriately to maintain control and defuse any potential threats.\n\n3. **Calm and Control**: It&#39;s vital to remain calm and assertive. Lions, like many animals, can sense fear and uncertainty, which can affect their reaction&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722905347, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9t2hSLnFpyOuy8Ey2UlyE3prebS3H&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.\n\nThe presence of a lion is awe-inspiring. It is a majestic and formidable creature, exuding power and primal energy. The sheer size and muscular build of the lion are humbling, and its presence commands respect. The sounds a lion makes—whether a low growl or a powerful roar—can resonate through your body, reminding you of the animal&#39;s dominance and strength.\n\nThe atmosphere in the room may vary depending on the lion&#39;s mood and level of training. A well-trained lion that has been habituated to human presence may be calm and somewhat predictable, exhibiting less aggressive behavior if it is used to the routines involved in training or performance. However, it is critical to remember that lions, regardless of training, are wild animals with instincts that can kick in at any moment.\n\nWhen interacting with a lion, one must pay close attention to the animal&#39;s body&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722905446, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
 </pre></div>
 </div>
 </div>
@@ -564,13 +538,11 @@ Steps</div>
 </div>
 <p><span class="pasted-text">Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal’s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.
 
-Here are some sensations and considerations I experience when sharing a space with a lion:
+The presence of a lion is awe-inspiring. It is a majestic and formidable creature, exuding power and primal energy. The sheer size and muscular build of the lion are humbling, and its presence commands respect. The sounds a lion makes—whether a low growl or a powerful roar—can resonate through your body, reminding you of the animal’s dominance and strength.
 
-1. **Respect for Power**: The immediate recognition of the lion’s strength and potential for danger is palpable. These creatures are apex predators, equipped with powerful muscles, sharp teeth, and claws capable of inflicting serious harm. One wrong move could elicit an aggressive response, so I always maintain a posture of respect and caution.
+The atmosphere in the room may vary depending on the lion’s mood and level of training. A well-trained lion that has been habituated to human presence may be calm and somewhat predictable, exhibiting less aggressive behavior if it is used to the routines involved in training or performance. However, it is critical to remember that lions, regardless of training, are wild animals with instincts that can kick in at any moment.
 
-2. **Understanding Behavior**: My background in zoology helps me to read subtle cues in the lion’s body language, vocalizations, and behavior. This understanding is crucial in predicting their actions and ensuring that I react appropriately to maintain control and defuse any potential threats.
-
-3. **Calm and Control**: It’s vital to remain calm and assertive. Lions, like many animals, can sense fear and uncertainty, which can affect their reaction</span></p>
+When interacting with a lion, one must pay close attention to the animal’s body</span></p>
 <div class="admonition-usage-https-platform-openai-com-usage admonition">
 <p class="admonition-title"><a class="reference external" href="https://platform.openai.com/usage">Usage</a></p>
 <figure class="align-default" id="openai-billing">
@@ -691,7 +663,6 @@ Here are some sensations and considerations I experience when sharing a space wi
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chatgpt">ChatGPT</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api">API</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#playground">Playground</a></li>
