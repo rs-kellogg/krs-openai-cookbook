@@ -427,8 +427,17 @@ document.write(`
 <a class="reference internal image-reference" href="_images/openai-platform.png"><img alt="_images/openai-platform.png" src="_images/openai-platform.png" style="width: 600px;" /></a>
 </figure>
 </div>
-<div class="admonition-create-an-api-key-https-platform-openai-com-api-keys admonition">
-<p class="admonition-title">3. <a class="reference external" href="https://platform.openai.com/api-keys">Create an API key</a></p>
+<div class="note admonition">
+<p class="admonition-title">1. Sign up</p>
+<p><a class="reference external" href="https://platform.openai.com/docs/overview">Create an account</a></p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">2. Pay</p>
+<p><a class="reference external" href="https://platform.openai.com/settings/organization/general">Add money to your account</a></p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">3. Authenticate</p>
+<p><a class="reference internal" href="#(https://platform.openai.com/api-keys)"><span class="xref myst">Create an API key token</span></a></p>
 <figure class="align-default" id="openai-keys">
 <a class="reference internal image-reference" href="_images/openai-api-keys.png"><img alt="_images/openai-api-keys.png" src="_images/openai-api-keys.png" style="width: 600px;" /></a>
 </figure>
@@ -474,6 +483,13 @@ OPENAI_PROJ_ID: proj_...
 </div>
 </div>
 </div>
+<div class="note admonition">
+<p class="admonition-title">4. Install a client</p>
+<p><a class="reference external" href="https://platform.openai.com/docs/quickstart">The Python client is the most common choice</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>openai
+</pre></div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span> <span class="c1"># pip install openai</span>
@@ -504,7 +520,7 @@ OPENAI_PROJ_ID: proj_...
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9t4G8x4BIwgF2AeZzBRBET2ZLMral&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.\n\nThe presence of a lion is awe-inspiring. It is a majestic and formidable creature, exuding power and primal energy. The sheer size and muscular build of the lion are humbling, and its presence commands respect. The sounds a lion makes—whether a low growl or a powerful roar—can resonate through your body, reminding you of the animal&#39;s dominance and strength.\n\nThe atmosphere in the room may vary depending on the lion&#39;s mood and level of training. A well-trained lion that has been habituated to human presence may be calm and somewhat predictable, exhibiting less aggressive behavior if it is used to the routines involved in training or performance. However, it is critical to remember that lions, regardless of training, are wild animals with instincts that can kick in at any moment.\n\nWhen interacting with a lion, one must pay close attention to the animal&#39;s body&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722911440, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ChatCompletion(id=&#39;chatcmpl-9t4oM8hIHfu3iAXDJk5EAgohcmemt&#39;, choices=[Choice(finish_reason=&#39;length&#39;, index=0, logprobs=None, message=ChatCompletionMessage(content=&quot;Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal&#39;s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.\n\nHere are some sensations and considerations I experience when sharing a space with a lion:\n\n1. **Respect for Power**: The immediate recognition of the lion&#39;s strength, agility, and potential for danger is at the forefront. Adult male lions can weigh up to 250 kilograms (550 pounds) with powerful jaws and sharp claws.\n\n2. **Awareness of Behavioral Cues**: I must constantly monitor the lion&#39;s body language, which conveys its emotional state and intentions. Signs of agitation, such as tail flicking, ear positioning, growling, or fixated staring, require immediate attention and appropriate responses.\n\n3. **Adrenaline Rush**: The presence of such a formidable predator can naturally trigger an adrenaline rush, leading to heightened senses and quick reflexes—both of which are crucial for maintaining control of the situation.\n\n4. **Controlled Environment**: Ens&quot;, role=&#39;assistant&#39;, function_call=None, tool_calls=None))], created=1722913562, model=&#39;gpt-4-1106-preview&#39;, object=&#39;chat.completion&#39;, service_tier=None, system_fingerprint=None, usage=CompletionUsage(completion_tokens=256, prompt_tokens=53, total_tokens=309))
 </pre></div>
 </div>
 </div>
@@ -527,27 +543,25 @@ OPENAI_PROJ_ID: proj_...
 </div>
 <p><span class="pasted-text">Being in the same room as a lion is an exhilarating and intense experience, requiring a deep understanding of lion behavior, a high level of alertness, and an unwavering respect for the animal’s power and instincts. As a lion tamer with a Ph.D. in zoology and an expertise in large cat psychology, I approach interactions with lions with a scientific mindset while prioritizing safety and ethical treatment.
 
-The presence of a lion is awe-inspiring. It is a majestic and formidable creature, exuding power and primal energy. The sheer size and muscular build of the lion are humbling, and its presence commands respect. The sounds a lion makes—whether a low growl or a powerful roar—can resonate through your body, reminding you of the animal’s dominance and strength.
+Here are some sensations and considerations I experience when sharing a space with a lion:
 
-The atmosphere in the room may vary depending on the lion’s mood and level of training. A well-trained lion that has been habituated to human presence may be calm and somewhat predictable, exhibiting less aggressive behavior if it is used to the routines involved in training or performance. However, it is critical to remember that lions, regardless of training, are wild animals with instincts that can kick in at any moment.
+1. **Respect for Power**: The immediate recognition of the lion’s strength, agility, and potential for danger is at the forefront. Adult male lions can weigh up to 250 kilograms (550 pounds) with powerful jaws and sharp claws.
 
-When interacting with a lion, one must pay close attention to the animal’s body</span></p>
-<div class="admonition-usage-https-platform-openai-com-usage admonition">
-<p class="admonition-title"><a class="reference external" href="https://platform.openai.com/usage">Usage</a></p>
+2. **Awareness of Behavioral Cues**: I must constantly monitor the lion’s body language, which conveys its emotional state and intentions. Signs of agitation, such as tail flicking, ear positioning, growling, or fixated staring, require immediate attention and appropriate responses.
+
+3. **Adrenaline Rush**: The presence of such a formidable predator can naturally trigger an adrenaline rush, leading to heightened senses and quick reflexes—both of which are crucial for maintaining control of the situation.
+
+4. **Controlled Environment**: Ens</span></p>
+<div class="admonition-check-usage-https-platform-openai-com-usage admonition">
+<p class="admonition-title"><a class="reference external" href="https://platform.openai.com/usage">5. Check usage</a></p>
 <figure class="align-default" id="openai-billing">
 <a class="reference internal image-reference" href="_images/openai-api-usage.png"><img alt="_images/openai-api-usage.png" src="_images/openai-api-usage.png" style="width: 600px;" /></a>
 </figure>
 </div>
-<div class="admonition-limits-https-platform-openai-com-account-limits admonition">
-<p class="admonition-title"><a class="reference external" href="https://platform.openai.com/account/limits">Limits</a></p>
+<div class="admonition-check-limits-https-platform-openai-com-account-limits admonition">
+<p class="admonition-title"><a class="reference external" href="https://platform.openai.com/account/limits">6. Check limits</a></p>
 <figure class="align-default" id="openai-limits">
 <a class="reference internal image-reference" href="_images/openai-api-limits.png"><img alt="_images/openai-api-limits.png" src="_images/openai-api-limits.png" style="width: 600px;" /></a>
-</figure>
-</div>
-<div class="admonition-billing-https-platform-openai-com-account-billing-overview admonition">
-<p class="admonition-title"><a class="reference external" href="https://platform.openai.com/account/billing/overview">Billing</a></p>
-<figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="_images/openai-api-billing.png"><img alt="_images/openai-api-billing.png" src="_images/openai-api-billing.png" style="width: 600px;" /></a>
 </figure>
 </div>
 </section>
