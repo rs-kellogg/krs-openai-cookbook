@@ -38,8 +38,7 @@ name: testing
 :::
 
 :::{admonition} Moving forward
-:class: warning
-- This is a living document, we will be updating it with new topics regularly
+:class: important
+- This is a living document, we will be updating it regularly
 - We will also be adding code to the attached `openai-helper` package
-- Come to us for help during office hours at 5424, or send us an email us at <url><p><a href="mailto:rs@kellogg.northwestern.edu">rs@kellogg.northwestern.edu</a></p>
 :::
