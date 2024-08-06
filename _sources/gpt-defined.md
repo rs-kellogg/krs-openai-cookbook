@@ -1,7 +1,7 @@
 # Generative Pre-Trained Transformer (GPT)
 
 :::{admonition} OpenAI's GPT-series are Large Language Models
-:class: note
+:class: tip
 Let's break down these terms in reverse order:
 
 - `Language Models`
@@ -25,7 +25,7 @@ A `Language Model` (LM) is a model that assigns probabilities to sequences of wo
 
 ```{figure} ./images/lm-hist.png
 ---
-width: 600px
+width: 800px
 name: lm-hist
 ---
 [Evolution of language models over time](https://learning.oreilly.com/library/view/developing-apps-with/9781098152475/ch01.html#understanding_the_transformer_architecture_and_its)
@@ -76,29 +76,6 @@ name: attention
 
 :::{admonition} **Generative**
 :class: tip
-`Generative` models that generate samples from the sample space they are trained on. Vanilla pre-trained models just do next word prediction (OpenAI calls these "GPT base"). These can be useful for some tasks, such as speech recognition and predictive text completion. The assistant-style models we are more used to using are foundation models that have been further trained via supervised fine-tuning and reinforcement learning from human feedback (RLHF) to behave in a useful and safe manner, for example by responding to questions with answers like a chat assistant.
+`Generative` models are models that create content as output, in this case linguistic content. Vanilla pre-trained generative models do simple next word prediction (OpenAI calls these "GPT base"). They predict the most likely next word in a sequence. These can be useful for some tasks, such as speech recognition and predictive text completion. The assistant-style models we are more accustomed to using are models that have been further trained via supervised fine-tuning and reinforcement learning from human feedback (RLHF) to behave in a useful and safe manner, for example by responding to questions with answers like an assistant.
 :::
-
-:::{card} [OpenAI](https://en.wikipedia.org/wiki/OpenAI):
-
-> OpenAI is an American artificial intelligence (AI) organization consisting of the non-profit OpenAI, Inc.[4] registered in Delaware and its for-profit subsidiary corporation OpenAI Global, LLC.[5] OpenAI researches artificial intelligence with the declared intention of developing "safe and beneficial" artificial general intelligence, which it defines as "highly autonomous systems that outperform humans at most economically valuable work".[6]
-
-> OpenAI was founded in 2015 by Ilya Sutskever, Greg Brockman, Trevor Blackwell, Vicki Cheung, Andrej Karpathy, Durk Kingma, Jessica Livingston, John Schulman, Pamela Vagata, and Wojciech Zaremba, with Sam Altman and Elon Musk serving as the initial board members.Microsoft provided OpenAI Global LLC with a \$1 billion investment in 2019 and a \$10 billion investment in 2023.
-:::
-
-```{figure} ./images/model-zoo.png
----
-width: 600px
-name: model-zoo
----
-[Model Zoo](https://arxiv.org/abs/2303.18223)
-```
-
-```{figure} ./images/openai-llm-history.png
----
-width: 600px
-name: openai-hist
----
-[GPT Generations](https://learning.oreilly.com/library/view/developing-apps-with/9781098152475/ch01.html#understanding_the_transformer_architecture_and_its)
-```
 

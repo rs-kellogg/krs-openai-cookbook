@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Choosing Models" href="choosing_models.html" />
-    <link rel="prev" title="Workshop" href="introduction.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,7 +181,7 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Large Language Models</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Workshop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Generative Pre-Trained Transformer (GPT)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="choosing_models.html">Choosing Models</a></li>
 </ul>
@@ -252,7 +252,7 @@
       
       
       
-      <li><a href="https://github.com/rs-kellogg/krs-llm-cookbook" target="_blank"
+      <li><a href="https://github.com/rs-kellogg/krs-openai-cookbook" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -269,7 +269,7 @@
       
       
       
-      <li><a href="https://github.com/rs-kellogg/krs-llm-cookbook/issues/new?title=Issue%20on%20page%20%2Fgpt-defined.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/rs-kellogg/krs-openai-cookbook/issues/new?title=Issue%20on%20page%20%2Fgpt-defined.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -397,7 +397,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="generative-pre-trained-transformer-gpt">
 <h1>Generative Pre-Trained Transformer (GPT)<a class="headerlink" href="#generative-pre-trained-transformer-gpt" title="Link to this heading">#</a></h1>
-<div class="note admonition">
+<div class="tip admonition">
 <p class="admonition-title">OpenAI’s GPT-series are Large Language Models</p>
 <p>Let’s break down these terms in reverse order:</p>
 <ul class="simple">
@@ -422,7 +422,7 @@ document.write(`
 </div>
 </div>
 <figure class="align-default" id="lm-hist">
-<a class="reference internal image-reference" href="_images/lm-hist.png"><img alt="_images/lm-hist.png" src="_images/lm-hist.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/lm-hist.png"><img alt="_images/lm-hist.png" src="_images/lm-hist.png" style="width: 800px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1 </span><span class="caption-text"><a class="reference external" href="https://learning.oreilly.com/library/view/developing-apps-with/9781098152475/ch01.html#understanding_the_transformer_architecture_and_its">Evolution of language models over time</a></span><a class="headerlink" href="#lm-hist" title="Link to this image">#</a></p>
 </figcaption>
@@ -462,32 +462,8 @@ document.write(`
 </div>
 <div class="tip admonition">
 <p class="admonition-title"><strong>Generative</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">Generative</span></code> models that generate samples from the sample space they are trained on. Vanilla pre-trained models just do next word prediction (OpenAI calls these “GPT base”). These can be useful for some tasks, such as speech recognition and predictive text completion. The assistant-style models we are more used to using are foundation models that have been further trained via supervised fine-tuning and reinforcement learning from human feedback (RLHF) to behave in a useful and safe manner, for example by responding to questions with answers like a chat assistant.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Generative</span></code> models are models that create content as output, in this case linguistic content. Vanilla pre-trained generative models do simple next word prediction (OpenAI calls these “GPT base”). They predict the most likely next word in a sequence. These can be useful for some tasks, such as speech recognition and predictive text completion. The assistant-style models we are more accustomed to using are models that have been further trained via supervised fine-tuning and reinforcement learning from human feedback (RLHF) to behave in a useful and safe manner, for example by responding to questions with answers like an assistant.</p>
 </div>
-<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-<a class="reference external" href="https://en.wikipedia.org/wiki/OpenAI">OpenAI</a>:</div>
-<blockquote>
-<div><p class="sd-card-text">OpenAI is an American artificial intelligence (AI) organization consisting of the non-profit OpenAI, Inc.[4] registered in Delaware and its for-profit subsidiary corporation OpenAI Global, LLC.[5] OpenAI researches artificial intelligence with the declared intention of developing “safe and beneficial” artificial general intelligence, which it defines as “highly autonomous systems that outperform humans at most economically valuable work”.[6]</p>
-</div></blockquote>
-<blockquote>
-<div><p class="sd-card-text">OpenAI was founded in 2015 by Ilya Sutskever, Greg Brockman, Trevor Blackwell, Vicki Cheung, Andrej Karpathy, Durk Kingma, Jessica Livingston, John Schulman, Pamela Vagata, and Wojciech Zaremba, with Sam Altman and Elon Musk serving as the initial board members.Microsoft provided OpenAI Global LLC with a $1 billion investment in 2019 and a $10 billion investment in 2023.</p>
-</div></blockquote>
-</div>
-</div>
-<figure class="align-default" id="model-zoo">
-<a class="reference internal image-reference" href="_images/model-zoo.png"><img alt="_images/model-zoo.png" src="_images/model-zoo.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text"><a class="reference external" href="https://arxiv.org/abs/2303.18223">Model Zoo</a></span><a class="headerlink" href="#model-zoo" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="openai-hist">
-<a class="reference internal image-reference" href="_images/openai-llm-history.png"><img alt="_images/openai-llm-history.png" src="_images/openai-llm-history.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text"><a class="reference external" href="https://learning.oreilly.com/library/view/developing-apps-with/9781098152475/ch01.html#understanding_the_transformer_architecture_and_its">GPT Generations</a></span><a class="headerlink" href="#openai-hist" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
 </section>
 
     <script type="text/x-thebe-config">
@@ -526,7 +502,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Workshop</p>
+        <p class="prev-next-title">Introduction</p>
       </div>
     </a>
     <a class="right-next"
