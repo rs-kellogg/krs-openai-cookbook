@@ -25,7 +25,7 @@ A `Language Model` (LM) is a model that assigns probabilities to sequences of wo
 
 ```{figure} ./images/lm-hist.png
 ---
-width: 600px
+width: 800px
 name: lm-hist
 ---
 [Evolution of language models over time](https://learning.oreilly.com/library/view/developing-apps-with/9781098152475/ch01.html#understanding_the_transformer_architecture_and_its)
