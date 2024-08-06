@@ -1,1 +1,1 @@
-# ocr-tools
+# openai-helper
