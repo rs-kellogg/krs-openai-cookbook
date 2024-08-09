@@ -14,7 +14,7 @@ classifiers = [
 ]
 dynamic = ["version", "description"]
 dependencies = [
-    "typer[all]",
+    "typer",
     "typer-cli",
     "pyyaml", 
     "pandas",
@@ -24,11 +24,13 @@ dependencies = [
     "tenacity",
     "PyMuPDF",
     "datasets",
-    "pytest"
+    "pytest",
+    "ipyleaflet",
+    "leafmap",
 ]
 
 [project.urls]
-Home = "https://github.com/rs-kellogg/krs-llm-cookbook"
+Home = "https://github.com/rs-kellogg/krs-openai-cookbook"
 
 [project.optional-dependencies]
 test = [
@@ -48,6 +50,9 @@ include-package-data = true
 [tool.setuptools.packages.find]
 namespaces = true
 where = ["openaihelper"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["openaihelper"]
 
 [project.scripts]
 openaihelper = "openaihelper.cli:app"
