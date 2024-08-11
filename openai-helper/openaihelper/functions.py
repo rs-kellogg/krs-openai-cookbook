@@ -80,22 +80,3 @@ def count_tokens(text: str, encoding_name: str) -> int:
 def validate_result(result: str) -> bool:
     assert result is not None
     return True
-
-
-# -----------------------------------------------------------------------------
-def text2speech(client, text: str, model: str = "tts-1", voice: str = "alloy"):
-    response = client.audio.speech.create(
-        model=model,
-        voice=voice,
-        input=text,
-    )
-    return response
-
-
-# -----------------------------------------------------------------------------
-def speech2text(client, audio_file: str, model: str = "whisper-1"):
-    response = client.audio.transcriptions.create(
-        model=model,
-        file=audio_file,
-    )
-    return response
