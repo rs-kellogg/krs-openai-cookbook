@@ -17,9 +17,12 @@ from pathlib import Path
 from typing import Optional
 from dotenv import load_dotenv
 from rich import console as cons
+from importlib import resources
 from tenacity import wait_random_exponential
 
 from openaihelper import functions as F
+from openaihelper import data
+from openaihelper import __app_name__, __version__
 
 # -----------------------------------------------------------------------------
 # setup
@@ -28,25 +31,41 @@ from openaihelper import functions as F
 # load environment variables
 load_dotenv()
 
-# setup the typer app
-app = typer.Typer()
+# load in the configuration file
+with resources.path(data, "config.yml") as path:
+    CONFIG_FILE_PATH = Path(path)
+    CONFIG_FILE_PATH.touch(exist_ok=True)
+
+with open(CONFIG_FILE_PATH) as conf_file:
+    CONFIG = yaml.load(conf_file, Loader=yaml.FullLoader)
+
+# setup logging
+logging.config.dictConfig(CONFIG["logging"])
+logger = logging.getLogger(__name__)
 
 # setup the rich console
 console = cons.Console(style="green on black")
 
-# load in the configuration file
-dir_path = Path(os.path.dirname(os.path.realpath(__file__)))
-with open(dir_path / "config.yaml") as f:
-    config = yaml.safe_load(f.read())
+# setup the typer app
+app = typer.Typer()
 
-# setup logging
-logging.config.dictConfig(config["logging"])
-logger = logging.getLogger(__name__)
+# setup the openai client
+client = openai.OpenAI(
+    organization=os.environ["OPENAI_ORG_ID"],
+    project=os.environ["OPENAI_PROJ_ID"],
+    api_key=os.environ["OPENAI_API_KEY"],
+)
 
 
 # -----------------------------------------------------------------------------
 # helper functions
 # -----------------------------------------------------------------------------
+def _version_callback(value: bool) -> None:
+    if value:
+        console.print(f"[blue]version: {__app_name__} v{__version__}")
+        raise typer.Exit()
+
+
 def check_args(
     data_file_path: Path,
     config_file_path: Path,
@@ -61,6 +80,28 @@ def check_args(
 # -----------------------------------------------------------------------------
 # commands
 # -----------------------------------------------------------------------------
+
+
+# -----------------------------------------------------------------------------
+@app.callback()
+def main(
+    version: Optional[bool] = typer.Option(
+        None,
+        "--version",
+        "-v",
+        help="Show the application's version and exit.",
+        callback=_version_callback,
+        is_eager=True,
+    )
+) -> Optional[bool]:
+    return version
+
+
+# -----------------------------------------------------------------------------
+@app.command()
+def config() -> None:
+    console.print(f"[orange1]{CONFIG_FILE_PATH}")
+    console.print(f"[green]{CONFIG}")
 
 
 # -----------------------------------------------------------------------------
@@ -169,7 +210,6 @@ def complete_prompt(
 
     with open(f"{out}/{data_file_path.stem}_responses.csv", "a") as out_csv:
         writer = csv.writer(out_csv)
-        client = openai.OpenAI()
 
         for i in tqdm(range(len(texts))):
             # check if the text is too long
