@@ -5,20 +5,42 @@ import openai
 import csv
 import json
 import logging
+import logging.config
 from typing import Optional
 import fitz
 from rich import console as cons
+from dotenv import load_dotenv
 from tenacity import wait_random_exponential
 from openaihelper import functions as F
 import typer
+import yaml
+import os
+
+# -----------------------------------------------------------------------------
+# setup
+# -----------------------------------------------------------------------------
+
+# load environment variables
+load_dotenv()
+
+# setup the typer app
+app = typer.Typer()
+
+# setup the rich console
+console = cons.Console(style="green on black")
+
+# load in the configuration file
+dir_path = Path(os.path.dirname(os.path.realpath(__file__)))
+with open(dir_path / "config.yaml") as f:
+    config = yaml.safe_load(f.read())
+
+# setup logging
+logging.config.dictConfig(config["logging"])
+logger = logging.getLogger(__name__)
 
 
 # -----------------------------------------------------------------------------
-console = cons.Console(style="green on black")
-
-logging.basicConfig(filename="openai-helper.log", encoding="utf-8", level=logging.INFO)
-
-
+# helper functions
 # -----------------------------------------------------------------------------
 def check_args(
     data_file_path: Path,
@@ -32,16 +54,12 @@ def check_args(
 
 
 # -----------------------------------------------------------------------------
-app = typer.Typer()
-if __name__ == "__main__":
-    app()
-
-
+# commands
 # -----------------------------------------------------------------------------
 @app.command()
 def text2speech(
     in_dir: Path = typer.Argument(..., help="Path to input text files"),
-    out_dir: Optional[Path] = typer.Option(
+    out: Optional[Path] = typer.Option(
         Path("."),
         "--dir",
         help="The directory where the audio files will be created.",
@@ -53,7 +71,7 @@ def text2speech(
     client = openai.OpenAI()
     for file in in_dir.glob("*.txt"):
         console.print(f"processing text file: {file.name}")
-        speech_file_path = out_dir / f"{file.stem}.mp3"
+        speech_file_path = out / f"{file.stem}.mp3"
         response = F.text2speech(client, file.read_text())
         response.stream_to_file(speech_file_path)
 
@@ -62,7 +80,7 @@ def text2speech(
 @app.command()
 def speech2text(
     in_dir: Path = typer.Argument(..., help="Path to input audio files"),
-    out_dir: Optional[Path] = typer.Option(
+    out: Optional[Path] = typer.Option(
         Path("."),
         "--dir",
         help="The directory where the text files will be created.",
@@ -74,7 +92,7 @@ def speech2text(
     client = openai.OpenAI()
     for file in in_dir.glob("*.mp3"):
         console.print(f"processing audio file: {file.name}")
-        text_file_path = out_dir / f"{file.stem}.txt"
+        text_file_path = out / f"{file.stem}.txt"
         response = F.speech2text(client, file)
         text_file_path.write_text(response.text)
 
@@ -83,28 +101,28 @@ def speech2text(
 @app.command()
 def pdf2text(
     in_dir: Path = typer.Argument(..., help="Path to input PDF files"),
-    out_dir: Optional[Path] = typer.Option(
+    out: Optional[Path] = typer.Option(
         Path("."),
         "--dir",
         help="The directory where the extracted output files will be created.",
     ),
-    start_page: Optional[int] = typer.Option(0, help="Start page"),
-    end_page: Optional[int] = typer.Option(10_000, help="End page"),
+    start: Optional[int] = typer.Option(0, help="Start page"),
+    end: Optional[int] = typer.Option(10_000, help="End page"),
 ):
     """
     Extract text from a collection of PDF files and write each output to a text file.
     """
-    assert end_page >= start_page
-    if not out_dir.exists():
-        out_dir.mkdir(parents=True)
+    assert end >= start
+    if not out.exists():
+        out.mkdir(parents=True)
 
     for pdf in in_dir.glob("*.pdf"):
         console.print(f"processing pdf file: {pdf.name}")
         logging.info(f"extracting text from: {pdf.name}")
         try:
             doc = fitz.open(pdf)
-            textfile = out_dir / f"{pdf.stem}.txt"
-            pages = [page for page in doc if start_page <= page.number <= end_page]
+            textfile = out / f"{pdf.stem}.txt"
+            pages = [page for page in doc if start <= page.number <= end]
             textfile.write_text(chr(12).join([page.get_text(sort=True) for page in pages]))
         except Exception as e:
             logger.error(f"exception: {type(e)}: {e}")
@@ -116,12 +134,12 @@ def pdf2text(
 def count_tokens(
     data_file_path: Path = typer.Argument(..., help="Data file path name"),
     config_file_path: Path = typer.Argument(..., help="Config file path name"),
-    outdir: Path = typer.Option(Path("."), help="Output directory"),
+    out: Path = typer.Option(Path("."), help="Output directory"),
 ):
     """
     Count tokens in a data file and write output to a csv file.
     """
-    check_args(data_file_path, config_file_path, outdir)
+    check_args(data_file_path, config_file_path, out)
 
     # Read config file
     config = F.config(config_file_path)
@@ -136,7 +154,7 @@ def count_tokens(
     ids = list(df["id"])
 
     # Count tokens and write results to csv file
-    out_csv = open(f"{outdir}/{data_file_path.stem}_counts.csv", "a")
+    out_csv = open(f"{out}/{data_file_path.stem}_counts.csv", "a")
     writer = csv.writer(out_csv)
     writer.writerow(["id", "count"])
     for i in tqdm(range(len(texts))):
@@ -152,12 +170,12 @@ def count_tokens(
 def complete_prompt(
     data_file_path: Path = typer.Argument(..., help="Data file path name"),
     config_file_path: Path = typer.Argument(..., help="Config file path name"),
-    outdir: Path = typer.Option(Path("."), help="Output directory"),
+    out: Path = typer.Option(Path("."), help="Output directory"),
 ):
     """
     Accept a data file with text and complete the prompt for each text and write output to a csv file.
     """
-    check_args(data_file_path, config_file_path, outdir)
+    check_args(data_file_path, config_file_path, out)
 
     # Read config file and setup OpenAI
     config = F.config(config_file_path)
@@ -176,14 +194,14 @@ def complete_prompt(
     ids = list(df["id"])
 
     # Complete prompt for each row and write results to csv file
-    out_csv_path = outdir / f"{data_file_path.stem}_responses.csv"
+    out_csv_path = out / f"{data_file_path.stem}_responses.csv"
     if not out_csv_path.exists():
         out_csv = open(out_csv_path, "w")
         writer = csv.writer(out_csv)
         writer.writerow(["id", "response"])
         out_csv.close()
 
-    with open(f"{outdir}/{data_file_path.stem}_responses.csv", "a") as out_csv:
+    with open(f"{out}/{data_file_path.stem}_responses.csv", "a") as out_csv:
         writer = csv.writer(out_csv)
         client = openai.OpenAI()
 
@@ -210,3 +228,10 @@ def complete_prompt(
                 else:
                     logging.warn(f"Error for data point {ids[i]}: {response}")
             out_csv.flush()
+
+
+# -----------------------------------------------------------------------------
+# main
+# -----------------------------------------------------------------------------
+if __name__ == "__main__":
+    app()
