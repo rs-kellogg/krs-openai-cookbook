@@ -143,31 +143,32 @@ def chat_complete(
         console.print(f"[yellow on red]{msg}")
         raise typer.Abort()
 
-    # Assert that the data file contains an 'id' column
+    # Make sure the data file has an id column
     df = pl.read_csv(data_file)
-    if not "id" in df.columns:
-        msg = f"Data file {data_file.name} does not contain an {id_col} column"
-        logger.error(msg)
-        console.print(f"[yellow on red]{msg}")
-        raise typer.Abort()
+    if not id_col in df.columns:
+        df = df.with_row_index(name=id_col)
 
     # Loop through the data
     data: List[Dict] = df.to_dicts()
     for i in tqdm(range(len(data))):
         system_prompt = chevron.render(system_prompt_template, data[i])
         user_prompt = chevron.render(user_prompt_template, data[i])
+
         if count:
             count_tokens = F.count_tokens(f"{system_prompt}\n{user_prompt}", config["model"])
             logger.info(f"{data[i]['id']} input tokens: {count_tokens}")
-        else:
-            messages = F.make_message_body(system_prompt, user_prompt)
-            config["messages"] = "<messages>"
-            logger.info(f"request body for row [{i}]: {config}")
-            config["messages"] = messages
-            response = F.completion_with_backoff(**config)
-            logger.info(f"{response}")
-            out_file = out / f"{data[i]['id']}.json"
-            out_file.write_text(json.dumps(response.choices[0].message.json()))
+            continue
+
+        messages = F.make_message_body(system_prompt, user_prompt)
+        config["messages"] = "<messages>"
+        logger.info(f"request body for row [{i}]: {config}")
+        config["messages"] = messages
+        response = F.completion_with_backoff(**config)
+        logger.info(f"{response}")
+        out_file = out / f"{data[i]['id']}.json"
+        response_content = json.loads(response.choices[0].message.json())
+        response_content["row_id"] = data[i]["id"]
+        out_file.write_text(json.dumps(response_content))
 
 
 # -----------------------------------------------------------------------------
