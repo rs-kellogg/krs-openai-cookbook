@@ -135,6 +135,7 @@ def chat_complete(
     user_prompt_template = config["user_prompt"]
     del config["system_prompt"]
     del config["user_prompt"]
+    logger.info(f"request body parameters: {config}")
 
     # Read the data file
     if not data_file.exists():
@@ -148,6 +149,12 @@ def chat_complete(
     if not id_col in df.columns:
         df = df.with_row_index(name=id_col)
 
+    # Create the output file
+    if not out.exists():
+        out.mkdir(parents=True)
+    out_file = out / "responses.jsonl"
+    out_file.write_text("")
+
     # Loop through the data
     data: List[Dict] = df.to_dicts()
     for i in tqdm(range(len(data))):
@@ -160,15 +167,14 @@ def chat_complete(
             continue
 
         messages = F.make_message_body(system_prompt, user_prompt)
-        config["messages"] = "<messages>"
-        logger.info(f"request body for row [{i}]: {config}")
         config["messages"] = messages
         response = F.completion_with_backoff(**config)
         logger.info(f"{response}")
-        out_file = out / f"{data[i]['id']}.json"
         response_content = json.loads(response.choices[0].message.json())
         response_content["row_id"] = data[i]["id"]
-        out_file.write_text(json.dumps(response_content))
+        with open(out_file, "a") as f:
+            f.write(f"{json.dumps(response_content)}\n")
+            f.flush()
 
 
 # -----------------------------------------------------------------------------

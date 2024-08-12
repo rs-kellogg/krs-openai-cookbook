@@ -1,0 +1,217 @@
+id,submitter,authors,title,comments,journal-ref,doi,report-no,categories,license,abstract,update_date,src_pdf,text
+2310.00014,Yong Ren,"Yong Ren, Tao Wang, Jiangyan Yi, Le Xu, Jianhua Tao, Chuyuan Zhang,
+  Junzuo Zhou",Fewer-token Neural Speech Codec with Time-invariant Codes,Submitted to ICASSP 2024,"","","",cs.SD eess.AS,http://arxiv.org/licenses/nonexclusive-distrib/1.0/,"  Language model based text-to-speech (TTS) models, like VALL-E, have gained
+attention for their outstanding in-context learning capability in zero-shot
+scenarios. Neural speech codec is a critical component of these models, which
+can convert speech into discrete token representations. However, excessive
+token sequences from the codec may negatively affect prediction accuracy and
+restrict the progression of Language model based TTS models. To address this
+issue, this paper proposes a novel neural speech codec with time-invariant
+codes named TiCodec. By encoding and quantizing time-invariant information into
+a separate code, TiCodec can reduce the amount of frame-level information that
+needs encoding, effectively decreasing the number of tokens as codes of speech.
+Furthermore, this paper introduces a time-invariant encoding consistency loss
+to enhance the consistency of time-invariant code within an utterance and force
+it to capture more global information, which can benefit the zero-shot TTS
+task. Experimental results demonstrate that TiCodec can not only enhance the
+quality of reconstruction speech with fewer tokens but also increase the
+similarity and naturalness, as well as reduce the word error rate of the
+synthesized speech by the TTS model.
+",2023-10-03,2310.00014v1.pdf,"FEWER-TOKEN NEURAL SPEECH CODEC WITH TIME-INVARIANT CODES
+Yong Ren1,2, Tao Wang1, Jiangyan Yi1, Le Xu1,2, Jianhua Tao3, Chuyuan Zhang1,2, Junzuo Zhou1,2
+1Institute of Automation, Chinese Academy of Sciences, China
+2University of Chinese Academy of Sciences, China
+3Department of Automation, Tsinghua University, China
+ABSTRACT
+Language model based text-to-speech (TTS) models, like VALL-E,
+have gained attention for their outstanding in-context learning capa-
+bility in zero-shot scenarios. Neural speech codec is a critical com-
+ponent of these models, which can convert speech into discrete token
+representations. However, excessive token sequences from the codec
+may negatively affect prediction accuracy and restrict the progres-
+sion of Language model based TTS models. To address this issue,
+this paper proposes a novel neural speech codec with time-invariant
+codes named TiCodec. By encoding and quantizing time-invariant
+information into a separate code, TiCodec can reduce the amount of
+frame-level information that needs encoding, effectively decreasing
+the number of tokens as codes of speech. Furthermore, this paper
+introduces a time-invariant encoding consistency loss to enhance the
+consistency of time-invariant code within an utterance and force it
+to capture more global information, which can benefit the zero-shot
+TTS task. Experimental results demonstrate that TiCodec can not
+only enhance the quality of reconstruction speech with fewer tokens
+but also increase the similarity and naturalness, as well as reduce the
+word error rate of the synthesized speech by the TTS model.
+Index Terms— speech codec, fewer tokens, time-invariant, lan-
+guage model, text-to-speech
+1. INTRODUCTION
+arXiv:2310.00014v1  [cs.SD]  15 Sep 2023
+VQVAE [13] as conditioning for the WaveNet decoder. After that,
+SoundStream [14], as a fully convolutional end-to-end universal au-
+dio codec model, was proposed, extending the VQVAE vector quan-
+tizer to a residual vector quantizer. Following that, Encodec [4] in-
+troduced a spectrogram-only adversarial loss, a novel gradient bal-
+ancer, and a small Transformer model to further improve the per-
+formance of codec. HifiCodec [15] proposes a codec model that
+uses group-residual vector quantization to improve the reconstruc-
+tion performance of audio. It can achieve good speech reconstruc-
+tion performance with only four discrete token sequences, outper-
+forming SoundStream and Encodec. However, the performance of
+codec decreases significantly when using only one or two discrete
+token sequences to represent speech, making it unable to reconstruct
+high-quality speech.
+To achieve good speech reconstruction performance with only
+two or even one sequence of discrete frame-level tokens, we pro-
+pose a neural speech codec model with time-invariant codes named
+TiCodec. Some information in a speech that does not change over
+time is extracted by a time-invariant representation extraction mod-
+ule and encoded into a fixed-length code, referred to as the time-
+invariant code. This operation can reduce the amount of information
+that needs to be encoded in frame-level codes, forcing it to be max-
+imally informative about time-related aspects. After obtaining the
+frame-level and time-invariant features, they are separately quan-
+tized as frame-level and time-invariant tokens. When TiCodec is
+used for downstream TTS tasks, the time-invariant tokens can be
+extracted from the prompt of target speakers, which can better main-
+tain the timbre information of target speakers. At the same time,
+fewer frame-level tokens can be used to predict by the TTS model,
+while maintaining a low word error rate (WER) and high quality of
+synthesized speech. To make the time-invariant token representa-
+tions extracted from the target speech in TTS contain more global
+time-invariant information, we introduce the time-invariant encod-
+ing consistency loss, hoping to improve the robustness of inference
+in TTS and further reduce WER.
+The contributions of this paper are as follows:
+• This paper proposed a neural speech codec model named
+TiCodec, which can separate the time-varying and time-
+invariant information in speech and quantize them separately.
+• A time-invariant encoding consistency loss was introduced to
+improve the consistency of the time-invariant codes.
+Recently, large language models have demonstrated remarkable per-
+formance on zero-shot text-to-speech (TTS) tasks such as VALL-
+E [1], SPEAR-TTS [2], and SoundStorm [3]. VALL-E uses dis-
+crete tokens derived from Encodec [4] as a representation of speech,
+and then trains an autoregressive (AR) language model and a non-
+autoregressive (NAR) language model to generate tokens from the
+first quantizer and the other seven quantizers separately. It can syn-
+thesize high-quality personalized speech by using a short recording
+of an unknown speaker as an acoustic prompt. However, the high-
+quality reconstruction of speech requires multiple token sequences,
+which affects the inference speed and robustness, and restricts the
+model structure and training methods of language model based TTS
+models. Therefore, how to represent speech better with fewer dis-
+crete tokens has become a core issue.
+Neural speech codec is an important method to acquire discrete
+token representations of speech. To improve the compression rate
+and reduce the number of tokens, more and more research is focus-
+ing on neural speech codec [5, 6, 7]. Kleijn et al. [8] proposed a
+low-rate speech coding architecture based on the WaveNet [9] de-
+coder.
+Lyra [10] encodes quantized mel-spectrogram features of
+speech, and then decodes them with WaveGRU [11]. Subsequently,
+end-to-end neural speech codecs have been introduced.
+Grbacea
+et al. [12] used the discretized latent representations proposed in
+Experimental results on speech reconstruction and zero-shot
+TTS task with LibriTTS datasets [16] show that TiCodec achieved
+better speech reconstruction performance with fewer tokens and
+improved robustness, quality, and similarity of synthesized speech
+in the zero-shot TTS task.
+"
+2310.00031,Markus Marks,"Neehar Kondapaneni, Markus Marks, Manuel Knott, Rog\'erio Guimar\~aes,
+  Pietro Perona",Text-image Alignment for Diffusion-based Perception,Project page: https://www.vision.caltech.edu/tadp/,"","","",cs.CV,http://arxiv.org/licenses/nonexclusive-distrib/1.0/,"  Diffusion models are generative models with impressive text-to-image
+synthesis capabilities and have spurred a new wave of creative methods for
+classical machine learning tasks. However, the best way to harness the
+perceptual knowledge of these generative models for visual tasks is still an
+open question. Specifically, it is unclear how to use the prompting interface
+when applying diffusion backbones to vision tasks. We find that automatically
+generated captions can improve text-image alignment and significantly enhance a
+model's cross-attention maps, leading to better perceptual performance. Our
+approach improves upon the current SOTA in diffusion-based semantic
+segmentation on ADE20K and the current overall SOTA in depth estimation on
+NYUv2. Furthermore, our method generalizes to the cross-domain setting; we use
+model personalization and caption modifications to align our model to the
+target domain and find improvements over unaligned baselines. Our object
+detection model, trained on Pascal VOC, achieves SOTA results on Watercolor2K.
+Our segmentation method, trained on Cityscapes, achieves SOTA results on Dark
+Zurich-val and Nighttime Driving. Project page:
+https://www.vision.caltech.edu/tadp/
+",2023-10-06,2310.00031v1.pdf,"Text-image Alignment for Diffusion-based Perception
+Neehar Kondapaneni1* Markus Marks1∗
+Manuel Knott2∗
+Rog´erio Guimar˜aes1
+Pietro Perona1
+1California Institute of Technology
+2ETH Z¨urich, Swiss Data Science Center, Empa
+Abstract
+Single-domain
+Depth Estimation
+Diffusion-Pretrained 
+Vision Model
+Segmentation
+“a dog and a bird”
+Captioner
++
+”in a watercolor style”
+Cross-domain
+Object Detection
+Caption Modifier
+Figure 1. Text-Aligned Diffusion Perception (TADP). In TADP,
+image captions align the text prompts and images passed to
+diffusion-based vision models. In cross-domain tasks, target do-
+main information is incorporated into the prompt to boost perfor-
+mance.
+Diffusion models are generative models with impressive
+text-to-image synthesis capabilities and have spurred a new
+wave of creative methods for classical machine learning
+tasks.
+However, the best way to harness the perceptual
+knowledge of these generative models for visual tasks is
+still an open question. Specifically, it is unclear how to
+use the prompting interface when applying diffusion back-
+bones to vision tasks. We find that automatically gener-
+ated captions can improve text-image alignment and sig-
+nificantly enhance a model’s cross-attention maps, leading
+to better perceptual performance. Our approach improves
+upon the current SOTA in diffusion-based semantic segmen-
+tation on ADE20K and the current overall SOTA in depth
+estimation on NYUv2. Furthermore, our method general-
+izes to the cross-domain setting; we use model personal-
+ization and caption modifications to align our model to the
+target domain and find improvements over unaligned base-
+lines. Our object detection model, trained on Pascal VOC,
+achieves SOTA results on Watercolor2K. Our segmentation
+method, trained on Cityscapes, achieves SOTA results on
+Dark Zurich-val and Nighttime Driving.
+1. Introduction
+arXiv:2310.00031v1  [cs.CV]  29 Sep 2023
+Diffusion models have set the state-of-the-art for image
+generation [30, 33, 36, 48]. Recently, a few works have
+shown diffusion pre-trained backbones have a strong prior
+for scene understanding that allows them to perform well in
+advanced discriminative vision tasks, such as semantic seg-
+mentation and monocular depth estimation [16, 49]. Unlike
+contrastive vision language models (like CLIP) [21, 25, 29],
+generative models have a causal relationship with text, in
+which text guides image generation.
+In latent diffusion
+models, text prompts control the denoising U-Net [34],
+moving the image latent in a semantically meaningful di-
+*Equal contribution.
+rection [5].
+We explore this relationship and find that text-image
+alignment significantly improves the performance of
+diffusion-based perception. We then investigate text-target
+domain alignment in cross-domain vision tasks, finding that
+aligning the text with the target domain while training on the
+source domain can improve a model’s target domain perfor-
+mance (Fig. 1).
+We first study prompting for diffusion-based perceptual
+models and find that increasing text-image alignment im-
+proves semantic segmentation and depth estimation perfor-
+mance. We hypothesize that unaligned text prompts can in-
+troduce semantic shifts to the feature maps of the diffusion
+model [5] and that these shifts can make it more difficult
+for the task-specific head to solve the target task. Specifi-
+1
+"
