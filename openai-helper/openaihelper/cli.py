@@ -116,9 +116,9 @@ def pdf2text(
 def chat_complete(
     config_file: Annotated[Path, typer.Argument(help="Config file")] = None,
     data_file: Annotated[Path, typer.Argument(help="Data file")] = None,
-    id_col: Annotated[str, typer.Option(help="Column name for the id")] = "id",
-    out: Annotated[Path, typer.Option(help="Path to output files")] = Path("."),
-    count: Annotated[bool, typer.Option(help="Count input tokens")] = False,
+    id_col: Annotated[str, typer.Option(help="Column name for the id", rich_help_panel="Options")] = "id",
+    out: Annotated[Path, typer.Option(help="Path to output files", rich_help_panel="Options")] = Path("."),
+    count: Annotated[bool, typer.Option(help="Count input tokens", rich_help_panel="Options")] = False,
 ):
     """
     Complete a list of chat prompts using OpenAI's API.
