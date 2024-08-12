@@ -166,6 +166,8 @@ def chat_complete(
             config["messages"] = messages
             response = F.completion_with_backoff(**config)
             logger.info(f"{response}")
+            out_file = out / f"{data[i]['id']}.json"
+            out_file.write_text(json.dumps(response.choices[0].message.json()))
 
 
 # -----------------------------------------------------------------------------
