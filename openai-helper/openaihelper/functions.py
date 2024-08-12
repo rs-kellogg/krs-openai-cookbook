@@ -1,10 +1,11 @@
-from pathlib import Path
-from tqdm import tqdm
-import pandas as pd
+import os
 import openai
 import json
 import yaml
 import tiktoken
+import pandas as pd
+from pathlib import Path
+from tqdm import tqdm
 from typing import List, Dict
 from tenacity import (
     retry,
@@ -34,7 +35,6 @@ def completion_with_backoff(**kwargs) -> openai.types.chat.chat_completion.ChatC
 
 # -----------------------------------------------------------------------------
 def make_message_body(system_prompt, user_prompt) -> List[Dict]:
-
     message_body = [
         {
             "role": "system",
@@ -50,46 +50,7 @@ def make_message_body(system_prompt, user_prompt) -> List[Dict]:
             "content": [{"type": "text", "text": user_prompt}],
         },
     ]
-
     return message_body
-
-
-# -----------------------------------------------------------------------------
-# def chat_complete(
-#     client,
-#     model_name: str,
-#     user_prompt: str,
-#     system_prompt: str,
-#     text: str,
-#     temperature=0,
-#     max_tokens=2048,
-#     top_p=1,
-#     frequency_penalty=0,
-#     presence_penalty=0,
-#     seed=42,
-# ) -> str:
-#     assert text is not None and len(text) > 0
-#     assert model_name is not None and len(model_name) > 0
-#     assert user_prompt is not None and len(user_prompt) > 0
-
-#     try:
-#         response = completion_with_backoff(
-#             model=model_name,
-#             messages=[
-#                 {"role": "system", "content": system_prompt},
-#                 {"role": "user", "content": user_prompt + '\n\n"""' + text + '\n\n"""'},
-#             ],
-#             response_format={"type": "json_object"},
-#             temperature=temperature,
-#             max_tokens=max_tokens,
-#             top_p=top_p,
-#             frequency_penalty=frequency_penalty,
-#             presence_penalty=presence_penalty,
-#             seed=seed,
-#         )
-#         return json.dumps(json.loads(response.choices[0].message.content))
-#     except Exception as e:
-#         return str(f"{response}")
 
 
 # -----------------------------------------------------------------------------

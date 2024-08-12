@@ -27,9 +27,9 @@ logging:
   loggers:
       openaihelper:
           level: INFO
-          handlers: [console, file]
+          handlers: [file]
           propagate: no
 
   root:
-      level: DEBUG
+      level: WARNING
       handlers: [console]

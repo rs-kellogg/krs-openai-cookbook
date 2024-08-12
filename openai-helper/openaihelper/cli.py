@@ -5,22 +5,18 @@ import math
 
 import fitz
 import typer
-import openai
 import chevron
 import logging
 import logging.config
-
-import pandas as pd
 import polars as pl
 
 from tqdm import tqdm
 from pathlib import Path
-from typing import Optional
 from dotenv import load_dotenv
 from rich.table import Table
 from rich.console import Console
 from importlib import resources
-from tenacity import wait_random_exponential
+from typing import Optional
 from typing_extensions import Annotated
 
 from openaihelper import functions as F
@@ -119,19 +115,18 @@ def pdf2text(
 @app.command()
 def chat_complete(
     config_file: Annotated[Path, typer.Argument(help="Config file")] = None,
-    data_file: Annotated[Path, typer.Option(help="Data file")] = None,
     out: Annotated[Path, typer.Option(help="Path to output text files")] = Path("."),
     count: Annotated[bool, typer.Option(help="Count input tokens")] = False,
+    data_file: Annotated[Path, typer.Option("--data", help="Data file")] = None,
+    id_col: Annotated[str, typer.Option(help="ID column name")] = "id",
+    text_col: Annotated[str, typer.Option(help="Text column name")] = "text",
 ):
     """
     Accept a data file with text and complete the prompt for each text and write output to a csv file.
     """
-    assert config_file.exists()
-    if data_file:
-        assert data_file.exists()
-    if not out.exists():
-        out.mkdir(parents=True)
 
+    # Read the config file and set the message body
+    assert config_file.exists()
     config = F.config(config_file)
     system_prompt = config["system_prompt"]
     user_prompt = config["user_prompt"]
@@ -140,33 +135,22 @@ def chat_complete(
     del config["user_prompt"]
     config["messages"] = messages
 
-    console.print(f"{config}")
-
-    client = openai.OpenAI(
-        organization=os.environ["OPENAI_ORG_ID"],
-        project=os.environ["OPENAI_PROJ_ID"],
-        api_key=os.environ["OPENAI_API_KEY"],
-    )
-    response = client.chat.completions.create(**config)
-    console.print(f"{response}")
-
-    typer.Exit()
-
-    # config = F.config(config_file_path)
-    # encoding_name = config["encoding_name"]
-    # max_token_len = config["max_token_len"]
-    # model_name = config["model_name"]
-    # user_prompt = config["user_prompt"]
-    # system_prompt = config["system_prompt"]
-    # n_prompt_tokens = F.count_tokens(system_prompt + user_prompt, encoding_name)
-
-    # # Read the data file and check its format
-    # df = pd.read_csv(data_file_path)
-    # assert "id" in df.columns
-    # assert "text" in df.columns
-    # texts = list(df["text"])
-    # ids = list(df["id"])
-
+    # Read the data file and check its format
+    if data_file:
+        assert data_file.exists()    
+    df = pl.read_csv(data_file)
+    assert "id" in df.columns
+    assert "text" in df.columns
+    texts = list(df["text"])
+    ids = list(df["id"])
+    for id, text in zip(ids, texts):
+        console.print(f"processing row: {id}")
+        logger.info(f"request: {config}")
+        response = F.completion_with_backoff(**config)
+        logger.info(f"{response}")
+        
+    # if not out.exists():
+    #     out.mkdir(parents=True)
     # # Complete prompt for each row and write results to csv file
     # out_csv_path = out / f"{data_file_path.stem}_responses.csv"
     # if not out_csv_path.exists():
