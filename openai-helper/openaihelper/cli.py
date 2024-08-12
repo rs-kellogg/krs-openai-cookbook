@@ -10,10 +10,10 @@ import logging
 import logging.config
 import polars as pl
 
-from tqdm import tqdm
 from pathlib import Path
 from dotenv import load_dotenv
 from rich.table import Table
+from rich.progress import track
 from rich.console import Console
 from importlib import resources
 from typing import Optional
@@ -50,8 +50,15 @@ app = typer.Typer()
 # -----------------------------------------------------------------------------
 def version_callback(value: bool) -> None:
     if value:
-        console.print(f"[blue]version: {__app_name__} v{__version__}")
+        console.print(f"[blue]{__version__}")
         raise typer.Exit()
+
+
+# -----------------------------------------------------------------------------
+def path_callback(path: Path):
+    if not path.exists():
+        raise typer.BadParameter(f"Path {path} does not exist")
+    return path
 
 
 # -----------------------------------------------------------------------------
@@ -114,10 +121,10 @@ def pdf2text(
 # -----------------------------------------------------------------------------
 @app.command()
 def chat_complete(
-    config_file: Annotated[Path, typer.Argument(help="Config file")] = None,
-    data_file: Annotated[Path, typer.Argument(help="Data file")] = None,
+    config_file: Annotated[Path, typer.Argument(help="Config file", callback=path_callback)] = None,
+    data_file: Annotated[Path, typer.Argument(help="Data file", callback=path_callback)] = None,
     id_col: Annotated[str, typer.Option(help="Column name for the id", rich_help_panel="Options")] = "id",
-    out: Annotated[Path, typer.Option(help="Path to output files", rich_help_panel="Options")] = Path("."),
+    out: Annotated[Path, typer.Option("--out", "-o", help="Path to output files", rich_help_panel="Options")] = Path("."),
     count: Annotated[bool, typer.Option(help="Count input tokens", rich_help_panel="Options")] = False,
 ):
     """
@@ -125,11 +132,6 @@ def chat_complete(
     """
 
     # Read the config file
-    if not config_file.exists():
-        logger.error(f"Config file {config_file.name} not found")
-        console.print(f"[yellow on red]Config file {config_file.name} not found")
-        raise typer.Abort()
-
     config = F.config(config_file)
     system_prompt_template = config["system_prompt"]
     user_prompt_template = config["user_prompt"]
@@ -138,13 +140,6 @@ def chat_complete(
     logger.info(f"request body parameters: {config}")
 
     # Read the data file
-    if not data_file.exists():
-        msg = f"Data file {data_file.name} not found"
-        logger.error(msg)
-        console.print(f"[yellow on red]{msg}")
-        raise typer.Abort()
-
-    # Make sure the data file has an id column
     df = pl.read_csv(data_file)
     if not id_col in df.columns:
         df = df.with_row_index(name=id_col)
@@ -157,7 +152,7 @@ def chat_complete(
 
     # Loop through the data
     data: List[Dict] = df.to_dicts()
-    for i in tqdm(range(len(data))):
+    for i in track(range(len(data)), description="Processing..."):
         system_prompt = chevron.render(system_prompt_template, data[i])
         user_prompt = chevron.render(user_prompt_template, data[i])
 

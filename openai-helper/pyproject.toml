@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "openai-helper"
+name = "openaihelper"
 license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.8"
@@ -15,16 +15,13 @@ classifiers = [
 dynamic = ["version", "description"]
 dependencies = [
     "typer",
-    "typer-cli",
     "pyyaml", 
-    "pandas",
-    "tqdm",
+    "polars",
     "openai",
     "tiktoken",
     "tenacity",
     "PyMuPDF",
     "datasets",
-    "pytest",
     "ipyleaflet",
     "leafmap",
 ]
