@@ -22,7 +22,7 @@ logging:
           level: INFO
           formatter: detailed
           filename: openaihelper.log
-          mode: a
+          mode: w
 
   loggers:
       openaihelper:

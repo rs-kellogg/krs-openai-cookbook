@@ -54,11 +54,11 @@ def make_message_body(system_prompt, user_prompt) -> List[Dict]:
 
 
 # -----------------------------------------------------------------------------
-def count_tokens(text: str, encoding_name: str) -> int:
+def count_tokens(text: str, model: str) -> int:
     assert text is not None and len(text) > 0
-    assert encoding_name is not None and len(encoding_name) > 0
+    assert model is not None
 
-    encoding = tiktoken.get_encoding(encoding_name)
+    encoding = tiktoken.encoding_for_model(model)
     num_tokens = len(encoding.encode(text))
     return num_tokens
 

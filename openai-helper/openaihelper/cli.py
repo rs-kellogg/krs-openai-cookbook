@@ -115,76 +115,57 @@ def pdf2text(
 @app.command()
 def chat_complete(
     config_file: Annotated[Path, typer.Argument(help="Config file")] = None,
-    out: Annotated[Path, typer.Option(help="Path to output text files")] = Path("."),
+    data_file: Annotated[Path, typer.Argument(help="Data file")] = None,
+    id_col: Annotated[str, typer.Option(help="Column name for the id")] = "id",
+    out: Annotated[Path, typer.Option(help="Path to output files")] = Path("."),
     count: Annotated[bool, typer.Option(help="Count input tokens")] = False,
-    data_file: Annotated[Path, typer.Option("--data", help="Data file")] = None,
-    id_col: Annotated[str, typer.Option(help="ID column name")] = "id",
-    text_col: Annotated[str, typer.Option(help="Text column name")] = "text",
 ):
     """
-    Accept a data file with text and complete the prompt for each text and write output to a csv file.
+    Complete a list of chat prompts using OpenAI's API.
     """
 
-    # Read the config file and set the message body
-    assert config_file.exists()
+    # Read the config file
+    if not config_file.exists():
+        logger.error(f"Config file {config_file.name} not found")
+        console.print(f"[yellow on red]Config file {config_file.name} not found")
+        raise typer.Abort()
+
     config = F.config(config_file)
-    system_prompt = config["system_prompt"]
-    user_prompt = config["user_prompt"]
-    messages = F.make_message_body(system_prompt, user_prompt)
+    system_prompt_template = config["system_prompt"]
+    user_prompt_template = config["user_prompt"]
     del config["system_prompt"]
     del config["user_prompt"]
-    config["messages"] = messages
 
-    # Read the data file and check its format
-    if data_file:
-        assert data_file.exists()    
+    # Read the data file
+    if not data_file.exists():
+        msg = f"Data file {data_file.name} not found"
+        logger.error(msg)
+        console.print(f"[yellow on red]{msg}")
+        raise typer.Abort()
+
+    # Assert that the data file contains an 'id' column
     df = pl.read_csv(data_file)
-    assert "id" in df.columns
-    assert "text" in df.columns
-    texts = list(df["text"])
-    ids = list(df["id"])
-    for id, text in zip(ids, texts):
-        console.print(f"processing row: {id}")
-        logger.info(f"request: {config}")
-        response = F.completion_with_backoff(**config)
-        logger.info(f"{response}")
-        
-    # if not out.exists():
-    #     out.mkdir(parents=True)
-    # # Complete prompt for each row and write results to csv file
-    # out_csv_path = out / f"{data_file_path.stem}_responses.csv"
-    # if not out_csv_path.exists():
-    #     out_csv = open(out_csv_path, "w")
-    #     writer = csv.writer(out_csv)
-    #     writer.writerow(["id", "response"])
-    #     out_csv.close()
+    if not "id" in df.columns:
+        msg = f"Data file {data_file.name} does not contain an {id_col} column"
+        logger.error(msg)
+        console.print(f"[yellow on red]{msg}")
+        raise typer.Abort()
 
-    # with open(f"{out}/{data_file_path.stem}_responses.csv", "a") as out_csv:
-    #     writer = csv.writer(out_csv)
-
-    #     for i in tqdm(range(len(texts))):
-    #         # check if the text is too long
-    #         n_tokens = F.count_tokens(texts[i], encoding_name)
-    #         if (n_tokens + n_prompt_tokens) > max_token_len:
-    #             writer.writerow([ids[i], "TOO_LONG"])
-    #             logging.warn(f"Data point {ids[i]} not completed")
-    #         else:
-    #             # complete the prompt
-    #             response = F.chat_complete(
-    #                 client=client,
-    #                 model_name=model_name,
-    #                 user_prompt=user_prompt,
-    #                 system_prompt=system_prompt,
-    #                 text=texts[i],
-    #             )
-    #             # validate the response
-    #             valid = F.validate_result(response)
-    #             if valid:
-    #                 logging.info(f"Data point {ids[i]} completed")
-    #                 writer.writerow([ids[i], json.dumps(response)])
-    #             else:
-    #                 logging.warn(f"Error for data point {ids[i]}: {response}")
-    #         out_csv.flush()
+    # Loop through the data
+    data: List[Dict] = df.to_dicts()
+    for i in tqdm(range(len(data))):
+        system_prompt = chevron.render(system_prompt_template, data[i])
+        user_prompt = chevron.render(user_prompt_template, data[i])
+        if count:
+            count_tokens = F.count_tokens(f"{system_prompt}\n{user_prompt}", config["model"])
+            logger.info(f"{data[i]['id']} input tokens: {count_tokens}")
+        else:
+            messages = F.make_message_body(system_prompt, user_prompt)
+            config["messages"] = "<messages>"
+            logger.info(f"request body for row [{i}]: {config}")
+            config["messages"] = messages
+            response = F.completion_with_backoff(**config)
+            logger.info(f"{response}")
 
 
 # -----------------------------------------------------------------------------
