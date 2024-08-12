@@ -22,10 +22,11 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope="session")
 def config() -> Dict:
-    config_file = dir_path / "config.yml"
+    config_file = dir_path / "config-test-1.yml"
     with open(config_file) as f:
         conf = yaml.load(f, Loader=yaml.FullLoader)
         return conf
+
 
 @pytest.fixture(scope="session")
 def sample_1() -> pd.DataFrame:
