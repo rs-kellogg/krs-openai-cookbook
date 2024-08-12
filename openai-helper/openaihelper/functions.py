@@ -5,7 +5,7 @@ import openai
 import json
 import yaml
 import tiktoken
-from typing import Dict
+from typing import List, Dict
 from tenacity import (
     retry,
     stop_after_attempt,
@@ -23,47 +23,73 @@ def config(config_file: Path) -> Dict:
 # -----------------------------------------------------------------------------
 @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
 def completion_with_backoff(**kwargs) -> openai.types.chat.chat_completion.ChatCompletion:
-    client = openai.OpenAI()
+    client = openai.OpenAI(
+        organization=os.environ["OPENAI_ORG_ID"],
+        project=os.environ["OPENAI_PROJ_ID"],
+        api_key=os.environ["OPENAI_API_KEY"],
+    )
     response = client.chat.completions.create(**kwargs)
     return response
 
 
 # -----------------------------------------------------------------------------
-def chat_complete(
-    client,
-    model_name: str,
-    user_prompt: str,
-    system_prompt: str,
-    text: str,
-    temperature=0,
-    max_tokens=2048,
-    top_p=1,
-    frequency_penalty=0,
-    presence_penalty=0,
-    seed=42,
-) -> str:
-    assert text is not None and len(text) > 0
-    assert model_name is not None and len(model_name) > 0
-    assert user_prompt is not None and len(user_prompt) > 0
+def make_message_body(system_prompt, user_prompt) -> List[Dict]:
 
-    try:
-        response = completion_with_backoff(
-            model=model_name,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt + '\n\n"""' + text + '\n\n"""'},
+    message_body = [
+        {
+            "role": "system",
+            "content": [
+                {
+                    "type": "text",
+                    "text": system_prompt,
+                }
             ],
-            response_format={"type": "json_object"},
-            temperature=temperature,
-            max_tokens=max_tokens,
-            top_p=top_p,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty,
-            seed=seed,
-        )
-        return json.dumps(json.loads(response.choices[0].message.content))
-    except Exception as e:
-        return str(f"{response}")
+        },
+        {
+            "role": "user",
+            "content": [{"type": "text", "text": user_prompt}],
+        },
+    ]
+
+    return message_body
+
+
+# -----------------------------------------------------------------------------
+# def chat_complete(
+#     client,
+#     model_name: str,
+#     user_prompt: str,
+#     system_prompt: str,
+#     text: str,
+#     temperature=0,
+#     max_tokens=2048,
+#     top_p=1,
+#     frequency_penalty=0,
+#     presence_penalty=0,
+#     seed=42,
+# ) -> str:
+#     assert text is not None and len(text) > 0
+#     assert model_name is not None and len(model_name) > 0
+#     assert user_prompt is not None and len(user_prompt) > 0
+
+#     try:
+#         response = completion_with_backoff(
+#             model=model_name,
+#             messages=[
+#                 {"role": "system", "content": system_prompt},
+#                 {"role": "user", "content": user_prompt + '\n\n"""' + text + '\n\n"""'},
+#             ],
+#             response_format={"type": "json_object"},
+#             temperature=temperature,
+#             max_tokens=max_tokens,
+#             top_p=top_p,
+#             frequency_penalty=frequency_penalty,
+#             presence_penalty=presence_penalty,
+#             seed=seed,
+#         )
+#         return json.dumps(json.loads(response.choices[0].message.content))
+#     except Exception as e:
+#         return str(f"{response}")
 
 
 # -----------------------------------------------------------------------------
@@ -77,6 +103,6 @@ def count_tokens(text: str, encoding_name: str) -> int:
 
 
 # -----------------------------------------------------------------------------
-def validate_result(result: str) -> bool:
+def validate_response(result: str) -> bool:
     assert result is not None
     return True

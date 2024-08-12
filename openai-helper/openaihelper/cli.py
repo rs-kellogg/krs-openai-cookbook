@@ -48,13 +48,6 @@ console = Console(style="green on black")
 # setup the typer app
 app = typer.Typer()
 
-# setup the openai client
-client = openai.OpenAI(
-    organization=os.environ["OPENAI_ORG_ID"],
-    project=os.environ["OPENAI_PROJ_ID"],
-    api_key=os.environ["OPENAI_API_KEY"],
-)
-
 
 # -----------------------------------------------------------------------------
 # helper functions
@@ -81,6 +74,9 @@ def main(
         ),
     ] = None
 ) -> Optional[bool]:
+    """
+    OpenAI Helper CLI
+    """
     return version
 
 
@@ -122,21 +118,37 @@ def pdf2text(
 # -----------------------------------------------------------------------------
 @app.command()
 def chat_complete(
-    data_file: Annotated[Path, typer.Argument(help="Data file")] = None,
     config_file: Annotated[Path, typer.Argument(help="Config file")] = None,
-    model: Annotated[str, typer.Option(help="Model name")] = "gpt-4o",
+    data_file: Annotated[Path, typer.Option(help="Data file")] = None,
     out: Annotated[Path, typer.Option(help="Path to output text files")] = Path("."),
     count: Annotated[bool, typer.Option(help="Count input tokens")] = False,
 ):
     """
     Accept a data file with text and complete the prompt for each text and write output to a csv file.
     """
-    assert data_file.exists()
     assert config_file.exists()
+    if data_file:
+        assert data_file.exists()
     if not out.exists():
         out.mkdir(parents=True)
-    
+
     config = F.config(config_file)
+    system_prompt = config["system_prompt"]
+    user_prompt = config["user_prompt"]
+    messages = F.make_message_body(system_prompt, user_prompt)
+    del config["system_prompt"]
+    del config["user_prompt"]
+    config["messages"] = messages
+
+    console.print(f"{config}")
+
+    client = openai.OpenAI(
+        organization=os.environ["OPENAI_ORG_ID"],
+        project=os.environ["OPENAI_PROJ_ID"],
+        api_key=os.environ["OPENAI_API_KEY"],
+    )
+    response = client.chat.completions.create(**config)
+    console.print(f"{response}")
 
     typer.Exit()
 
