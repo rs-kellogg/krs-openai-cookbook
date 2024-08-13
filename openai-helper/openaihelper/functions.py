@@ -23,12 +23,7 @@ def config(config_file: Path) -> Dict:
 
 # -----------------------------------------------------------------------------
 @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
-def completion_with_backoff(**kwargs) -> openai.types.chat.chat_completion.ChatCompletion:
-    client = openai.OpenAI(
-        organization=os.environ["OPENAI_ORG_ID"],
-        project=os.environ["OPENAI_PROJ_ID"],
-        api_key=os.environ["OPENAI_API_KEY"],
-    )
+def completion_with_backoff(client, kwargs) -> openai.types.chat.chat_completion.ChatCompletion:
     response = client.chat.completions.create(**kwargs)
     return response
 

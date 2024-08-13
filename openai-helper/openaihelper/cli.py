@@ -122,56 +122,37 @@ def pdf2text(
 # -----------------------------------------------------------------------------
 @app.command()
 def chat_complete(
-    config_file: Annotated[Path, typer.Argument(help="Config file", callback=path_callback)] = None,
-    data_file: Annotated[Path, typer.Argument(help="Data file", callback=path_callback)] = None,
-    id_col: Annotated[str, typer.Option(help="Column name for the id", rich_help_panel="Options")] = "id",
+    batch_file: Annotated[Path, typer.Argument(help="Batch file", callback=path_callback)] = None,
     out: Annotated[Path, typer.Option("--out", "-o", help="Path to output files", rich_help_panel="Options")] = Path("."),
-    count: Annotated[bool, typer.Option(help="Count input tokens", rich_help_panel="Options")] = False,
-    batch: Annotated[bool, typer.Option(help="Create a batch file", rich_help_panel="Options")] = False,
+    format: Annotated[str, typer.Option("--format", "-f", help="Output format", rich_help_panel="Options")] = "json",
 ):
     """
     Complete a list of chat prompts using OpenAI's API.
     """
 
-    # Read the config file
-    config = F.config(config_file)
-    system_prompt_template = config["system_prompt"]
-    user_prompt_template = config["user_prompt"]
-    del config["system_prompt"]
-    del config["user_prompt"]
-    logger.info(f"request body parameters: {config}")
-
-    # Read the data file
-    df = pl.read_csv(data_file)
-    if not id_col in df.columns:
-        df = df.with_row_index(name=id_col)
-
-    # Create the output file
     if not out.exists():
         out.mkdir(parents=True)
-    out_file = out / "responses.jsonl"
-    out_file.write_text("")
 
-    # Loop through the data
-    data: List[Dict] = df.to_dicts()
-    for i in track(range(len(data)), description="Processing..."):
-        system_prompt = chevron.render(system_prompt_template, data[i])
-        user_prompt = chevron.render(user_prompt_template, data[i])
-
-        if count:
-            count_tokens = F.count_tokens(f"{system_prompt}\n{user_prompt}", config["model"])
-            logger.info(f"{data[i]['id']} input tokens: {count_tokens}")
-            continue
-
-        messages = F.make_message_body(system_prompt, user_prompt)
-        config["messages"] = messages
-        response = F.completion_with_backoff(**config)
-        logger.info(f"{response}")
-        response_content = json.loads(response.choices[0].message.json())
-        response_content["row_id"] = data[i]["id"]
-        with open(out_file, "a") as f:
-            f.write(f"{json.dumps(response_content)}\n")
-            f.flush()
+    # Read the batch file
+    with open(batch_file, "r") as f:
+        client = openai.OpenAI(
+            organization=os.environ["OPENAI_ORG_ID"],
+            project=os.environ["OPENAI_PROJ_ID"],
+            api_key=os.environ["OPENAI_API_KEY"],
+        )
+        requests = f.readlines()
+        for i, request in enumerate(requests):
+            request = json.loads(request)
+            logger.info(f"processing request: {request['custom_id']}")
+            console.print(f"processing request: {request['custom_id']}")
+            response = F.completion_with_backoff(client, request['body'])
+            if format == "text":
+                out_file = out / f"{request['custom_id']}-response.txt"
+                out_file.write_text(response.choices[0].message.content)
+            elif format == "json":   
+                out_file = out / f"{request['custom_id']}-response.json"
+                # out_file.write_text(json.dumps(response.choices[0].message.content))
+                out_file.write_text(response.to_json())
 
 
 # -----------------------------------------------------------------------------
