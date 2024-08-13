@@ -34,7 +34,6 @@ def test_sample100(sample_100: DataFrame):
     assert len(sample_100) == 100
 
 
-# ignore test
 @pytest.mark.skip(reason="ignore this test")
 def test_count_tokens(config: Dict, sample_100: DataFrame):
     text = "This is a test message."
@@ -56,7 +55,7 @@ def test_count_tokens(config: Dict, sample_100: DataFrame):
 def test_chat_complete_success_mode(config: Dict, sample_100: DataFrame):
     system_prompt = config["system_prompt"]
     user_prompt = config["user_prompt"]
-    model_name = config["model_name"]
+    model_name = config["model"]
     authors = list(sample_100["authors"])[0]
     text = list(sample_100["text"])[0]
     client = openai.OpenAI()

@@ -5,6 +5,7 @@ import math
 
 import fitz
 import typer
+import openai
 import chevron
 import logging
 import logging.config
@@ -126,6 +127,7 @@ def chat_complete(
     id_col: Annotated[str, typer.Option(help="Column name for the id", rich_help_panel="Options")] = "id",
     out: Annotated[Path, typer.Option("--out", "-o", help="Path to output files", rich_help_panel="Options")] = Path("."),
     count: Annotated[bool, typer.Option(help="Count input tokens", rich_help_panel="Options")] = False,
+    batch: Annotated[bool, typer.Option(help="Create a batch file", rich_help_panel="Options")] = False,
 ):
     """
     Complete a list of chat prompts using OpenAI's API.
@@ -170,6 +172,133 @@ def chat_complete(
         with open(out_file, "a") as f:
             f.write(f"{json.dumps(response_content)}\n")
             f.flush()
+
+
+# -----------------------------------------------------------------------------
+@app.command()
+def make_batch(
+    config_file: Annotated[Path, typer.Argument(help="Config file", callback=path_callback)] = None,
+    data_file: Annotated[Path, typer.Argument(help="Data file", callback=path_callback)] = None,
+    id_col: Annotated[str, typer.Option(help="Column name for the id", rich_help_panel="Options")] = "id",
+    out: Annotated[Path, typer.Option("--out", "-o", help="Path to output file", rich_help_panel="Options")] = Path("."),
+    batch_name: Annotated[str, typer.Option("--batch", help="Batch name", rich_help_panel="Options")] = "batch",
+):
+    """
+    Make a batch file for OpenAI's API.
+    """
+
+    # Read the config file
+    config = F.config(config_file)
+    system_prompt_template = config["system_prompt"]
+    user_prompt_template = config["user_prompt"]
+    del config["system_prompt"]
+    del config["user_prompt"]
+
+    # Read the data file
+    df = pl.read_csv(data_file)
+    if not id_col in df.columns:
+        df = df.with_row_index(name=id_col)
+
+    # Create the output file
+    if not out.exists():
+        out.mkdir(parents=True)
+    out_file = out / f"{batch_name}-requests.jsonl"
+    out_file.write_text("")
+
+    # Loop through the data to create a jsonl batch file
+    requests = []
+    data: List[Dict] = df.to_dicts()
+    for index in track(range(len(data)), description="Processing..."):
+        system_prompt = chevron.render(system_prompt_template, data[index])
+        user_prompt = chevron.render(user_prompt_template, data[index])
+        messages = F.make_message_body(system_prompt, user_prompt)
+        config = config.copy()
+        config["messages"] = messages
+        request = {
+            "custom_id": f"id_{data[index]['id']}",
+            "method": "POST",
+            "url": "/v1/chat/completions",
+            "body": config,
+        }
+        requests.append(request)
+
+    out_file.write_text("\n".join([json.dumps(r) for r in requests]))
+    console.print(f"Batch file created: {out_file}")
+
+
+# -----------------------------------------------------------------------------
+@app.command()
+def upload_batch(
+    batch_file: Annotated[Path, typer.Argument(help="Batch file", callback=path_callback)] = None,
+):
+    """
+    Upload a batch file to OpenAI
+    """
+    client = openai.OpenAI(
+        organization=os.environ["OPENAI_ORG_ID"],
+        project=os.environ["OPENAI_PROJ_ID"],
+        api_key=os.environ["OPENAI_API_KEY"],
+    )
+    batch_input_file = client.files.create(file=open(batch_file, "rb"), purpose="batch")
+    console.print(f"Uploaded batch file: {batch_file}")
+    console.print(f"[orange1]{batch_input_file}")
+    logger.info(f"Uploaded batch file: {batch_file}")
+    logger.info(f"{batch_input_file}")
+
+
+# -----------------------------------------------------------------------------
+@app.command()
+def start_batch(
+    batch_file_id: Annotated[str, typer.Argument(help="Batch file ID")] = None,
+    description: Annotated[str, typer.Option("--desc", help="Description of the batch job")] = "batch job",
+):
+    """
+    Start a batch job
+    """
+    client = openai.OpenAI(
+        organization=os.environ["OPENAI_ORG_ID"],
+        project=os.environ["OPENAI_PROJ_ID"],
+        api_key=os.environ["OPENAI_API_KEY"],
+    )
+
+    # create batch job
+    batch_create_response = client.batches.create(
+        input_file_id=batch_file_id,
+        endpoint="/v1/chat/completions",
+        completion_window="24h",
+        metadata={"description": description},
+    )
+    logger.info(batch_create_response)
+    console.print(batch_create_response)
+
+
+# -----------------------------------------------------------------------------
+@app.command()
+def get_batch_results(
+    batch_id: Annotated[str, typer.Argument(help="Batch ID")] = None,
+    out: Annotated[Path, typer.Option("--out", "-o", help="Path to output file")] = Path("."),
+    batch_name: Annotated[str, typer.Option("--batch", help="Batch name", rich_help_panel="Options")] = "batch",
+):
+    """
+    Download batch results to a file if the batch job is completed.
+    If not completed, the status is displayed.
+    """
+    client = openai.OpenAI(
+        organization=os.environ["OPENAI_ORG_ID"],
+        project=os.environ["OPENAI_PROJ_ID"],
+        api_key=os.environ["OPENAI_API_KEY"],
+    )
+
+    batch_retrieve_response = client.batches.retrieve(batch_id)
+    logger.info(batch_retrieve_response)
+    console.print(batch_retrieve_response)
+    if batch_retrieve_response.status == "completed":
+        file_response = client.files.content(batch_retrieve_response.output_file_id)
+        out.mkdir(parents=True, exist_ok=True)
+        out_file = out / f"{batch_name}-responses.jsonl"
+        out_file.write_text(file_response.text)
+        logger.info(f"writing json output to {out_file}")
+        console.print(f"[orange1]writing json output to {out_file}")
 
 
 # -----------------------------------------------------------------------------
