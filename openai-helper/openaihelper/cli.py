@@ -20,7 +20,7 @@ from importlib import resources
 from typing import Optional
 from typing_extensions import Annotated
 
-from openaihelper import functions as F
+from openaihelper import utils as F
 from openaihelper import data
 from openaihelper import __app_name__, __version__
 
