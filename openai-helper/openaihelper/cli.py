@@ -128,7 +128,7 @@ def chat_complete(
     format: Annotated[str, typer.Option("--format", "-f", help="Output format", rich_help_panel="Options")] = "json",
 ):
     """
-    Complete a list of chat prompts using OpenAI's API.
+    Run a batch file line by line in synchronous non-batch mode.
     """
 
     if not out.exists():
@@ -165,7 +165,7 @@ def make_batch_file(
     batch_name: Annotated[str, typer.Option("--batch", help="Batch name", rich_help_panel="Options")] = "batch",
 ) -> None:
     """
-    Make a batch file for OpenAI's API.
+    Make a batch file for OpenAI
     """
 
     # Read the config file
