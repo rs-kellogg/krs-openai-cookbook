@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 from rich.table import Table
 from rich.progress import track
 from rich.console import Console
+from datetime import datetime
 from importlib import resources
 from typing import Optional
 from typing_extensions import Annotated
@@ -151,19 +152,18 @@ def chat_complete(
                 out_file.write_text(response.choices[0].message.content)
             elif format == "json":   
                 out_file = out / f"{request['custom_id']}-response.json"
-                # out_file.write_text(json.dumps(response.choices[0].message.content))
                 out_file.write_text(response.to_json())
 
 
 # -----------------------------------------------------------------------------
 @app.command()
-def make_batch(
+def make_batch_file(
     config_file: Annotated[Path, typer.Argument(help="Config file", callback=path_callback)] = None,
     data_file: Annotated[Path, typer.Argument(help="Data file", callback=path_callback)] = None,
     id_col: Annotated[str, typer.Option(help="Column name for the id", rich_help_panel="Options")] = "id",
     out: Annotated[Path, typer.Option("--out", "-o", help="Path to output file", rich_help_panel="Options")] = Path("."),
     batch_name: Annotated[str, typer.Option("--batch", help="Batch name", rich_help_panel="Options")] = "batch",
-):
+) -> None:
     """
     Make a batch file for OpenAI's API.
     """
@@ -209,7 +209,7 @@ def make_batch(
 
 # -----------------------------------------------------------------------------
 @app.command()
-def upload_batch(
+def upload_batch_file(
     batch_file: Annotated[Path, typer.Argument(help="Batch file", callback=path_callback)] = None,
 ):
     """
@@ -281,6 +281,23 @@ def get_batch_results(
         logger.info(f"writing json output to {out_file}")
         console.print(f"[orange1]writing json output to {out_file}")
 
+
+
+# -----------------------------------------------------------------------------
+@app.command()
+def list_batches(
+    limit: Annotated[int, typer.Option("--limit", "-l", help="Limit the number of batches to list")] = 100,
+):
+    client = openai.OpenAI(
+        organization=os.environ["OPENAI_ORG_ID"],
+        project=os.environ["OPENAI_PROJ_ID"],
+        api_key=os.environ["OPENAI_API_KEY"],
+    )
+
+    batches = client.batches.list(limit=limit)
+    batches = sorted(batches, key=lambda x: x.created_at)
+    for b in batches:
+        console.print(b.id, b.status, datetime.fromtimestamp(b.created_at))
 
 # -----------------------------------------------------------------------------
 # main
