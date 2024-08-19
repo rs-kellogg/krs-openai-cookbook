@@ -21,9 +21,9 @@ dependencies = [
     "tiktoken",
     "tenacity",
     "PyMuPDF",
-    "vertexai",
-    "google-auth",
-    "requests",
+    "datasets",
+    "ipyleaflet",
+    "leafmap",
 ]
 
 [project.urls]
