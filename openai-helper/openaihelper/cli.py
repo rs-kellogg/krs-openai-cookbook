@@ -1,5 +1,4 @@
 import os
-import csv
 import json
 import math
 
@@ -13,17 +12,16 @@ import polars as pl
 
 from pathlib import Path
 from dotenv import load_dotenv
-from rich.table import Table
 from rich.progress import track
 from rich.console import Console
 from datetime import datetime
 from importlib import resources
-from typing import Optional
+from typing import Optional, List, Dict
 from typing_extensions import Annotated
 
 from openaihelper import utils as F
 from openaihelper import data
-from openaihelper import __app_name__, __version__
+from openaihelper import __version__
 
 # -----------------------------------------------------------------------------
 # setup
@@ -103,7 +101,6 @@ def pdf2text(
     Extract text from a collection of PDF files and write each output to a text file.
     """
     assert end >= start
-    check_args(in_dir, CONFIG_FILE_PATH, out)
     if not out.exists():
         out.mkdir(parents=True)
 
@@ -177,7 +174,7 @@ def make_batch_file(
 
     # Read the data file
     df = pl.read_csv(data_file)
-    if not id_col in df.columns:
+    if id_col not in df.columns:
         df = df.with_row_index(name=id_col)
 
     # Create the output file
