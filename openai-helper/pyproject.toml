@@ -24,6 +24,8 @@ dependencies = [
     "vertexai",
     "google-auth",
     "requests",
+    "chevron",
+    "python-dotenv"
 ]
 
 [project.urls]
