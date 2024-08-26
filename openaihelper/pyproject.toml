@@ -25,7 +25,8 @@ dependencies = [
     "google-auth",
     "requests",
     "chevron",
-    "python-dotenv"
+    "python-dotenv",
+    "llm",
 ]
 
 [project.urls]
