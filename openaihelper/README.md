@@ -1,1 +1,2 @@
-# openai-helper
+# openaihelp CLI
+
