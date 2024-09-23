@@ -4,6 +4,7 @@
 # misc
 Papers/
 **/*.log
+**/.aider.chat.history.md
 
 # sensitive info
 **/.env

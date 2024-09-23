@@ -14,7 +14,7 @@ classifiers = [
 ]
 dynamic = ["version", "description"]
 dependencies = [
-    "typer",
+    "cyclopts",
     "pyyaml", 
     "polars",
     "openai",

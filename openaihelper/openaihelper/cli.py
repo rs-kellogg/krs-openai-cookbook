@@ -3,10 +3,10 @@ import json
 import math
 
 import fitz
-import typer
 import openai
 import chevron
 import logging
+import cyclopts
 import logging.config
 import polars as pl
 
@@ -17,6 +17,7 @@ from rich.console import Console
 from datetime import datetime
 from importlib import resources
 from typing import Optional, List, Dict
+from cyclopts import App, Parameter
 from typing_extensions import Annotated
 
 from openaihelper import utils as F
@@ -41,61 +42,33 @@ logger = logging.getLogger(__name__)
 # setup the rich console
 console = Console(style="green on black")
 
-# setup the typer app
-app = typer.Typer()
+# setup the CLI app
+app = App(help="Help string for this demo application.", version=__version__)
 
-
-# -----------------------------------------------------------------------------
-# helper functions
-# -----------------------------------------------------------------------------
-def version_callback(value: bool) -> None:
-    if value:
-        console.print(f"[blue]{__version__}")
-        raise typer.Exit()
-
+# add sub-apps
+chat_app = App(help="Help string for the synchronous chat complete application.", version=__version__)
+app.command(chat_app, name="chat")
+batch_app = App(help="Help string for the asynchronous batch application.", version=__version__)
+app.command(batch_app, name="batch")
+utils_app = App(help="Help string for the utils application.", version=__version__)
+app.command(utils_app, name="utils")
 
 # -----------------------------------------------------------------------------
-def path_callback(path: Path):
-    if not path.exists():
-        raise typer.BadParameter(f"Path {path} does not exist")
-    return path
-
-
+# utils commands
 # -----------------------------------------------------------------------------
-# commands
-# -----------------------------------------------------------------------------
-@app.callback()
-def main(
-    version: Annotated[
-        Optional[bool],
-        typer.Option(
-            "--version",
-            "-v",
-            help="Show the application's version and exit.",
-            callback=version_callback,
-            is_eager=True,
-        ),
-    ] = None
-) -> Optional[bool]:
-    """
-    OpenAI Helper CLI
-    """
-    return version
-
-
-# -----------------------------------------------------------------------------
-@app.command()
+@utils_app.command()
 def config() -> None:
+    "Display configuration parameters"
     console.print(f"{CONFIG}")
 
 
 # -----------------------------------------------------------------------------
-@app.command()
+@utils_app.command()
 def pdf2text(
-    in_dir: Annotated[Path, typer.Argument(help="Path to input PDF files")] = None,
-    out: Annotated[Path, typer.Option(help="Path to output text files")] = Path("."),
-    start: Annotated[int, typer.Option(help="Start page")] = 0,
-    end: Annotated[int, typer.Option(help="End page")] = math.inf,
+    in_dir: Annotated[Path, Parameter(help="Path to input PDF files")] = None,
+    out: Annotated[Path, Parameter(help="Path to output text files")] = Path("."),
+    start: Annotated[int, Parameter(help="Start page")] = 0,
+    end: Annotated[int, Parameter(help="End page")] = math.inf,
 ):
     """
     Extract text from a collection of PDF files and write each output to a text file.
@@ -118,16 +91,20 @@ def pdf2text(
 
 
 # -----------------------------------------------------------------------------
-@app.command()
+# batch commands
+# -----------------------------------------------------------------------------
+@batch_app.command()
 def chat_complete(
-    batch_file: Annotated[Path, typer.Argument(help="Batch file", callback=path_callback)] = None,
-    out: Annotated[Path, typer.Option("--out", "-o", help="Path to output files", rich_help_panel="Options")] = Path("."),
-    format: Annotated[str, typer.Option("--format", "-f", help="Output format", rich_help_panel="Options")] = "json",
+    batch_file: Annotated[Path, Parameter(help="Batch file")] = None,
+    out: Annotated[Path, Parameter("--out", "-o", help="Path to output files")] = Path("."),
+    format: Annotated[str, Parameter("--format", "-f", help="Output format")] = "json",
 ):
     """
     Run a batch file line by line in synchronous non-batch mode.
     """
-
+    if not batch_file.exists():
+        raise FileNotFoundError(f"batch file not found: {batch_file}")
+    
     if not out.exists():
         out.mkdir(parents=True)
 
@@ -153,13 +130,13 @@ def chat_complete(
 
 
 # -----------------------------------------------------------------------------
-@app.command()
+@batch_app.command()
 def make_batch_file(
-    config_file: Annotated[Path, typer.Argument(help="Config file", callback=path_callback)] = None,
-    data_file: Annotated[Path, typer.Argument(help="Data file", callback=path_callback)] = None,
-    id_col: Annotated[str, typer.Option(help="Column name for the id", rich_help_panel="Options")] = "id",
-    out: Annotated[Path, typer.Option("--out", "-o", help="Path to output file", rich_help_panel="Options")] = Path("."),
-    batch_name: Annotated[str, typer.Option("--batch", help="Batch name", rich_help_panel="Options")] = "batch",
+    config_file: Annotated[Path, Parameter(help="Config file")] = None,
+    data_file: Annotated[Path, Parameter(help="Data file")] = None,
+    id_col: Annotated[str, Parameter(help="Column name for the id")] = "id",
+    out: Annotated[Path, Parameter("--out", "-o", help="Path to output file")] = Path("."),
+    batch_name: Annotated[str, Parameter("--batch", help="Batch name")] = "batch",
 ) -> None:
     """
     Make a batch file for OpenAI
@@ -205,9 +182,9 @@ def make_batch_file(
 
 
 # -----------------------------------------------------------------------------
-@app.command()
+@batch_app.command()
 def upload_batch_file(
-    batch_file: Annotated[Path, typer.Argument(help="Batch file", callback=path_callback)] = None,
+    batch_file: Annotated[Path, Parameter(help="Batch file")] = None,
 ):
     """
     Upload a batch file to OpenAI
@@ -225,10 +202,10 @@ def upload_batch_file(
 
 
 # -----------------------------------------------------------------------------
-@app.command()
+@batch_app.command()
 def start_batch(
-    batch_file_id: Annotated[str, typer.Argument(help="Batch file ID")] = None,
-    description: Annotated[str, typer.Option("--desc", help="Description of the batch job")] = "batch job",
+    batch_file_id: Annotated[str, Parameter(help="Batch file ID")] = None,
+    description: Annotated[str, Parameter("--desc", help="Description of the batch job")] = "batch job",
 ):
     """
     Start a batch job
@@ -251,15 +228,14 @@ def start_batch(
 
 
 # -----------------------------------------------------------------------------
-@app.command()
+@batch_app.command()
 def get_batch_results(
-    batch_id: Annotated[str, typer.Argument(help="Batch ID")] = None,
-    out: Annotated[Path, typer.Option("--out", "-o", help="Path to output file")] = Path("."),
-    batch_name: Annotated[str, typer.Option("--batch", help="Batch name", rich_help_panel="Options")] = "batch",
+    batch_id: Annotated[str, Parameter(help="Batch ID")] = None,
+    out: Annotated[Path, Parameter("--out", "-o", help="Path to output file")] = Path("."),
+    batch_name: Annotated[str, Parameter("--batch", help="Batch name")] = "batch",
 ):
     """
-    Download batch results to a file if the batch job is completed.
-    If not completed, the status is displayed.
+    Download batch results to a file if the batch job is completed. If not completed, the status is displayed.
     """
     client = openai.OpenAI(
         organization=os.environ["OPENAI_ORG_ID"],
@@ -281,10 +257,13 @@ def get_batch_results(
 
 
 # -----------------------------------------------------------------------------
-@app.command()
+@batch_app.command()
 def list_batches(
-    limit: Annotated[int, typer.Option("--limit", "-l", help="Limit the number of batches to list")] = 100,
+    limit: Annotated[int, Parameter("--limit", "-l", help="Limit the number of batches to list")] = 100,
 ):
+    """
+    List all the batches
+    """
     client = openai.OpenAI(
         organization=os.environ["OPENAI_ORG_ID"],
         project=os.environ["OPENAI_PROJ_ID"],
