@@ -34,6 +34,8 @@ clean-build: ## remove build artifacts
 	rm -fr .eggs/
 	find . -name '*.egg-info' -exec rm -fr {} +
 	find . -name '*.egg' -exec rm -f {} +
+	find . -name '.ruff_cache' -exec rm -fr {} +
+
 
 clean-pyc: ## remove Python file artifacts
 	find . -name '*.pyc' -exec rm -f {} +
@@ -54,6 +56,8 @@ clean-misc: ## misc. junk
 	find . -name '.DS_Store' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name 'temp' -exec rm -rf {} +
+	find . -name '.ruff_cache' -exec rm -fr {} +
+	find . -name '*.log' -exec rm -f {} +
 
 lint: ## check style with flake8
 	flake8 edgar2data tests
