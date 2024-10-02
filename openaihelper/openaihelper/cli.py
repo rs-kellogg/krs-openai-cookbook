@@ -46,8 +46,6 @@ console = Console(style="green on black")
 app = App(help="Help string for this demo application.", version=__version__)
 
 # add sub-apps
-chat_app = App(help="Help string for the synchronous chat complete application.", version=__version__)
-app.command(chat_app, name="chat")
 batch_app = App(help="Help string for the asynchronous batch application.", version=__version__)
 app.command(batch_app, name="batch")
 utils_app = App(help="Help string for the utils application.", version=__version__)
@@ -89,15 +87,14 @@ def pdf2text(
             logger.error(f"exception: {type(e)}: {e}")
             continue
 
-
 # -----------------------------------------------------------------------------
 # batch commands
 # -----------------------------------------------------------------------------
 @batch_app.command()
 def chat_complete(
     batch_file: Annotated[Path, Parameter(help="Batch file")] = None,
-    out: Annotated[Path, Parameter("--out", "-o", help="Path to output files")] = Path("."),
-    format: Annotated[str, Parameter("--format", "-f", help="Output format")] = "json",
+    out: Annotated[Path, Parameter(help="Path to output files")] = Path("."),
+    format: Annotated[str, Parameter(help="Output format")] = "json",
 ):
     """
     Run a batch file line by line in synchronous non-batch mode.
@@ -135,7 +132,7 @@ def make_batch_file(
     config_file: Annotated[Path, Parameter(help="Config file")] = None,
     data_file: Annotated[Path, Parameter(help="Data file")] = None,
     id_col: Annotated[str, Parameter(help="Column name for the id")] = "id",
-    out: Annotated[Path, Parameter("--out", "-o", help="Path to output file")] = Path("."),
+    out: Annotated[Path, Parameter(help="Path to output file")] = Path("."),
     batch_name: Annotated[str, Parameter("--batch", help="Batch name")] = "batch",
 ) -> None:
     """

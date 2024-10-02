@@ -35,3 +35,4 @@ MANIFEST
 **/*.log
 **/.env
 **/openai-key.txt
+**/.vscode/
