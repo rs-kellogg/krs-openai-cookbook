@@ -1,0 +1,101 @@
+ID,Age,College Education,Description
+1,28,No,Hank Rodriguez is a 28 year old black architect who enjoys Star Wars.
+2,45,Yes,David Carter is a 45 year old black nurse who enjoys medieval history.
+3,39,Yes,David Smith is a 39 year old caucasian architect who enjoys medieval history.
+4,30,Yes,Hank Rodriguez is a 30 year old black architect who enjoys cooking.
+5,38,Yes,Sophia Lee is a 38 year old caucasian software engineer who enjoys medieval history.
+6,27,Yes,David Smith is a 27 year old caucasian artist who enjoys painting.
+7,43,Yes,Hank Smith is a 43 year old caucasian teacher who enjoys fitness.
+8,42,Yes,Mia Lee is a 42 year old caucasian software engineer who enjoys cooking.
+9,30,Yes,Mia Smith is a 30 year old caucasian artist who enjoys painting.
+10,43,No,Aaron Rodriguez is a 43 year old caucasian software engineer who enjoys painting.
+11,39,No,Michael Carter is a 39 year old caucasian truck driver who enjoys outdoors.
+12,38,Yes,Hank Smith is a 38 year old black bartender who enjoys travel.
+13,34,No,Michael Lee is a 34 year old asian bartender who enjoys medieval history.
+14,37,No,Aaron Carter is a 37 year old latino artist who enjoys painting.
+15,28,Yes,Sam Banana is a 28 year old caucasian artist who enjoys Star Wars.
+16,40,No,Michael Rodriguez is a 40 year old caucasian software engineer who enjoys cooking.
+17,36,Yes,David Lee is a 36 year old asian truck driver who enjoys painting.
+18,37,No,David Lee is a 37 year old black bartender who enjoys travel.
+19,38,Yes,Sophia Rodriguez is a 38 year old caucasian nurse who enjoys painting.
+20,32,Yes,Hank Rodriguez is a 32 year old black architect who enjoys cooking.
+21,29,Yes,Sophia Smith is a 29 year old caucasian bartender who enjoys travel.
+22,31,Yes,Aaron Carter is a 31 year old caucasian architect who enjoys cooking.
+23,29,No,Mia Lee is a 29 year old caucasian teacher who enjoys painting.
+24,29,Yes,Aaron Rodriguez is a 29 year old caucasian bartender who enjoys travel.
+25,28,Yes,Sam Smith is a 28 year old caucasian truck driver who enjoys medieval history.
+26,29,Yes,Anna Lee is a 29 year old black bartender who enjoys travel.
+27,38,No,Hank Smith is a 38 year old caucasian bartender who enjoys fitness.
+28,45,Yes,Sophia Smith is a 45 year old caucasian artist who enjoys outdoors.
+29,33,No,Mia Banana is a 33 year old latino artist who enjoys painting.
+30,34,No,Aaron Smith is a 34 year old black truck driver who enjoys gaming.
+31,33,Yes,Aaron Banana is a 33 year old caucasian nurse who enjoys medieval history.
+32,43,No,Michael Lee is a 43 year old caucasian teacher who enjoys fitness.
+33,33,Yes,Aaron Lee is a 33 year old black software engineer who enjoys travel.
+34,36,Yes,Michael Smith is a 36 year old caucasian nurse who enjoys gaming.
+35,36,No,Michael Waters is a 36 year old caucasian architect who enjoys cooking.
+36,32,No,Michael Waters is a 32 year old black software engineer who enjoys fitness.
+37,35,No,Mia Banana is a 35 year old caucasian teacher who enjoys travel.
+38,33,Yes,Aaron Carter is a 33 year old black bartender who enjoys travel.
+39,39,No,David Carter is a 39 year old caucasian bartender who enjoys outdoors.
+40,36,Yes,Mia Lee is a 36 year old caucasian nurse who enjoys cooking.
+41,44,No,Sophia Lee is a 44 year old caucasian teacher who enjoys travel.
+42,40,Yes,Aaron Rodriguez is a 40 year old caucasian teacher who enjoys medieval history.
+43,43,No,Anna Smith is a 43 year old caucasian software engineer who enjoys gaming.
+44,39,No,Michael Rodriguez is a 39 year old caucasian truck driver who enjoys gaming.
+45,41,Yes,Anna Smith is a 41 year old caucasian truck driver who enjoys fitness.
+46,29,No,Mia Carter is a 29 year old caucasian plumber who enjoys cooking.
+47,39,Yes,Aaron Waters is a 39 year old caucasian plumber who enjoys cooking.
+48,30,No,Anna Smith is a 30 year old asian software engineer who enjoys painting.
+49,45,Yes,Mia Lee is a 45 year old caucasian teacher who enjoys outdoors.
+50,42,Yes,Anna Waters is a 42 year old caucasian architect who enjoys Star Wars.
+51,41,No,Sophia Waters is a 41 year old caucasian plumber who enjoys fitness.
+52,42,Yes,Michael Rodriguez is a 42 year old black truck driver who enjoys fitness.
+53,38,Yes,David Banana is a 38 year old caucasian truck driver who enjoys cooking.
+54,28,Yes,Mia Lee is a 28 year old caucasian truck driver who enjoys cooking.
+55,42,Yes,Aaron Banana is a 42 year old caucasian software engineer who enjoys Star Wars.
+56,42,No,Hank Lee is a 42 year old black artist who enjoys medieval history.
+57,36,No,Michael Lee is a 36 year old caucasian truck driver who enjoys painting.
+58,35,No,Sophia Carter is a 35 year old caucasian software engineer who enjoys medieval history.
+59,34,No,Aaron Rodriguez is a 34 year old caucasian software engineer who enjoys medieval history.
+60,27,Yes,Hank Carter is a 27 year old latino truck driver who enjoys fitness.
+61,34,No,Sam Banana is a 34 year old latino teacher who enjoys medieval history.
+62,41,Yes,Aaron Banana is a 41 year old caucasian software engineer who enjoys Star Wars.
+63,30,No,Sophia Waters is a 30 year old latino nurse who enjoys Star Wars.
+64,45,No,Hank Rodriguez is a 45 year old latino plumber who enjoys travel.
+65,40,No,Anna Smith is a 40 year old caucasian teacher who enjoys outdoors.
+66,38,Yes,Aaron Smith is a 38 year old latino truck driver who enjoys gaming.
+67,36,No,Sam Rodriguez is a 36 year old latino nurse who enjoys Star Wars.
+68,38,Yes,Sophia Banana is a 38 year old caucasian software engineer who enjoys gaming.
+69,35,Yes,Mia Waters is a 35 year old black truck driver who enjoys Star Wars.
+70,32,No,Michael Waters is a 32 year old caucasian architect who enjoys travel.
+71,44,Yes,Sam Banana is a 44 year old black plumber who enjoys cooking.
+72,40,Yes,Mia Banana is a 40 year old caucasian truck driver who enjoys fitness.
+73,32,Yes,Mia Lee is a 32 year old black teacher who enjoys outdoors.
+74,38,Yes,Mia Rodriguez is a 38 year old caucasian truck driver who enjoys outdoors.
+75,36,No,Michael Smith is a 36 year old caucasian nurse who enjoys outdoors.
+76,40,No,Mia Smith is a 40 year old caucasian artist who enjoys medieval history.
+77,43,Yes,Hank Banana is a 43 year old caucasian software engineer who enjoys gaming.
+78,32,Yes,Sam Rodriguez is a 32 year old black plumber who enjoys travel.
+79,30,Yes,Anna Lee is a 30 year old latino plumber who enjoys cooking.
+80,29,Yes,Michael Rodriguez is a 29 year old caucasian software engineer who enjoys gaming.
+81,38,Yes,Sam Carter is a 38 year old caucasian artist who enjoys painting.
+82,32,No,David Rodriguez is a 32 year old black plumber who enjoys Star Wars.
+83,31,Yes,Aaron Banana is a 31 year old caucasian truck driver who enjoys fitness.
+84,35,Yes,Sam Lee is a 35 year old black artist who enjoys gaming.
+85,39,Yes,Sam Carter is a 39 year old latino software engineer who enjoys gaming.
+86,45,Yes,Sophia Smith is a 45 year old caucasian plumber who enjoys outdoors.
+87,39,Yes,Anna Rodriguez is a 39 year old black nurse who enjoys Star Wars.
+88,27,Yes,Michael Waters is a 27 year old caucasian truck driver who enjoys Star Wars.
+89,31,Yes,Sophia Waters is a 31 year old latino plumber who enjoys Star Wars.
+90,41,Yes,Sam Carter is a 41 year old caucasian plumber who enjoys Star Wars.
+91,31,No,Hank Rodriguez is a 31 year old caucasian bartender who enjoys cooking.
+92,31,No,Mia Carter is a 31 year old caucasian bartender who enjoys medieval history.
+93,28,Yes,Aaron Rodriguez is a 28 year old caucasian truck driver who enjoys fitness.
+94,38,No,Mia Carter is a 38 year old caucasian truck driver who enjoys outdoors.
+95,36,No,David Waters is a 36 year old caucasian bartender who enjoys cooking.
+96,37,Yes,Sam Waters is a 37 year old caucasian nurse who enjoys outdoors.
+97,42,No,Mia Lee is a 42 year old caucasian plumber who enjoys painting.
+98,25,No,Mia Banana is a 25 year old caucasian artist who enjoys cooking.
+99,40,No,Sam Rodriguez is a 40 year old caucasian nurse who enjoys Star Wars.
+100,44,No,Aaron Smith is a 44 year old black truck driver who enjoys outdoors.
