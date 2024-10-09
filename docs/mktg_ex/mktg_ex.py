@@ -12,7 +12,7 @@ from PIL import Image, ImageEnhance
 
 
 # Load your API key
-with open('/Users/ambreenchaudhri/Desktop/api_key.txt', 'r') as file:
+with open('~/api_key.txt', 'r') as file:
     api_key = file.read().strip()
 
 client = OpenAI(api_key=api_key)
