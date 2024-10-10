@@ -3,10 +3,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "openaihelper"
+name = "openai-batch"
 license = {file = "LICENSE"}
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -30,15 +30,14 @@ dependencies = [
 ]
 
 [project.urls]
-Home = "https://github.com/rs-kellogg/krs-openai-cookbook"
+Home = "https://github.com/rs-kellogg/krs-openai-cookbook/llm-plugins/openai-batch"
 
 [project.optional-dependencies]
 test = [
   "pytest",
 ]
 lint = [
-  "black",
-  "flake8"
+  "ruff"
 ]
 notebook = [
   "jupyterlab",
@@ -49,22 +48,19 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 namespaces = true
-where = ["openaihelper"]
+where = ["llm_batch"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["openaihelper"]
+packages = ["llm_batch"]
 
 [project.scripts]
-openaihelper = "openaihelper.cli:app"
+openai-batch = "llm_batch.cli:app"
 
 [tool.setuptools.package-data]
-"openaihelper.data" = ["*.yml"]
+"llm_batch.data" = ["*.yml"]
 
 [tool.hatch.version]
-path = "openaihelper/__init__.py"
+path = "llm_batch/__init__.py"
 
-[tool.black]
-line-length = 160
-
-[tool.isort]
-profile = "black"
+# [project.entry-points.llm]
+# batch = "llm_batch/cli"

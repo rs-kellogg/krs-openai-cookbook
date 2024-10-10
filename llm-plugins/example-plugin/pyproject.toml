@@ -1,0 +1,25 @@
+[project]
+name = "llm-test"
+version = "0.1"
+description = "LLM plugin test"
+readme = "README.md"
+authors = [{name = "Will Thompson"}]
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+    "llm",
+    "rich",
+    "cyclopts"
+]
+
+[project.urls]
+Homepage = "https://github.com/rs-kellogg/krs-openai-cookbook"
+
+
+[project.entry-points.llm]
+test = "llm_test"
+
+[project.optional-dependencies]
+test = ["pytest"]

@@ -20,9 +20,9 @@ from typing import Optional, List, Dict
 from cyclopts import App, Parameter
 from typing_extensions import Annotated
 
-from openaihelper import utils as F
-from openaihelper import data
-from openaihelper import __version__
+from llm_batch import utils as F
+from llm_batch import data
+from llm_batch import __version__
 
 # -----------------------------------------------------------------------------
 # setup
@@ -50,6 +50,7 @@ batch_app = App(help="Help string for the asynchronous batch application.", vers
 app.command(batch_app, name="batch")
 utils_app = App(help="Help string for the utils application.", version=__version__)
 app.command(utils_app, name="utils")
+
 
 # -----------------------------------------------------------------------------
 # utils commands

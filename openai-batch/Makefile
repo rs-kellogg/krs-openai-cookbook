@@ -58,6 +58,8 @@ clean-misc: ## misc. junk
 	find . -name 'temp' -exec rm -rf {} +
 	find . -name '.ruff_cache' -exec rm -fr {} +
 	find . -name '*.log' -exec rm -f {} +
+	find . -name 'aider*' -exec rm -f {} +
+
 
 lint: ## check style with flake8
 	flake8 edgar2data tests
