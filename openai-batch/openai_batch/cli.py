@@ -10,8 +10,8 @@ import cyclopts
 import logging.config
 import polars as pl
 
-from pathlib import Path
-from dotenv import load_dotenv
+from pathlib import Path, PosixPath
+from dotenv import load_dotenv, find_dotenv
 from rich.progress import track
 from rich.console import Console
 from datetime import datetime
@@ -20,16 +20,16 @@ from typing import Optional, List, Dict
 from cyclopts import App, Parameter
 from typing_extensions import Annotated
 
-from llm_batch import utils as F
-from llm_batch import data
-from llm_batch import __version__
+from openai_batch import utils as F
+from openai_batch import data
+from openai_batch import __version__
 
 # -----------------------------------------------------------------------------
 # setup
 # -----------------------------------------------------------------------------
 
 # load environment variables
-load_dotenv()
+load_dotenv(find_dotenv((PosixPath('~/.openai')).expanduser()/".env"))
 
 # load in the configuration file
 with resources.path(data, "config.yml") as path:
@@ -43,12 +43,12 @@ logger = logging.getLogger(__name__)
 console = Console(style="green on black")
 
 # setup the CLI app
-app = App(help="Help string for this demo application.", version=__version__)
+app = App(help="Commands to create, upload, and execute batch jobs using the OpenAI API", version=__version__)
 
 # add sub-apps
-batch_app = App(help="Help string for the asynchronous batch application.", version=__version__)
-app.command(batch_app, name="batch")
-utils_app = App(help="Help string for the utils application.", version=__version__)
+# batch_app = App(help="Help string for the asynchronous batch application.", version=__version__)
+# app.command(batch_app, name="batch")
+utils_app = App(help="Utility commands for supporting batch jobs", version=__version__)
 app.command(utils_app, name="utils")
 
 
@@ -91,7 +91,7 @@ def pdf2text(
 # -----------------------------------------------------------------------------
 # batch commands
 # -----------------------------------------------------------------------------
-@batch_app.command()
+@utils_app.command()
 def chat_complete(
     batch_file: Annotated[Path, Parameter(help="Batch file")] = None,
     out: Annotated[Path, Parameter(help="Path to output files")] = Path("."),
@@ -109,9 +109,9 @@ def chat_complete(
     # Read the batch file
     with open(batch_file, "r") as f:
         client = openai.OpenAI(
-            organization=os.environ["OPENAI_ORG_ID"],
-            project=os.environ["OPENAI_PROJ_ID"],
-            api_key=os.environ["OPENAI_API_KEY"],
+            # organization=os.environ["OPENAI_ORG_ID"],
+            # project=os.environ["OPENAI_PROJ_ID"],
+            # api_key=os.environ["OPENAI_API_KEY"],
         )
         requests = f.readlines()
         for i, request in enumerate(requests):
@@ -128,7 +128,7 @@ def chat_complete(
 
 
 # -----------------------------------------------------------------------------
-@batch_app.command()
+@app.command()
 def make_batch_file(
     config_file: Annotated[Path, Parameter(help="Config file")] = None,
     data_file: Annotated[Path, Parameter(help="Data file")] = None,
@@ -137,7 +137,7 @@ def make_batch_file(
     batch_name: Annotated[str, Parameter("--batch", help="Batch name")] = "batch",
 ) -> None:
     """
-    Make a batch file for OpenAI
+    Make a batch file for uploading to OpenAI
     """
 
     # Read the config file
@@ -180,7 +180,7 @@ def make_batch_file(
 
 
 # -----------------------------------------------------------------------------
-@batch_app.command()
+@app.command()
 def upload_batch_file(
     batch_file: Annotated[Path, Parameter(help="Batch file")] = None,
 ):
@@ -188,9 +188,9 @@ def upload_batch_file(
     Upload a batch file to OpenAI
     """
     client = openai.OpenAI(
-        organization=os.environ["OPENAI_ORG_ID"],
-        project=os.environ["OPENAI_PROJ_ID"],
-        api_key=os.environ["OPENAI_API_KEY"],
+        # organization=os.environ["OPENAI_ORG_ID"],
+        # project=os.environ["OPENAI_PROJ_ID"],
+        # api_key=os.environ["OPENAI_API_KEY"],
     )
     batch_input_file = client.files.create(file=open(batch_file, "rb"), purpose="batch")
     console.print(f"Uploaded batch file: {batch_file}")
@@ -200,18 +200,18 @@ def upload_batch_file(
 
 
 # -----------------------------------------------------------------------------
-@batch_app.command()
+@app.command()
 def start_batch(
     batch_file_id: Annotated[str, Parameter(help="Batch file ID")] = None,
     description: Annotated[str, Parameter("--desc", help="Description of the batch job")] = "batch job",
 ):
     """
-    Start a batch job
+    Start a batch job on OpenAI
     """
     client = openai.OpenAI(
-        organization=os.environ["OPENAI_ORG_ID"],
-        project=os.environ["OPENAI_PROJ_ID"],
-        api_key=os.environ["OPENAI_API_KEY"],
+        # organization=os.environ["OPENAI_ORG_ID"],
+        # project=os.environ["OPENAI_PROJ_ID"],
+        # api_key=os.environ["OPENAI_API_KEY"],
     )
 
     # create batch job
@@ -226,7 +226,7 @@ def start_batch(
 
 
 # -----------------------------------------------------------------------------
-@batch_app.command()
+@app.command()
 def get_batch_results(
     batch_id: Annotated[str, Parameter(help="Batch ID")] = None,
     out: Annotated[Path, Parameter("--out", "-o", help="Path to output file")] = Path("."),
@@ -236,9 +236,9 @@ def get_batch_results(
     Download batch results to a file if the batch job is completed. If not completed, the status is displayed.
     """
     client = openai.OpenAI(
-        organization=os.environ["OPENAI_ORG_ID"],
-        project=os.environ["OPENAI_PROJ_ID"],
-        api_key=os.environ["OPENAI_API_KEY"],
+        # organization=os.environ["OPENAI_ORG_ID"],
+        # project=os.environ["OPENAI_PROJ_ID"],
+        # api_key=os.environ["OPENAI_API_KEY"],
     )
 
     batch_retrieve_response = client.batches.retrieve(batch_id)
@@ -255,17 +255,17 @@ def get_batch_results(
 
 
 # -----------------------------------------------------------------------------
-@batch_app.command()
+@app.command()
 def list_batches(
     limit: Annotated[int, Parameter("--limit", "-l", help="Limit the number of batches to list")] = 100,
 ):
     """
-    List all the batches
+    List all OpenAI batches for your account
     """
     client = openai.OpenAI(
-        organization=os.environ["OPENAI_ORG_ID"],
-        project=os.environ["OPENAI_PROJ_ID"],
-        api_key=os.environ["OPENAI_API_KEY"],
+        # organization=os.environ["OPENAI_ORG_ID"],
+        # project=os.environ["OPENAI_PROJ_ID"],
+        # api_key=os.environ["OPENAI_API_KEY"],
     )
 
     batches = client.batches.list(limit=limit)

@@ -48,19 +48,17 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 namespaces = true
-where = ["llm_batch"]
+where = ["openai_batch"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["llm_batch"]
+packages = ["openai_batch"]
 
 [project.scripts]
-openai-batch = "llm_batch.cli:app"
+openai-batch = "openai_batch.cli:app"
 
 [tool.setuptools.package-data]
-"llm_batch.data" = ["*.yml"]
+"openai_batch.data" = ["*.yml"]
 
 [tool.hatch.version]
-path = "llm_batch/__init__.py"
+path = "openai_batch/__init__.py"
 
-# [project.entry-points.llm]
-# batch = "llm_batch/cli"
