@@ -1,4 +1,3 @@
-import os
 import json
 import math
 
@@ -6,7 +5,6 @@ import fitz
 import openai
 import chevron
 import logging
-import cyclopts
 import logging.config
 import polars as pl
 
@@ -16,7 +14,7 @@ from rich.progress import track
 from rich.console import Console
 from datetime import datetime
 from importlib import resources
-from typing import Optional, List, Dict
+from typing import List, Dict
 from cyclopts import App, Parameter
 from typing_extensions import Annotated
 
@@ -108,11 +106,7 @@ def chat_complete(
 
     # Read the batch file
     with open(batch_file, "r") as f:
-        client = openai.OpenAI(
-            # organization=os.environ["OPENAI_ORG_ID"],
-            # project=os.environ["OPENAI_PROJ_ID"],
-            # api_key=os.environ["OPENAI_API_KEY"],
-        )
+        client = openai.OpenAI()
         requests = f.readlines()
         for i, request in enumerate(requests):
             request = json.loads(request)
@@ -187,11 +181,7 @@ def upload_batch_file(
     """
     Upload a batch file to OpenAI
     """
-    client = openai.OpenAI(
-        # organization=os.environ["OPENAI_ORG_ID"],
-        # project=os.environ["OPENAI_PROJ_ID"],
-        # api_key=os.environ["OPENAI_API_KEY"],
-    )
+    client = openai.OpenAI()
     batch_input_file = client.files.create(file=open(batch_file, "rb"), purpose="batch")
     console.print(f"Uploaded batch file: {batch_file}")
     console.print(f"[orange1]{batch_input_file}")
@@ -208,13 +198,7 @@ def start_batch(
     """
     Start a batch job on OpenAI
     """
-    client = openai.OpenAI(
-        # organization=os.environ["OPENAI_ORG_ID"],
-        # project=os.environ["OPENAI_PROJ_ID"],
-        # api_key=os.environ["OPENAI_API_KEY"],
-    )
-
-    # create batch job
+    client = openai.OpenAI()
     batch_create_response = client.batches.create(
         input_file_id=batch_file_id,
         endpoint="/v1/chat/completions",
@@ -235,12 +219,7 @@ def get_batch_results(
     """
     Download batch results to a file if the batch job is completed. If not completed, the status is displayed.
     """
-    client = openai.OpenAI(
-        # organization=os.environ["OPENAI_ORG_ID"],
-        # project=os.environ["OPENAI_PROJ_ID"],
-        # api_key=os.environ["OPENAI_API_KEY"],
-    )
-
+    client = openai.OpenAI()
     batch_retrieve_response = client.batches.retrieve(batch_id)
     logger.info(batch_retrieve_response)
     console.print(batch_retrieve_response)
@@ -262,12 +241,7 @@ def list_batches(
     """
     List all OpenAI batches for your account
     """
-    client = openai.OpenAI(
-        # organization=os.environ["OPENAI_ORG_ID"],
-        # project=os.environ["OPENAI_PROJ_ID"],
-        # api_key=os.environ["OPENAI_API_KEY"],
-    )
-
+    client = openai.OpenAI()
     batches = client.batches.list(limit=limit)
     batches = sorted(batches, key=lambda x: x.created_at)
     for b in batches:
