@@ -1,0 +1,37 @@
+{
+    "model": "gpt-4o",
+    "messages":[
+    {
+      "role": "system",
+      "content": [
+        {
+          "type": "text",
+          "text": "You are a participant in a marketing study from Monkeys Elbow, Kentucky. Here is your persona: {{Description}}"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+            {
+                "type": "text",
+                "text": "Please select the image you find the most appealing from these three and explain your choice.\nThe image on the left can be called \"kawaii\", the image in the middle \"cubs\", and the image on the right \"futuristic\"."
+            },
+            {
+                "type": "image_url",
+                "image_url": {
+                    "url": "https://kellogg-shared.s3.us-east-2.amazonaws.com/images/select_enhanced.png"
+                }
+            }
+        ]
+    }
+  ],
+  "temperature": 1,
+  "max_tokens": 2048,
+  "top_p": 1,
+  "frequency_penalty":0,
+  "presence_penalty":0,
+  "response_format": {
+    "type": "text"
+  }
+}

@@ -124,7 +124,7 @@ def chat_complete(
 # -----------------------------------------------------------------------------
 @app.command()
 def make_batch_file(
-    config_file: Annotated[Path, Parameter(help="Config file")] = None,
+    prompt_template_file: Annotated[Path, Parameter(help="Prompt template file")] = None,
     data_file: Annotated[Path, Parameter(help="Data file")] = None,
     id_col: Annotated[str, Parameter(help="Column name for the id")] = "id",
     out: Annotated[Path, Parameter(help="Path to output file")] = Path("."),
@@ -134,12 +134,8 @@ def make_batch_file(
     Make a batch file for uploading to OpenAI
     """
 
-    # Read the config file
-    config = F.config(config_file)
-    system_prompt_template = config["system_prompt"]
-    user_prompt_template = config["user_prompt"]
-    del config["system_prompt"]
-    del config["user_prompt"]
+    # Read the prompt template file
+    prompt_template = prompt_template_file.read_text()
 
     # Read the data file
     df = pl.read_csv(data_file)
@@ -156,16 +152,13 @@ def make_batch_file(
     requests = []
     data: List[Dict] = df.to_dicts()
     for index in track(range(len(data)), description="Processing..."):
-        system_prompt = chevron.render(system_prompt_template, data[index])
-        user_prompt = chevron.render(user_prompt_template, data[index])
-        messages = F.make_message_body(system_prompt, user_prompt)
-        config = config.copy()
-        config["messages"] = messages
+        body = chevron.render(prompt_template, data[index])
+        body = json.loads(body)
         request = {
             "custom_id": f"id_{data[index]['id']}",
             "method": "POST",
             "url": "/v1/chat/completions",
-            "body": config,
+            "body": body,
         }
         requests.append(request)
 
