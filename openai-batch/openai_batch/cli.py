@@ -41,7 +41,14 @@ logger = logging.getLogger(__name__)
 console = Console(style="green on black")
 
 # setup the CLI app
-app = App(help="Commands to create, upload, and execute batch jobs using the OpenAI API", version=__version__)
+help_msg = """
+Commands to create, upload, and execute batch jobs using the OpenAI API.
+
+To set up OpenAI API credentials, create a file /home/<user>/.openai/.env with the following content:
+ 
+OPENAI_API_KEY=<your-openai-api-key>
+"""
+app = App(help=help_msg, version=__version__)
 
 # add sub-apps
 # batch_app = App(help="Help string for the asynchronous batch application.", version=__version__)
