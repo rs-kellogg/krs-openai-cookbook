@@ -18,7 +18,7 @@ parts:
 - caption: Workflow
   numbered: false
   chapters:
-  - file: openai-text-analysis
+  - file: openai-arxiv-analysis
 - caption: Summary
   numbered: false
   chapters:
