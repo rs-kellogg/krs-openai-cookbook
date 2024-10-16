@@ -130,7 +130,7 @@ def chat_complete(
 
 # -----------------------------------------------------------------------------
 @app.command()
-def make_batch_file(
+def make(
     prompt_template_file: Annotated[Path, Parameter(help="Prompt template file")] = None,
     data_file: Annotated[Path, Parameter(help="Data file")] = None,
     id_col: Annotated[str, Parameter(help="Column name for the id")] = "id",
@@ -175,7 +175,7 @@ def make_batch_file(
 
 # -----------------------------------------------------------------------------
 @app.command()
-def upload_batch_file(
+def upload(
     batch_file: Annotated[Path, Parameter(help="Batch file")] = None,
 ):
     """
@@ -191,7 +191,7 @@ def upload_batch_file(
 
 # -----------------------------------------------------------------------------
 @app.command()
-def start_batch(
+def start(
     batch_file_id: Annotated[str, Parameter(help="Batch file ID")] = None,
     description: Annotated[str, Parameter("--desc", help="Description of the batch job")] = "batch job",
 ):
@@ -211,7 +211,7 @@ def start_batch(
 
 # -----------------------------------------------------------------------------
 @app.command()
-def get_batch_results(
+def fetch(
     batch_id: Annotated[str, Parameter(help="Batch ID")] = None,
     out: Annotated[Path, Parameter("--out", "-o", help="Path to output file")] = Path("."),
     batch_name: Annotated[str, Parameter("--batch", help="Batch name")] = "batch",
@@ -246,6 +246,18 @@ def list_batches(
     batches = sorted(batches, key=lambda x: x.created_at)
     for b in batches:
         console.print(b.id, b.status, datetime.fromtimestamp(b.created_at))
+
+
+# -----------------------------------------------------------------------------
+@app.command()
+def display(
+    file: Annotated[Path, Parameter(help="Path to file")] = None,
+):
+    """
+    Display the contents of a file
+    """
+    console.print(file.read_text())
+
 
 # -----------------------------------------------------------------------------
 # main

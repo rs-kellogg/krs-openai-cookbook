@@ -27,6 +27,8 @@ dependencies = [
     "chevron",
     "python-dotenv",
     "llm",
+    "textual",
+    "elia-chat",
 ]
 
 [project.urls]
