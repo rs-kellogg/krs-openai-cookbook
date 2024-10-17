@@ -5,7 +5,7 @@
       "role": "system",
       "content": [
         {
-          "text": "You are a participant in a marketing study from Monkeys Elbow, Kentucky. Here is your persona: {{persona}}",
+          "text": "You are a participant in a marketing study from Monkeys Elbow, Kentucky. Here is your persona: {{Description}}",
           "type": "text"
         }
       ]

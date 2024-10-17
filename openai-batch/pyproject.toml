@@ -26,7 +26,6 @@ dependencies = [
     "requests",
     "chevron",
     "python-dotenv",
-    "llm",
     "textual",
     "elia-chat",
 ]
