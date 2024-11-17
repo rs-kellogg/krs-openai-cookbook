@@ -21,13 +21,10 @@ dependencies = [
     "tiktoken",
     "tenacity",
     "PyMuPDF",
-    "vertexai",
-    "google-auth",
     "requests",
     "chevron",
     "python-dotenv",
-    "textual",
-    "elia-chat",
+    "fastexcel",
 ]
 
 [project.urls]

@@ -145,9 +145,14 @@ def make(
     prompt_template = prompt_template_file.read_text()
 
     # Read the data file
-    df = pl.read_csv(data_file)
+    if data_file.suffix == "csv":
+        df = pl.read_csv(data_file)
+    elif data_file.suffix == ".xlsx":
+        df = pl.read_excel(data_file)
     if id_col not in df.columns:
         df = df.with_row_index(name=id_col)
+
+    print(df.head())
 
     # Create the output file
     if not out.exists():
@@ -162,12 +167,15 @@ def make(
         body = chevron.render(prompt_template, data[index])
         body = json.loads(body)
         request = {
-            "custom_id": f"id_{data[index]['id']}",
+            "custom_id": f"id_{data[index][id_col]}",
             "method": "POST",
             "url": "/v1/chat/completions",
             "body": body,
         }
         requests.append(request)
+        
+    return
+
 
     out_file.write_text("\n".join([json.dumps(r) for r in requests]))
     console.print(f"Batch file created: {out_file}")
