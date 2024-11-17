@@ -164,18 +164,18 @@ def make(
     requests = []
     data: List[Dict] = df.to_dicts()
     for index in track(range(len(data)), description="Processing..."):
-        body = chevron.render(prompt_template, data[index])
-        body = json.loads(body)
-        request = {
-            "custom_id": f"id_{data[index][id_col]}",
-            "method": "POST",
-            "url": "/v1/chat/completions",
-            "body": body,
-        }
-        requests.append(request)
-        
-    return
-
+        try:
+            body = chevron.render(prompt_template, data[index])
+            body = json.loads(body)
+            request = {
+                "custom_id": f"id_{data[index][id_col]}",
+                "method": "POST",
+                "url": "/v1/chat/completions",
+                "body": body,
+            }
+            requests.append(request)
+        except Exception as e:
+            console.print(f"\nError processing row {index}")
 
     out_file.write_text("\n".join([json.dumps(r) for r in requests]))
     console.print(f"Batch file created: {out_file}")
